@@ -5,7 +5,7 @@
 
 
 # UML Class Diagram
-![ClassDiagram](https://user-images.githubusercontent.com/75033190/103152826-df75d600-478b-11eb-9686-d4ec839b571b.jpg)
+![ClassDiagram](https://user-images.githubusercontent.com/75033190/103172429-aacd5180-4853-11eb-9a06-3c9e18729f44.jpg)
 
 
 # UML Sequence Diagram

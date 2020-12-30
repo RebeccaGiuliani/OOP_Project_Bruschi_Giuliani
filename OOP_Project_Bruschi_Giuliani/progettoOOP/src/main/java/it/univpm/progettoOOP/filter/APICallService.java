@@ -2,11 +2,9 @@ package it.univpm.progettoOOP.filter;
 
 import org.json.simple.JSONObject;
 
-public interface FilterService {
+public interface APICallService {
 
-	public abstract String getCity();
-	public abstract String getCountry();
-	public abstract double getLat();
-	public abstract double getLon();
 	public abstract JSONObject getData();
+	public abstract long StartDateUnixConverter();
+	public abstract long EndDateUnixConverter();
 }

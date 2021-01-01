@@ -1,23 +1,26 @@
 package it.univpm.progettoOOP.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.univpm.progettoOOP.filter.APICall;
+import it.univpm.progettoOOP.filter.APICallService;
 import it.univpm.progettoOOP.model.Period;
 
 @RestController
-public class PeriodController {
+public class APICallController {
+	
+	APICallService apicall_service;
 
-	@GetMapping("/period")
-	public Period exampleMethode (@RequestParam (name = "param1", defaultValue = "World") String param1) {
-		return new Period(21,5,2019,30,7,2019);
+	@RequestMapping(value = "/data", method = RequestMethod.GET)   // il request body è da testare
+	public APICall chiamata_api(@RequestBody APICall apiCall){
+		return new APICall(new Period(1,1,2019,31,12,2019), 43.5991, 13.511);	
 	}
 
-	@PostMapping("/period")
+	/*@PostMapping("/period")
 	public Period exampleMethode2 (@RequestBody Period body) {
 		return body;
-	}
+	}*/
 }

@@ -19,13 +19,6 @@ public class CityFileReader implements CityFileReaderService {
 	public CityFileReader(City city) {
 		this.nameCity = city.getName();
 		this.country = city.getCountry();
-		
-		JSONArray ja = new JSONArray();
-		ja = caricaArray();
-		
-		getCity(ja, nameCity, country);
-		System.out.println(lat);
-		System.out.println(lon);
 	}
 
 	public JSONArray caricaArray() {
@@ -64,9 +57,15 @@ public class CityFileReader implements CityFileReaderService {
 		}
 	}
 	public double getLat() {
+		JSONArray ja = new JSONArray();
+		ja = caricaArray();
+		getCity(ja, nameCity, country);
 		return this.lat;
 	}
 	public double getLon() {
+		JSONArray ja = new JSONArray();
+		ja = caricaArray();
+		getCity(ja, nameCity, country);
 		return this.lon;
 	}
 }

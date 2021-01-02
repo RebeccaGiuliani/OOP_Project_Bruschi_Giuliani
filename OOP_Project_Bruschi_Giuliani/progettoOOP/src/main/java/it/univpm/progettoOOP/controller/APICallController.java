@@ -1,7 +1,7 @@
 package it.univpm.progettoOOP.controller;
 
+
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.univpm.progettoOOP.filter.APICall;
 import it.univpm.progettoOOP.model.Autumn;
+import it.univpm.progettoOOP.model.Period;
 import it.univpm.progettoOOP.model.Spring;
 import it.univpm.progettoOOP.model.Summer;
 import it.univpm.progettoOOP.model.Winter;
@@ -16,17 +17,15 @@ import it.univpm.progettoOOP.model.Winter;
 @RestController
 public class APICallController {
 
-	
-	//ottenimento dati delle specifiche
-	/*@RequestMapping(value = "/data", method = RequestMethod.GET)   
-	public APICall chiamata_api(){
-		return new APICall(new Period(1,1,2019,31,12,2019), 43.5991, 13.511);	
-	}*/
-
-	//filtraggio dati inserendo il periodo di interesse su postman
-	@RequestMapping(value = "/data/filter", method = RequestMethod.GET) 
-	public APICall apiCall (@RequestBody APICall apiCall) {    
-		return apiCall;
+	//filtraggio dati per un periodo generico
+	@RequestMapping(value = "/data/filter", method = RequestMethod.GET)   
+	public APICall chiamata_api(
+			@RequestParam (name = "start_day", defaultValue = "1") int start_day, @RequestParam (name = "start_month", defaultValue = "1") int start_month,
+			@RequestParam (name = "start_year", defaultValue = "2019") int start_year, @RequestParam (name = "end_day", defaultValue = "31")int end_day,
+			@RequestParam (name = "end_month", defaultValue = "12") int end_month, @RequestParam (name = "end_year", defaultValue = "2019") int end_year,
+			@RequestParam (name = "lat", defaultValue = "43.5991") double lat, @RequestParam (name = "lon", defaultValue = "13.511") double lon){
+		
+		return new APICall(new Period(start_day,start_month,start_year,end_day,end_month,end_year), lat, lon);	
 	}
 	
 	//filtraggio dati primavera variando anno e coordinate

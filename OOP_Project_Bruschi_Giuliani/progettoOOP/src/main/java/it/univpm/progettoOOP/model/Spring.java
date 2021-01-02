@@ -20,5 +20,4 @@ public class Spring extends Period{
 	public String getEnd() {
 		return super.getEnd()+"/"+this.year;
 	}
-	
 }

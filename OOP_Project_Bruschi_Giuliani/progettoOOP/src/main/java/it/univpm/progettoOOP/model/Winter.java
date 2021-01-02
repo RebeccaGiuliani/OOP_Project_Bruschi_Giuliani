@@ -10,7 +10,7 @@ public class Winter extends Period{
 	
 	public Winter (int year) {   //per l'inverno prendiamo in considerazione l'anno d'inizio
 		super (start_day, start_month, year, end_day, end_month, year+1);
-		this.year = year;
+		this.year = year;		
 	}
 	
 	public String getStart() {

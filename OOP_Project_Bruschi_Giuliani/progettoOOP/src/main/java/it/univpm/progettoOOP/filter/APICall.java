@@ -35,7 +35,10 @@ public class APICall implements APICallService {
 		this.end = EndDateUnixConverter();
 		this.url = "http://api.openweathermap.org/data/2.5/uvi/history?lat="+ this.lat +"&lon="+ this.lon +"&start="+ this.start +"&end="+ this.end +"&appid="+appid;
 	}
-
+	
+	public void setPeriod(Period period) {
+		this.period = period;
+	}
 	 
 	
 	public long StartDateUnixConverter() {
@@ -62,19 +65,18 @@ public class APICall implements APICallService {
 		String line = "";
 
 		try {
+			
 			URLConnection openConnection = new URL(api).openConnection();
 			InputStream in = openConnection.getInputStream();
 
-			try {
-				InputStreamReader input = new InputStreamReader( in );
-				BufferedReader buf = new BufferedReader( input );
+			InputStreamReader input = new InputStreamReader( in );
+			BufferedReader buf = new BufferedReader( input );
 
-				while ( ( line = buf.readLine() ) != null ) {
-					data+= line;
-				}
-			} finally {
-				in.close();
+			while ( ( line = buf.readLine() ) != null ) {
+				data+= line;
 			}
+			
+			in.close();
 			ja = (JSONArray) JSONValue.parseWithException(data);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -82,6 +84,7 @@ public class APICall implements APICallService {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		return ja;
 	}
 }

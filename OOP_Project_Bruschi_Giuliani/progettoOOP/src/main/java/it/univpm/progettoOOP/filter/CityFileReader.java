@@ -41,12 +41,12 @@ public class CityFileReader implements CityFileReaderService {
 		return cityList;
 	}
 
-	public void getCity(JSONArray ja, String name, String country) {
+	public void getCity(JSONArray ja) {
 		//Get city object within list
 		for(int i =0; i<ja.size(); i++) {
 			JSONObject cityObject = (JSONObject) ja.get(i);
-			if(cityObject.get("name").equals(name)) {
-				if(cityObject.get("country").equals(country)) {
+			if(cityObject.get("name").equals(this.nameCity)) {
+				if(cityObject.get("country").equals(this.country)) {
 					//Get coord object within list
 					JSONObject coordObject = (JSONObject) cityObject.get("coord");
 					//Get lon
@@ -60,13 +60,13 @@ public class CityFileReader implements CityFileReaderService {
 	public double getLat() {
 		JSONArray ja = new JSONArray();
 		ja = caricaArray();
-		getCity(ja, nameCity, country);
+		getCity(ja);
 		return this.lat;
 	}
 	public double getLon() {
 		JSONArray ja = new JSONArray();
 		ja = caricaArray();
-		getCity(ja, nameCity, country);
+		getCity(ja);
 		return this.lon;
 	}
 }

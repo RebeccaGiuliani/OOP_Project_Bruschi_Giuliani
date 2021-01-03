@@ -15,7 +15,6 @@ import org.json.simple.parser.ParseException;
 
 import it.univpm.progettoOOP.model.Period;
 
-//lat = 43.5991, lon = 13.511
 
 public class APICall implements APICallService {
 
@@ -27,10 +26,10 @@ public class APICall implements APICallService {
 	private long start, end;
 	private String url;
 	
-	public APICall(Period period, double lat, double lon) {
+	public APICall(Period period, CityFileReader city) {
 		this.period = period;
-		this.lat = lat;
-		this.lon = lon;
+		this.lat = city.getLat();
+		this.lon = city.getLon();
 		this.start = StartDateUnixConverter();
 		this.end = EndDateUnixConverter();
 		this.url = "http://api.openweathermap.org/data/2.5/uvi/history?lat="+ this.lat +"&lon="+ this.lon +"&start="+ this.start +"&end="+ this.end +"&appid="+appid;

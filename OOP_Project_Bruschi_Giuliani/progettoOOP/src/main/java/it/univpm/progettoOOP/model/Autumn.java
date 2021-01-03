@@ -4,7 +4,7 @@ public class Autumn extends Period{
 
 	private static int start_day = 23;
 	private static int start_month = 9;
-	private static int end_day = 22;
+	private static int end_day = 21;
 	private static int end_month = 12;
 	private int year;
 	

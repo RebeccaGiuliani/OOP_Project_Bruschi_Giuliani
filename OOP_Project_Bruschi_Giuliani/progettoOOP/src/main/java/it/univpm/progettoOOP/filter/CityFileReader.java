@@ -23,11 +23,12 @@ public class CityFileReader implements CityFileReaderService {
 
 	public JSONArray caricaArray() {
 		JSONParser jsonParser = new JSONParser();
-
+		JSONArray cityList = null;
+		
 		try (FileReader reader = new FileReader(name)){
 			//Read JSON file
 			Object obj = jsonParser.parse(reader);
-			JSONArray cityList = new JSONArray();
+			cityList = new JSONArray();
 			return cityList = (JSONArray) obj;
 
 		} catch (FileNotFoundException e) {
@@ -37,7 +38,7 @@ public class CityFileReader implements CityFileReaderService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return cityList;
 	}
 
 	public void getCity(JSONArray ja, String name, String country) {

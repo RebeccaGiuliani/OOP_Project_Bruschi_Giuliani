@@ -149,7 +149,6 @@ public class Stats {
 		return this.value;
 	}
 
-
 	public void getStats() {
 		System.out.println(giornoMax +"   "+ max);
 		System.out.println(giornoMin +"   "+ min);

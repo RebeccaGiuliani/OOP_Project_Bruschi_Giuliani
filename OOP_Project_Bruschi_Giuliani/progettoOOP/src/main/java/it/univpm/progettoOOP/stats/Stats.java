@@ -77,7 +77,7 @@ public class Stats {
 			else {if(month.equals("04")) Month = "aprile";
 			else {if(month.equals("05")) Month = "maggio";
 			else {if(month.equals("06")) Month = "giugno";
-			else {if(month.equals("07")) Month = "liglio";
+			else {if(month.equals("07")) Month = "luglio";
 			else {if(month.equals("08")) Month = "agosto";
 			else {if(month.equals("09")) Month = "settembre";
 			else {if(month.equals("10")) Month = "ottobre";
@@ -99,7 +99,7 @@ public class Stats {
 		else {if(month.equals("04")) Month = "aprile";
 		else {if(month.equals("05")) Month = "maggio";
 		else {if(month.equals("06")) Month = "giugno";
-		else {if(month.equals("07")) Month = "liglio";
+		else {if(month.equals("07")) Month = "luglio";
 		else {if(month.equals("08")) Month = "agosto";
 		else {if(month.equals("09")) Month = "settembre";
 		else {if(month.equals("10")) Month = "ottobre";

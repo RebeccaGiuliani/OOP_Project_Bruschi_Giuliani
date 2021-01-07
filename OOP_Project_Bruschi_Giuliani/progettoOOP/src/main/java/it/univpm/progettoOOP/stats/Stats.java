@@ -27,6 +27,7 @@ public class Stats {
 
 	public void monthStats() {
 		int cont = 0;
+		String year = "00";
 		String month = "00";
 		String Month = "00";
 		double media = 0;
@@ -46,49 +47,56 @@ public class Stats {
 			Date d = new Date((String) Object.get("date_iso"));
 			value = getValue((String) Object.get("date_iso"));
 
-			if (max < value) { 
-				max = value;
-				this.max = max;
-				this.giornoMax = d.getDate(); contMax = 1;}
-			else {if(max == value) { 
-				contMax ++; 
-				this.giornoMax = giornoMax +", "+d.getDate();
-			}}this.contMax = contMax;
+			if(d.getYear().equals(year)){
 
-			if (min > value) { 
-				min = value;
-				this.min = min;
-				this.giornoMin = d.getDate(); contMin = 1;}	
-			else {if(min == value) { 
-				contMin ++; 
-				this.giornoMin = giornoMin +", "+d.getDate();
-			}}this.contMin = contMin;
+				if (max < value) { 
+					max = value;
+					this.max = max;
+					this.giornoMax = d.getDate(); contMax = 1;}
+				else {if(max == value) { 
+					contMax ++; 
+					this.giornoMax = giornoMax +", "+d.getDate();
+				}}this.contMax = contMax;
+
+				if (min > value) { 
+					min = value;
+					this.min = min;
+					this.giornoMin = d.getDate(); contMin = 1;}	
+				else {if(min == value) { 
+					contMin ++; 
+					this.giornoMin = giornoMin +", "+d.getDate();
+				}}this.contMin = contMin;
 
 
-			if(d.getMonth().equals(month)) {
-				cont ++;
-				somma += value; 
-				media = somma/cont;
+				if(d.getMonth().equals(month)) {
+					cont ++;
+					somma += value; 
+					media = somma/cont;
 
-			}
-			else {if(month.equals("01")) Month = "gennaio";
-			else {if(month.equals("02")) Month = "febbraio";
-			else {if(month.equals("03")) Month = "marzo";
-			else {if(month.equals("04")) Month = "aprile";
-			else {if(month.equals("05")) Month = "maggio";
-			else {if(month.equals("06")) Month = "giugno";
-			else {if(month.equals("07")) Month = "luglio";
-			else {if(month.equals("08")) Month = "agosto";
-			else {if(month.equals("09")) Month = "settembre";
-			else {if(month.equals("10")) Month = "ottobre";
-			else {if(month.equals("11")) Month = "novembre";
-			else {if(month.equals("12")) Month = "dicembre";}}}}}}}}}}}
+				}
+				else {if(month.equals("01")) Month = "gennaio";
+				else {if(month.equals("02")) Month = "febbraio";
+				else {if(month.equals("03")) Month = "marzo";
+				else {if(month.equals("04")) Month = "aprile";
+				else {if(month.equals("05")) Month = "maggio";
+				else {if(month.equals("06")) Month = "giugno";
+				else {if(month.equals("07")) Month = "luglio";
+				else {if(month.equals("08")) Month = "agosto";
+				else {if(month.equals("09")) Month = "settembre";
+				else {if(month.equals("10")) Month = "ottobre";
+				else {if(month.equals("11")) Month = "novembre";
+				else {if(month.equals("12")) Month = "dicembre";}}}}}}}}}}}
 
-			if (month.equals("00"));
-			else {System.out.println("La media nel mese di "+ Month +" è: " + media);
-			varianza = getVarianza(media, month);
-			System.out.println("La varianza nel mese di "+ Month +" è: " + varianza);}
+				if (month.equals("00"));
+				else {System.out.println("La media nel mese di "+ Month +" è: " + media);
+				varianza = getVarianza(media, month, year);
+				System.out.println("La varianza nel mese di "+ Month +" è: " + varianza);}
 
+				media=value; somma=value; cont=1;
+				month = d.getMonth();
+				}
+			}else { year = d.getYear(); 
+			System.out.println(year);
 			media=value; somma=value; cont=1;
 			month = d.getMonth();
 			}
@@ -107,13 +115,13 @@ public class Stats {
 		else {if(month.equals("12")) Month = "dicembre";}}}}}}}}}}}
 
 		System.out.println("La media nel mese di "+Month+ " è: " + media);
-		varianza = getVarianza(media, month);
+		varianza = getVarianza(media, month, year);
 		System.out.println("La varianza nel mese di "+ Month +" è: " + varianza);
 	}
 
 	public void seasonStats() {}
 
-	public double getVarianza(double media, String month) {
+	public double getVarianza(double media, String month, String year) {
 		double varianza0 = 0.0;
 		double varianza = 0.0;
 		int cont = 0;	
@@ -127,12 +135,13 @@ public class Stats {
 			Date d = new Date((String) Object.get("date_iso"));
 			value = getValue((String) Object.get("date_iso"));
 
-			if(month.equals("00")); else {
-				if(d.getMonth().equals(month)) {
-					cont ++;
-					varianza0 += Math.pow(value-media, 2);
-					varianza = varianza0/cont;
-				}}
+			if(d.getYear().equals(year)) {
+				if(month.equals("00")); else {
+					if(d.getMonth().equals(month)) {
+						cont ++;
+						varianza0 += Math.pow(value-media, 2);
+						varianza = varianza0/cont;
+					}}}
 		}//chiusura FOR
 		return varianza;
 	}

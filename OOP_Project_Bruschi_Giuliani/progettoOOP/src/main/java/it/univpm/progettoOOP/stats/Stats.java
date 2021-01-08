@@ -119,7 +119,84 @@ public class Stats {
 		System.out.println("La varianza nel mese di "+ Month +" è: " + varianza);
 	}
 
-	public void seasonStats() {}
+	public void seasonStats() {
+		int contSpring = 0;
+		int contSummer = 0;
+		int contAutumn = 0;
+		int contWinter = 0;
+		double mediaSpring = 0;
+		double mediaSummer = 0;
+		double mediaAutumn = 0;
+		double mediaWinter = 0;
+		double sommaSpring = 0;
+		double sommaSummer = 0;
+		double sommaAutumn = 0;
+		double sommaWinter = 0;
+		double varianza;
+
+		APICall j = new APICall(this.period, this.p);
+		JSONArray ja = new JSONArray();
+		ja = j.getData();
+
+		for(int i = 0; i<ja.size(); i++) {
+			JSONObject Object = (JSONObject) ja.get(i);
+			Date d = new Date((String) Object.get("date_iso"));
+			value = getValue((String) Object.get("date_iso"));
+
+			int giorno = Integer.parseInt(d.getDay());
+
+			if (d.getMonth().equals("00"));
+			else{if(d.getMonth().equals("03") & giorno > 20 || 
+					d.getMonth().equals("04") || 
+					d.getMonth().equals("05") || 
+					d.getMonth().equals("06") & giorno < 22) {
+				contSpring ++;
+				sommaSpring += value;
+				mediaSpring = sommaSpring/contSpring;	
+			}
+			else {if(d.getMonth().equals("06") & giorno > 21 || 
+					d.getMonth().equals("07") || 
+					d.getMonth().equals("08") || 
+					d.getMonth().equals("09") & giorno < 23) {
+				contSummer ++;
+				sommaSummer += value;
+				mediaSummer = sommaSummer/contSummer;
+			}
+			else{if(d.getMonth().equals("09") & giorno > 22 ||
+					d.getMonth().equals("10") || 
+					d.getMonth().equals("11") || 
+					d.getMonth().equals("12") & giorno < 22) {
+				contAutumn ++;
+				sommaAutumn += value;
+				mediaAutumn = sommaAutumn/contAutumn;	
+			}
+			else {if(d.getMonth().equals("12") & giorno > 21 || 
+					d.getMonth().equals("01") || 
+					d.getMonth().equals("02") || 
+					d.getMonth().equals("03") & giorno < 21) {
+				contWinter ++;
+				sommaWinter += value;
+				mediaWinter = sommaWinter/contWinter;
+			}
+			}}}}
+		}//Chiusura FOR
+		if(mediaSpring != 0.0) {
+			System.out.println("La media in primavera è: " + mediaSpring);
+			varianza = getVarianzaSeason(mediaSpring);
+			System.out.println("La varianza in primavera è: " + varianza);}
+		if(mediaSummer != 0.0) {
+			System.out.println("La media in estate è: " + mediaSummer);
+			varianza = getVarianzaSeason(mediaSummer);
+			System.out.println("La varianza in estate è: " + varianza);}
+		if(mediaAutumn != 0.0) {
+			System.out.println("La media in autunno è: " + mediaAutumn);
+			varianza = getVarianzaSeason(mediaAutumn);
+			System.out.println("La varianza in autunno è: " + varianza);}
+		if(mediaWinter != 0.0) {
+			System.out.println("La media in inverno è: " + mediaWinter);
+			varianza = getVarianzaSeason(mediaWinter);
+			System.out.println("La varianza in inverno è: " + varianza);}
+	}
 
 	public double getVarianza(double media, String month, String year) {
 		double varianza0 = 0.0;
@@ -146,6 +223,60 @@ public class Stats {
 		return varianza;
 	}
 
+	public double getVarianzaSeason (double media) {
+		double varianza0 = 0.0;
+		double varianza = 0.0;
+		int cont = 0;	
+
+		APICall j = new APICall(this.period, this.p);
+		JSONArray ja = new JSONArray();
+		ja = j.getData();
+
+		for(int i = 0; i<ja.size(); i++) {
+			JSONObject Object = (JSONObject) ja.get(i);
+			Date d = new Date((String) Object.get("date_iso"));
+			value = getValue((String) Object.get("date_iso"));
+
+			int giorno = Integer.parseInt(d.getDay());
+
+			if (d.getMonth().equals("00"));
+			else{if(d.getMonth().equals("03") & giorno > 20 || 
+					d.getMonth().equals("04") || 
+					d.getMonth().equals("05") || 
+					d.getMonth().equals("06") & giorno < 22) {
+				cont ++; //System.out.println("cont varianza:"+cont);
+				varianza0 += Math.pow(value-media, 2); //System.out.println("varianza0: "+varianza0);
+				varianza = varianza0/cont;	
+			}
+			else {if(d.getMonth().equals("06") & giorno > 21 || 
+					d.getMonth().equals("07") || 
+					d.getMonth().equals("08") || 
+					d.getMonth().equals("09") & giorno < 23) {
+				cont ++; //System.out.println("cont varianza:"+cont);
+				varianza0 += Math.pow(value-media, 2); //System.out.println("varianza0: "+varianza0);
+				varianza = varianza0/cont;	
+			}
+			else{if(d.getMonth().equals("09") & giorno > 22 ||
+					d.getMonth().equals("10") || 
+					d.getMonth().equals("11") || 
+					d.getMonth().equals("12") & giorno < 22) {
+				cont ++; //System.out.println("cont varianza:"+cont);
+				varianza0 += Math.pow(value-media, 2); //System.out.println("varianza0: "+varianza0);
+				varianza = varianza0/cont;				
+			}
+			else {if(d.getMonth().equals("12") & giorno > 21 || 
+					d.getMonth().equals("01") || 
+					d.getMonth().equals("02") || 
+					d.getMonth().equals("03") & giorno < 21) {
+				cont ++; //System.out.println("cont varianza:"+cont);
+				varianza0 += Math.pow(value-media, 2); //System.out.println("varianza0: "+varianza0);
+				varianza = varianza0/cont;	
+			}
+			}}}}
+		}//chiusura FOR
+		return varianza;
+	}
+	
 	public double getValue(String date) {
 		APICall j = new APICall(this.period, this.p);
 		JSONArray ja = new JSONArray();

@@ -18,7 +18,7 @@ import it.univpm.progettoOOP.model.Period;
 
 public class APICall implements APICallService {
 
-	private static String appid = "786ef3c38e2018b2823094ad93925380"; //1ea00837bb533c8b22f844c29a16341e
+	private static String appid = "786ef3c38e2018b2823094ad93925380"; //appid Simone "1ea00837bb533c8b22f844c29a16341e"
 	private static int hour = 13;
 	private static int min = 0;
 	private Period period;

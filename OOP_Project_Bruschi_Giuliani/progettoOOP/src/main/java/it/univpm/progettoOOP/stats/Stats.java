@@ -12,23 +12,22 @@ import it.univpm.progettoOOP.model.Period;
 
 public class Stats implements StatsService {
 	private double max, min;
-	private Period period;
 	private double value;
 	private CityFileReader p;
 	private String giornoMax, giornoMin;
 	int contMin, contMax;
+	JSONArray ja = new JSONArray();
 
 	public Stats(City city, Period period) {
 		this.p = new CityFileReader(city);
 		APICall call = new APICall(period, p);
-		call.getData();	
-		this.period = period;
+		this.ja = call.getData();	
 	}
 
 	public void monthStats() {
 		int cont = 0;
-		String year = "00";
-		String month = "00";
+		int year = 0;
+		int month = 0;
 		String Month = "00";
 		double media = 0;
 		double varianza;
@@ -38,16 +37,12 @@ public class Stats implements StatsService {
 		int contMin = 1;
 		int contMax = 1;
 
-		APICall j = new APICall(this.period, this.p);
-		JSONArray ja = new JSONArray();
-		ja = j.getData();
-
-		for(int i = 0; i<ja.size(); i++) {
-			JSONObject Object = (JSONObject) ja.get(i);
+		for(int i = 0; i<this.ja.size(); i++) {
+			JSONObject Object = (JSONObject) this.ja.get(i);
 			Date d = new Date((String) Object.get("date_iso"));
 			value = getValue((String) Object.get("date_iso"));
 
-			if(d.getYear().equals(year)){
+			if(d.getYear() == year){
 
 				if (max < value) { 
 					max = value;
@@ -68,29 +63,42 @@ public class Stats implements StatsService {
 				}}this.contMin = contMin;
 
 
-				if(d.getMonth().equals(month)) {
+				if(d.getMonth() == month) {
 					cont ++;
 					somma += value; 
 					media = somma/cont;
 
 				}
-				else {if(month.equals("01")) Month = "gennaio";
-				else {if(month.equals("02")) Month = "febbraio";
-				else {if(month.equals("03")) Month = "marzo";
-				else {if(month.equals("04")) Month = "aprile";
-				else {if(month.equals("05")) Month = "maggio";
-				else {if(month.equals("06")) Month = "giugno";
-				else {if(month.equals("07")) Month = "luglio";
-				else {if(month.equals("08")) Month = "agosto";
-				else {if(month.equals("09")) Month = "settembre";
-				else {if(month.equals("10")) Month = "ottobre";
-				else {if(month.equals("11")) Month = "novembre";
-				else {if(month.equals("12")) Month = "dicembre";}}}}}}}}}}}
+				else {if(month == 1) Month = "gennaio";
+				else {if(month == 2) Month = "febbraio";
+				else {if(month == 3) Month = "marzo";
+				else {if(month == 4) Month = "aprile";
+				else {if(month == 5) Month = "maggio";
+				else {if(month == 6) Month = "giugno";
+				else {if(month == 7) Month = "luglio";
+				else {if(month == 8) Month = "agosto";
+				else {if(month == 9) Month = "settembre";
+				else {if(month == 10) Month = "ottobre";
+				else {if(month == 11) Month = "novembre";
+				else {if(month == 12) Month = "dicembre";}}}}}}}}}}}
 
-				if (month.equals("00"));
+				if (month == 0);
 				else {System.out.println("La media nel mese di "+ Month +" è: " + media);
 				varianza = getVarianza(media, month, year);
 				System.out.println("La varianza nel mese di "+ Month +" è: " + varianza);}
+				
+				if(month == 1) Month = "gennaio";
+				else {if(month == 2) Month = "febbraio";
+				else {if(month == 3) Month = "marzo";
+				else {if(month == 4) Month = "aprile";
+				else {if(month == 5) Month = "maggio";
+				else {if(month == 6) Month = "giugno";
+				else {if(month == 7) Month = "luglio";
+				else {if(month == 8) Month = "agosto";
+				else {if(month == 9) Month = "settembre";
+				else {if(month == 10) Month = "ottobre";
+				else {if(month == 11) Month = "novembre";
+				else {if(month == 12) Month = "dicembre";}}}}}}}}}}}
 
 				media=value; somma=value; cont=1;
 				month = d.getMonth();
@@ -101,19 +109,7 @@ public class Stats implements StatsService {
 			month = d.getMonth();
 			}
 		}//Chiusura FOR
-		if(month.equals("01")) Month = "gennaio";
-		else {if(month.equals("02")) Month = "febbraio";
-		else {if(month.equals("03")) Month = "marzo";
-		else {if(month.equals("04")) Month = "aprile";
-		else {if(month.equals("05")) Month = "maggio";
-		else {if(month.equals("06")) Month = "giugno";
-		else {if(month.equals("07")) Month = "luglio";
-		else {if(month.equals("08")) Month = "agosto";
-		else {if(month.equals("09")) Month = "settembre";
-		else {if(month.equals("10")) Month = "ottobre";
-		else {if(month.equals("11")) Month = "novembre";
-		else {if(month.equals("12")) Month = "dicembre";}}}}}}}}}}}
-
+		
 		System.out.println("La media nel mese di "+Month+ " è: " + media);
 		varianza = getVarianza(media, month, year);
 		System.out.println("La varianza nel mese di "+ Month +" è: " + varianza);
@@ -134,46 +130,33 @@ public class Stats implements StatsService {
 		double sommaWinter = 0;
 		double varianza;
 
-		APICall j = new APICall(this.period, this.p);
-		JSONArray ja = new JSONArray();
-		ja = j.getData();
 
-		for(int i = 0; i<ja.size(); i++) {
-			JSONObject Object = (JSONObject) ja.get(i);
+		for(int i = 0; i<this.ja.size(); i++) {
+			JSONObject Object = (JSONObject) this.ja.get(i);
 			Date d = new Date((String) Object.get("date_iso"));
 			value = getValue((String) Object.get("date_iso"));
 
-			int giorno = Integer.parseInt(d.getDay());
-
-			if (d.getMonth().equals("00"));
-			else{if(d.getMonth().equals("03") & giorno > 20 || 
-					d.getMonth().equals("04") || 
-					d.getMonth().equals("05") || 
-					d.getMonth().equals("06") & giorno < 22) {
+			if (d.getMonth() == 0);
+			else{if(d.getMonth() >= 3 & d.getDay() >= 21 ||  
+					d.getMonth() <= 6 & d.getDay() <= 21) {
 				contSpring ++;
 				sommaSpring += value;
 				mediaSpring = sommaSpring/contSpring;	
 			}
-			else {if(d.getMonth().equals("06") & giorno > 21 || 
-					d.getMonth().equals("07") || 
-					d.getMonth().equals("08") || 
-					d.getMonth().equals("09") & giorno < 23) {
+			else {if(d.getMonth() >= 6 & d.getDay() >= 22 ||
+					d.getMonth() <= 9 & d.getDay() <= 22) {
 				contSummer ++;
 				sommaSummer += value;
 				mediaSummer = sommaSummer/contSummer;
 			}
-			else{if(d.getMonth().equals("09") & giorno > 22 ||
-					d.getMonth().equals("10") || 
-					d.getMonth().equals("11") || 
-					d.getMonth().equals("12") & giorno < 22) {
+			else{if(d.getMonth() >= 9 & d.getDay() >= 23 ||
+					d.getMonth() <= 12 & d.getDay() <= 21) {
 				contAutumn ++;
 				sommaAutumn += value;
 				mediaAutumn = sommaAutumn/contAutumn;	
 			}
-			else {if(d.getMonth().equals("12") & giorno > 21 || 
-					d.getMonth().equals("01") || 
-					d.getMonth().equals("02") || 
-					d.getMonth().equals("03") & giorno < 21) {
+			else {if(d.getMonth() >= 12 & d.getDay() >= 22 || 
+					d.getMonth() <= 3 & d.getDay() <= 20) {
 				contWinter ++;
 				sommaWinter += value;
 				mediaWinter = sommaWinter/contWinter;
@@ -198,23 +181,19 @@ public class Stats implements StatsService {
 			System.out.println("La varianza in inverno è: " + varianza);}
 	}
 
-	public double getVarianza(double media, String month, String year) {
+	public double getVarianza(double media, int month, int year) {
 		double varianza0 = 0.0;
 		double varianza = 0.0;
 		int cont = 0;	
 
-		APICall j = new APICall(this.period, this.p);
-		JSONArray ja = new JSONArray();
-		ja = j.getData();
-
-		for(int i = 0; i<ja.size(); i++) {
-			JSONObject Object = (JSONObject) ja.get(i);
+		for(int i = 0; i<this.ja.size(); i++) {
+			JSONObject Object = (JSONObject) this.ja.get(i);
 			Date d = new Date((String) Object.get("date_iso"));
 			value = getValue((String) Object.get("date_iso"));
 
-			if(d.getYear().equals(year)) {
-				if(month.equals("00")); else {
-					if(d.getMonth().equals(month)) {
+			if(d.getYear() == year) {
+				if(month == 0); else {
+					if(d.getMonth() == month) {
 						cont ++;
 						varianza0 += Math.pow(value-media, 2);
 						varianza = varianza0/cont;
@@ -227,47 +206,33 @@ public class Stats implements StatsService {
 		double varianza0 = 0.0;
 		double varianza = 0.0;
 		int cont = 0;	
-
-		APICall j = new APICall(this.period, this.p);
-		JSONArray ja = new JSONArray();
-		ja = j.getData();
-
-		for(int i = 0; i<ja.size(); i++) {
-			JSONObject Object = (JSONObject) ja.get(i);
+		
+		for (int i = 0; i<this.ja.size(); i++) {
+			JSONObject Object = (JSONObject) this.ja.get(i);
 			Date d = new Date((String) Object.get("date_iso"));
 			value = getValue((String) Object.get("date_iso"));
 
-			int giorno = Integer.parseInt(d.getDay());
-
-			if (d.getMonth().equals("00"));
-			else{if(d.getMonth().equals("03") & giorno > 20 || 
-					d.getMonth().equals("04") || 
-					d.getMonth().equals("05") || 
-					d.getMonth().equals("06") & giorno < 22) {
+			if (d.getMonth() == 0);
+			else{if(d.getMonth() >= 3 & d.getDay() >= 21 || 
+					d.getMonth() <= 6 & d.getDay() <= 21) {
 				cont ++; //System.out.println("cont varianza:"+cont);
 				varianza0 += Math.pow(value-media, 2); //System.out.println("varianza0: "+varianza0);
 				varianza = varianza0/cont;	
 			}
-			else {if(d.getMonth().equals("06") & giorno > 21 || 
-					d.getMonth().equals("07") || 
-					d.getMonth().equals("08") || 
-					d.getMonth().equals("09") & giorno < 23) {
+			else {if(d.getMonth() >= 6 & d.getDay() >= 22 || 
+					d.getMonth() <= 9 & d.getDay() <= 22) {
 				cont ++; //System.out.println("cont varianza:"+cont);
 				varianza0 += Math.pow(value-media, 2); //System.out.println("varianza0: "+varianza0);
 				varianza = varianza0/cont;	
 			}
-			else{if(d.getMonth().equals("09") & giorno > 22 ||
-					d.getMonth().equals("10") || 
-					d.getMonth().equals("11") || 
-					d.getMonth().equals("12") & giorno < 22) {
+			else{if(d.getMonth() >= 9 & d.getDay() >= 23 || 
+					d.getMonth() <= 12 & d.getDay() <= 21) {
 				cont ++; //System.out.println("cont varianza:"+cont);
 				varianza0 += Math.pow(value-media, 2); //System.out.println("varianza0: "+varianza0);
 				varianza = varianza0/cont;				
 			}
-			else {if(d.getMonth().equals("12") & giorno > 21 || 
-					d.getMonth().equals("01") || 
-					d.getMonth().equals("02") || 
-					d.getMonth().equals("03") & giorno < 21) {
+			else {if(d.getMonth() >= 12 & d.getDay() >= 22 || 
+					d.getMonth() <= 3 & d.getDay() <= 20) {
 				cont ++; //System.out.println("cont varianza:"+cont);
 				varianza0 += Math.pow(value-media, 2); //System.out.println("varianza0: "+varianza0);
 				varianza = varianza0/cont;	
@@ -278,11 +243,9 @@ public class Stats implements StatsService {
 	}
 	
 	public double getValue(String date) {
-		APICall j = new APICall(this.period, this.p);
-		JSONArray ja = new JSONArray();
-		ja = j.getData();
-		for(int i = 0; i<ja.size(); i++) {
-			JSONObject Object = (JSONObject) ja.get(i);
+
+		for(int i = 0; i<this.ja.size(); i++) {
+			JSONObject Object = (JSONObject) this.ja.get(i);
 			if(Object.get("date_iso").equals(date))
 				this.value = (Double) Object.get("value");
 		}

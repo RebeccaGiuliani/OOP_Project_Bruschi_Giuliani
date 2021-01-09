@@ -18,16 +18,19 @@ public class Date {
 		this.day = param[2];
 	}
 
-	public String getDay(){
-		return this.day;
+	public int getDay(){
+		int giorno = Integer.parseInt(this.day);
+		return giorno;
 	} 
 
-	public String getMonth(){
-		return this.month;
+	public int getMonth(){
+		int mese = Integer.parseInt(this.month);
+		return mese;
 	}
 
-	public String getYear(){
-		return this.year;
+	public int getYear(){
+		int anno = Integer.parseInt(this.year);
+		return anno;
 	}
 	
 	public String getDate() {

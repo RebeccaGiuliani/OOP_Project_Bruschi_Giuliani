@@ -10,7 +10,7 @@ import it.univpm.progettoOOP.model.Date;
 import it.univpm.progettoOOP.model.Period;
 
 
-public class Stats {
+public class Stats implements StatsService {
 	private double max, min;
 	private Period period;
 	private double value;

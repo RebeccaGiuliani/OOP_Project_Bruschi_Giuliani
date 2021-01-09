@@ -11,11 +11,9 @@ import it.univpm.progettoOOP.model.Period;
 
 
 public class Stats implements StatsService {
-	private double max, min;
 	private double value;
 	private CityFileReader p;
-	private String giornoMax, giornoMin;
-	int contMin, contMax;
+
 	JSONArray ja = new JSONArray();
 
 	public Stats(City city, Period period) {
@@ -32,10 +30,6 @@ public class Stats implements StatsService {
 		double media = 0;
 		double varianza;
 		double somma = 0;
-		double max = 0;
-		double min = 30;
-		int contMin = 1;
-		int contMax = 1;
 
 		for(int i = 0; i<this.ja.size(); i++) {
 			JSONObject Object = (JSONObject) this.ja.get(i);
@@ -43,26 +37,6 @@ public class Stats implements StatsService {
 			value = getValue((String) Object.get("date_iso"));
 
 			if(d.getYear() == year){
-
-				if (max < value) { 
-					max = value;
-					this.max = max;
-					this.giornoMax = d.getDate(); contMax = 1;}
-				else {if(max == value) { 
-					contMax ++; 
-					this.giornoMax = giornoMax +", "+d.getDate();
-				}}this.contMax = contMax;
-
-				if (min > value) { 
-					min = value;
-					this.min = min;
-					this.giornoMin = d.getDate(); contMin = 1;}	
-				else {if(min == value) { 
-					contMin ++; 
-					this.giornoMin = giornoMin +", "+d.getDate();
-				}}this.contMin = contMin;
-
-
 				if(d.getMonth() == month) {
 					cont ++;
 					somma += value; 
@@ -86,7 +60,7 @@ public class Stats implements StatsService {
 				else {System.out.println("La media nel mese di "+ Month +" è: " + media);
 				varianza = getVarianza(media, month, year);
 				System.out.println("La varianza nel mese di "+ Month +" è: " + varianza);}
-				
+
 				if(month == 1) Month = "gennaio";
 				else {if(month == 2) Month = "febbraio";
 				else {if(month == 3) Month = "marzo";
@@ -109,7 +83,7 @@ public class Stats implements StatsService {
 			month = d.getMonth();
 			}
 		}//Chiusura FOR
-		
+
 		System.out.println("La media nel mese di "+Month+ " è: " + media);
 		varianza = getVarianza(media, month, year);
 		System.out.println("La varianza nel mese di "+ Month +" è: " + varianza);
@@ -206,7 +180,7 @@ public class Stats implements StatsService {
 		double varianza0 = 0.0;
 		double varianza = 0.0;
 		int cont = 0;	
-		
+
 		for (int i = 0; i<this.ja.size(); i++) {
 			JSONObject Object = (JSONObject) this.ja.get(i);
 			Date d = new Date((String) Object.get("date_iso"));
@@ -241,7 +215,7 @@ public class Stats implements StatsService {
 		}//chiusura FOR
 		return varianza;
 	}
-	
+
 	public double getValue(String date) {
 
 		for(int i = 0; i<this.ja.size(); i++) {
@@ -252,23 +226,11 @@ public class Stats implements StatsService {
 		return this.value;
 	}
 
-	public void getStats() {
-		System.out.println(giornoMax +"   "+ max);
-		System.out.println(giornoMin +"   "+ min);
+	public void getStats(int cont, String giorno) {
 
-		if (this.contMax > 1) getGiorniMax();
+		if (cont > 1) getGiorni(cont, giorno);
 		else {
-			Date d = new Date(this.giornoMax);
-			System.out.println("MAX:");
-			System.out.println("DATA: "+d.getDate());
-			System.out.println("DAY: "+d.getDay());
-			System.out.println("MONTH: "+d.getMonth());
-			System.out.println("YEAR: "+d.getYear());
-		}
-		if (this.contMin > 1) getGiorniMin();
-		else {
-			Date d = new Date(this.giornoMin);
-			System.out.println("MIN:");
+			Date d = new Date(giorno);
 			System.out.println("DATA: "+d.getDate());
 			System.out.println("DAY: "+d.getDay());
 			System.out.println("MONTH: "+d.getMonth());
@@ -276,12 +238,68 @@ public class Stats implements StatsService {
 		}
 	}
 
-	public void getGiorniMax() {
-		String[] g = this.giornoMax.split(", ");
-		System.out.println("MAX:");
-		for(int i=0; i<this.contMax; i++) {
-			String dataMax = g[i];
-			Date d = new Date(dataMax);
+	public double getMax() {
+		String giornoMax = "";
+		double max = 0;
+		int contMax = 1;
+		int year = 0;
+
+		for(int i = 0; i<this.ja.size(); i++) {
+			JSONObject Object = (JSONObject) this.ja.get(i);
+			Date d = new Date((String) Object.get("date_iso"));
+			value = getValue((String) Object.get("date_iso"));
+
+			if(d.getYear() == year){ 
+
+				if (max < value) { 
+					max = value;
+					giornoMax = d.getDate(); contMax = 1;}
+				else {if(max == value) { 
+					contMax ++; 
+					giornoMax = giornoMax +", "+d.getDate();
+
+				}}
+
+			}else { year = d.getYear(); 
+			System.out.println(year);}}
+		getStats(contMax, giornoMax);
+		return max;
+	}
+
+	public double getMin() {
+		String giornoMin = "";
+		double min = 30;
+		int contMin = 1;
+		int year = 0;
+
+
+		for(int i = 0; i<this.ja.size(); i++) {
+			JSONObject Object = (JSONObject) this.ja.get(i);
+			Date d = new Date((String) Object.get("date_iso"));
+			value = getValue((String) Object.get("date_iso"));
+
+			if(d.getYear() == year){
+				if (min > value) { 
+					min = value;
+					giornoMin = d.getDate(); contMin = 1;}	
+				else {if(min == value) { 
+					contMin ++; 
+					giornoMin = giornoMin +", "+d.getDate();
+
+				}}
+			}else { year = d.getYear(); 
+			System.out.println(year);}}
+		getStats(contMin, giornoMin);
+		return min;
+
+	}
+
+	public void getGiorni(int cont, String giorno) {
+
+		String[] g = giorno.split(", ");
+		for(int i=0; i<cont; i++) {
+			String data = g[i];
+			Date d = new Date(data);
 			System.out.println("DATA: "+d.getDate());
 			System.out.println("DAY: "+d.getDay());
 			System.out.println("MONTH: "+d.getMonth());
@@ -289,16 +307,4 @@ public class Stats implements StatsService {
 		}
 	}
 
-	public void getGiorniMin() {
-		String[] g = this.giornoMin.split(", ");
-		System.out.println("MIN:");
-		for(int i=0; i<this.contMin; i++) {
-			String dataMin = g[i];
-			Date d = new Date(dataMin);
-			System.out.println("DATA: "+d.getDate());
-			System.out.println("DAY: "+d.getDay());
-			System.out.println("MONTH: "+d.getMonth());
-			System.out.println("YEAR: "+d.getYear());
-		}
-	}
 }

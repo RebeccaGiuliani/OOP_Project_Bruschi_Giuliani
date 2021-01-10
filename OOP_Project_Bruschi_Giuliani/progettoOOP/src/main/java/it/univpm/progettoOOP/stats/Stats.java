@@ -56,10 +56,11 @@ public class Stats implements StatsService {
 				else {if(month == 11) Month = "novembre";
 				else {if(month == 12) Month = "dicembre";}}}}}}}}}}}
 
-				if (month == 0);
-				else {System.out.println("La media nel mese di "+ Month +" è: " + media);
-				varianza = getVarianza(media, month, year);
-				System.out.println("La varianza nel mese di "+ Month +" è: " + varianza);}
+				if (month != 0){
+					System.out.println("La media nel mese di "+ Month +" è: " + media);
+					varianza = getVarianza(media, month, year);
+					System.out.println("La varianza nel mese di "+ Month +" è: " + varianza);
+				}
 
 				if(month == 1) Month = "gennaio";
 				else {if(month == 2) Month = "febbraio";

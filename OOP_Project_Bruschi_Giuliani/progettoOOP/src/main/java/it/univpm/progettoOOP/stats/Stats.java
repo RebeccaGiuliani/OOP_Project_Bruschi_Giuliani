@@ -4,21 +4,15 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import it.univpm.progettoOOP.filter.APICall;
-import it.univpm.progettoOOP.filter.CityFileReader;
-import it.univpm.progettoOOP.model.City;
 import it.univpm.progettoOOP.model.Date;
-import it.univpm.progettoOOP.model.Period;
 
 
 public class Stats implements StatsService {
 	private double value;
-	private CityFileReader p;
 
 	JSONArray ja = new JSONArray();
 
-	public Stats(City city, Period period) {
-		this.p = new CityFileReader(city);
-		APICall call = new APICall(period, p);
+	public Stats(APICall call) {
 		this.ja = call.getData();	
 	}
 

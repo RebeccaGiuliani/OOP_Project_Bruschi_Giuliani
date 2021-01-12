@@ -99,7 +99,6 @@ public class Stats implements StatsService {
 		double sommaSummer = 0;
 		double sommaAutumn = 0;
 		double sommaWinter = 0;
-		double varianza;
 
 
 		for(int i = 0; i<this.ja.size(); i++) {

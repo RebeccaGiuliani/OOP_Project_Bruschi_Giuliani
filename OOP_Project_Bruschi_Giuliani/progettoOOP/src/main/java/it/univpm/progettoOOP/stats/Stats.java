@@ -86,7 +86,7 @@ public class Stats implements StatsService {
 		return varianza;
 	}
 	
-	public void seasonStats() {
+	public double seasonStats() {
 		int contSpring = 0;
 		int contSummer = 0;
 		int contAutumn = 0;
@@ -134,22 +134,10 @@ public class Stats implements StatsService {
 			}
 			}}}}
 		}//Chiusura FOR
-		if(mediaSpring != 0.0) {
-			System.out.println("La media in primavera è: " + mediaSpring);
-			varianza = getVarianzaSeason(mediaSpring);
-			System.out.println("La varianza in primavera è: " + varianza);}
-		if(mediaSummer != 0.0) {
-			System.out.println("La media in estate è: " + mediaSummer);
-			varianza = getVarianzaSeason(mediaSummer);
-			System.out.println("La varianza in estate è: " + varianza);}
-		if(mediaAutumn != 0.0) {
-			System.out.println("La media in autunno è: " + mediaAutumn);
-			varianza = getVarianzaSeason(mediaAutumn);
-			System.out.println("La varianza in autunno è: " + varianza);}
-		if(mediaWinter != 0.0) {
-			System.out.println("La media in inverno è: " + mediaWinter);
-			varianza = getVarianzaSeason(mediaWinter);
-			System.out.println("La varianza in inverno è: " + varianza);}
+		if(mediaSpring != 0.0) return mediaSpring;
+		else if(mediaSummer != 0.0) return mediaSummer;
+		else if(mediaAutumn != 0.0) return mediaAutumn;
+		else return mediaWinter;
 	}
 
 	public double getVarianzaSeason (double media) {

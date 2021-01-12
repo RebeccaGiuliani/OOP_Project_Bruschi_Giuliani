@@ -10,6 +10,9 @@ import it.univpm.progettoOOP.model.Date;
 
 public class Stats implements StatsService {
 	private double value;
+	private int cont;
+	private String giorno = "";
+	Vector<Double> v = new Vector<Double>();
 
 	JSONArray ja = new JSONArray();
 
@@ -17,13 +20,13 @@ public class Stats implements StatsService {
 		this.ja = call.getData();	
 	}
 
-	public void monthStats() {
+	public Vector<Double> monthStats() {
+		Vector<Double> m = new Vector<Double>();
+		Vector<Double> v = new Vector<Double>();
 		int cont = 0;
 		int year = 0;
 		int month = 0;
-		String Month = "00";
 		double media = 0;
-		double varianza;
 		double somma = 0;
 
 		for(int i = 0; i<this.ja.size(); i++) {
@@ -37,53 +40,52 @@ public class Stats implements StatsService {
 					somma += value; 
 					media = somma/cont;
 				}
-				else {if(month == 1) Month = "gennaio";
-				else {if(month == 2) Month = "febbraio";
-				else {if(month == 3) Month = "marzo";
-				else {if(month == 4) Month = "aprile";
-				else {if(month == 5) Month = "maggio";
-				else {if(month == 6) Month = "giugno";
-				else {if(month == 7) Month = "luglio";
-				else {if(month == 8) Month = "agosto";
-				else {if(month == 9) Month = "settembre";
-				else {if(month == 10) Month = "ottobre";
-				else {if(month == 11) Month = "novembre";
-				else {if(month == 12) Month = "dicembre";}}}}}}}}}}}
+				else {
 
 				if (month != 0){
-					System.out.println("La media nel mese di "+ Month +" è: " + media);
-					varianza = getVarianza(media, month, year);
-					System.out.println("La varianza nel mese di "+ Month +" è: " + varianza);
+					m.add(media);
+					v.add(getVarianza(media, month, year));
 				}
 
 				media=value; somma=value; cont=1;
 				month = d.getMonth();
 				}
 			}else { year = d.getYear(); 
-			System.out.println(year);
 			media=value; somma=value; cont=1;
 			month = d.getMonth();
 			}
 		}//Chiusura FOR
-		
-		if(month == 1) Month = "gennaio";
-		else {if(month == 2) Month = "febbraio";
-		else {if(month == 3) Month = "marzo";
-		else {if(month == 4) Month = "aprile";
-		else {if(month == 5) Month = "maggio";
-		else {if(month == 6) Month = "giugno";
-		else {if(month == 7) Month = "luglio";
-		else {if(month == 8) Month = "agosto";
-		else {if(month == 9) Month = "settembre";
-		else {if(month == 10) Month = "ottobre";
-		else {if(month == 11) Month = "novembre";
-		else {if(month == 12) Month = "dicembre";}}}}}}}}}}}
-
-		System.out.println("La media nel mese di "+Month+ " è: " + media);
-		varianza = getVarianza(media, month, year);
-		System.out.println("La varianza nel mese di "+ Month +" è: " + varianza);
+		m.add(media);
+		v.add(getVarianza(media, month, year));
+		this.v = v;
+		return m;
 	}
 
+	public Vector<Double> varianza() {
+		return this.v;
+	}
+	
+	public double getVarianza(double media, int month, int year) {
+		double varianza0 = 0.0;
+		double varianza = 0.0;
+		int cont = 0;	
+
+		for(int i = 0; i<this.ja.size(); i++) {
+			JSONObject Object = (JSONObject) this.ja.get(i);
+			Date d = new Date((String) Object.get("date_iso"));
+			value = getValue((String) Object.get("date_iso"));
+
+			if(d.getYear() == year) {
+				if(month == 0); else {
+					if(d.getMonth() == month) {
+						cont ++;
+						varianza0 += Math.pow(value-media, 2);
+						varianza = varianza0/cont;
+					}}}
+		}//chiusura FOR
+		return varianza;
+	}
+	
 	public void seasonStats() {
 		int contSpring = 0;
 		int contSummer = 0;
@@ -150,27 +152,6 @@ public class Stats implements StatsService {
 			System.out.println("La varianza in inverno è: " + varianza);}
 	}
 
-	public double getVarianza(double media, int month, int year) {
-		double varianza0 = 0.0;
-		double varianza = 0.0;
-		int cont = 0;	
-
-		for(int i = 0; i<this.ja.size(); i++) {
-			JSONObject Object = (JSONObject) this.ja.get(i);
-			Date d = new Date((String) Object.get("date_iso"));
-			value = getValue((String) Object.get("date_iso"));
-
-			if(d.getYear() == year) {
-				if(month == 0); else {
-					if(d.getMonth() == month) {
-						cont ++;
-						varianza0 += Math.pow(value-media, 2);
-						varianza = varianza0/cont;
-					}}}
-		}//chiusura FOR
-		return varianza;
-	}
-
 	public double getVarianzaSeason (double media) {
 		double varianza0 = 0.0;
 		double varianza = 0.0;
@@ -221,20 +202,6 @@ public class Stats implements StatsService {
 		return this.value;
 	}
 
-	public Vector<String> getStats(int cont, String giorno) {
-		Vector<String> v = new Vector<String>();
-		if (cont > 1) getGiorni(cont, giorno);
-		else {
-			Date d = new Date(giorno);
-			v.add(giorno);
-			System.out.println("DATA: "+d.getDate());
-			System.out.println("DAY: "+d.getDay());
-			System.out.println("MONTH: "+d.getMonth());
-			System.out.println("YEAR: "+d.getYear());
-		}
-		return v;
-	}
-
 	public double getMax() {
 		String giornoMax = "";
 		double max = 0;
@@ -256,7 +223,8 @@ public class Stats implements StatsService {
 				}}
 			}else { year = d.getYear(); 
 			System.out.println(year);}}
-		getStats(contMax, giornoMax);
+		this.giorno = giornoMax; this.cont = contMax;
+		getGiorno(/*contMax, giornoMax*/);	
 		return max;
 	}
 
@@ -281,14 +249,29 @@ public class Stats implements StatsService {
 				}}
 			}else { year = d.getYear(); 
 			System.out.println(year);}}
-		getStats(contMin, giornoMin);
+		this.giorno = giornoMin; this.cont = contMin;
+		getGiorno();
 		return min;
 	}
 
-	public Vector<String> getGiorni(int cont, String giorno) {
+	public Vector<String> getGiorno() {
+		Vector<String> v = new Vector<String>();
+		if (this.cont > 1) getGiorni();
+		else {
+			Date d = new Date(giorno);
+			v.add(giorno);
+			System.out.println("DATA: "+d.getDate());
+			System.out.println("DAY: "+d.getDay());
+			System.out.println("MONTH: "+d.getMonth());
+			System.out.println("YEAR: "+d.getYear());
+		}
+		return v;
+	}
+	
+	public Vector<String> getGiorni() {
 		Vector<String> v = new Vector<String>();
 		String[] g = giorno.split(", ");
-		for(int i=0; i<cont; i++) {
+		for(int i=0; i<this.cont; i++) {
 			String data = g[i];
 			Date d = new Date(data);
 			v.add(data);

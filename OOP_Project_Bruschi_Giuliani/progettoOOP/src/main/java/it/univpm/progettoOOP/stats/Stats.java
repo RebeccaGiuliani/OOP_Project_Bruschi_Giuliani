@@ -1,11 +1,12 @@
 package it.univpm.progettoOOP.stats;
 
+import java.util.Vector;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import it.univpm.progettoOOP.filter.APICall;
 import it.univpm.progettoOOP.model.Date;
-
 
 public class Stats implements StatsService {
 	private double value;
@@ -35,7 +36,6 @@ public class Stats implements StatsService {
 					cont ++;
 					somma += value; 
 					media = somma/cont;
-
 				}
 				else {if(month == 1) Month = "gennaio";
 				else {if(month == 2) Month = "febbraio";
@@ -56,19 +56,6 @@ public class Stats implements StatsService {
 					System.out.println("La varianza nel mese di "+ Month +" è: " + varianza);
 				}
 
-				if(month == 1) Month = "gennaio";
-				else {if(month == 2) Month = "febbraio";
-				else {if(month == 3) Month = "marzo";
-				else {if(month == 4) Month = "aprile";
-				else {if(month == 5) Month = "maggio";
-				else {if(month == 6) Month = "giugno";
-				else {if(month == 7) Month = "luglio";
-				else {if(month == 8) Month = "agosto";
-				else {if(month == 9) Month = "settembre";
-				else {if(month == 10) Month = "ottobre";
-				else {if(month == 11) Month = "novembre";
-				else {if(month == 12) Month = "dicembre";}}}}}}}}}}}
-
 				media=value; somma=value; cont=1;
 				month = d.getMonth();
 				}
@@ -78,6 +65,19 @@ public class Stats implements StatsService {
 			month = d.getMonth();
 			}
 		}//Chiusura FOR
+		
+		if(month == 1) Month = "gennaio";
+		else {if(month == 2) Month = "febbraio";
+		else {if(month == 3) Month = "marzo";
+		else {if(month == 4) Month = "aprile";
+		else {if(month == 5) Month = "maggio";
+		else {if(month == 6) Month = "giugno";
+		else {if(month == 7) Month = "luglio";
+		else {if(month == 8) Month = "agosto";
+		else {if(month == 9) Month = "settembre";
+		else {if(month == 10) Month = "ottobre";
+		else {if(month == 11) Month = "novembre";
+		else {if(month == 12) Month = "dicembre";}}}}}}}}}}}
 
 		System.out.println("La media nel mese di "+Month+ " è: " + media);
 		varianza = getVarianza(media, month, year);
@@ -221,16 +221,18 @@ public class Stats implements StatsService {
 		return this.value;
 	}
 
-	public void getStats(int cont, String giorno) {
-
+	public Vector<String> getStats(int cont, String giorno) {
+		Vector<String> v = new Vector<String>();
 		if (cont > 1) getGiorni(cont, giorno);
 		else {
 			Date d = new Date(giorno);
+			v.add(giorno);
 			System.out.println("DATA: "+d.getDate());
 			System.out.println("DAY: "+d.getDay());
 			System.out.println("MONTH: "+d.getMonth());
 			System.out.println("YEAR: "+d.getYear());
 		}
+		return v;
 	}
 
 	public double getMax() {
@@ -245,16 +247,13 @@ public class Stats implements StatsService {
 			value = getValue((String) Object.get("date_iso"));
 
 			if(d.getYear() == year){ 
-
 				if (max < value) { 
 					max = value;
 					giornoMax = d.getDate(); contMax = 1;}
 				else {if(max == value) { 
 					contMax ++; 
 					giornoMax = giornoMax +", "+d.getDate();
-
 				}}
-
 			}else { year = d.getYear(); 
 			System.out.println(year);}}
 		getStats(contMax, giornoMax);
@@ -266,7 +265,6 @@ public class Stats implements StatsService {
 		double min = 30;
 		int contMin = 1;
 		int year = 0;
-
 
 		for(int i = 0; i<this.ja.size(); i++) {
 			JSONObject Object = (JSONObject) this.ja.get(i);
@@ -280,26 +278,26 @@ public class Stats implements StatsService {
 				else {if(min == value) { 
 					contMin ++; 
 					giornoMin = giornoMin +", "+d.getDate();
-
 				}}
 			}else { year = d.getYear(); 
 			System.out.println(year);}}
 		getStats(contMin, giornoMin);
 		return min;
-
 	}
 
-	public void getGiorni(int cont, String giorno) {
-
+	public Vector<String> getGiorni(int cont, String giorno) {
+		Vector<String> v = new Vector<String>();
 		String[] g = giorno.split(", ");
 		for(int i=0; i<cont; i++) {
 			String data = g[i];
 			Date d = new Date(data);
+			v.add(data);
 			System.out.println("DATA: "+d.getDate());
 			System.out.println("DAY: "+d.getDay());
 			System.out.println("MONTH: "+d.getMonth());
 			System.out.println("YEAR: "+d.getYear());
 		}
+		return v;
 	}
 
 }

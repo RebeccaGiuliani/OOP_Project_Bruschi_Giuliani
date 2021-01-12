@@ -20,7 +20,7 @@ import it.univpm.progettoOOP.model.Winter;
 public class APICallController {
 
 	//filtraggio dati per un periodo generico
-	@RequestMapping(value = "/data/filter/{city_name}/{city_country}", method = RequestMethod.GET)   
+	@RequestMapping(value = "/data/filter/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall chiamata_api(
 			@RequestParam (name = "start_day", defaultValue = "1") int start_day, @RequestParam (name = "start_month", defaultValue = "1") int start_month,
 			@RequestParam (name = "start_year", defaultValue = "2019") int start_year, @RequestParam (name = "end_day", defaultValue = "31")int end_day,
@@ -31,7 +31,7 @@ public class APICallController {
 	}
 	
 	//filtraggio dati primavera variando anno e coordinate
-	@RequestMapping(value = "/data/filter/spring/{year}/{city_name}/{city_country}", method = RequestMethod.GET)   
+	@RequestMapping(value = "/data/filter/spring/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall_spring( @PathVariable("year") int year, 
 			@PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ){
 		
@@ -39,7 +39,7 @@ public class APICallController {
 	}
 	
 	//filtraggio dati estate variando l'anno
-	@RequestMapping(value = "/data/filter/summer/{year}/{city_name}/{city_country}", method = RequestMethod.GET)   
+	@RequestMapping(value = "/data/filter/summer/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall_summer(@PathVariable("year") int year, 
 			@PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ){
 		
@@ -47,7 +47,7 @@ public class APICallController {
 	}
 	
 	//filtraggio dati autunno variando l'anno
-	@RequestMapping(value = "/data/filter/autumn/{year}/{city_name}/{city_country}", method = RequestMethod.GET)   
+	@RequestMapping(value = "/data/filter/autumn/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall_autumn(@PathVariable("year") int year, 
 			@PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ){
 		
@@ -55,7 +55,7 @@ public class APICallController {
 	}
 	
 	//filtraggio dati inverno variando l'anno
-	@RequestMapping(value = "/data/filter/winter/{year}/{city_name}/{city_country}", method = RequestMethod.GET)   
+	@RequestMapping(value = "/data/filter/winter/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall_winter(@PathVariable("year") int year, 
 			@PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ){
 		

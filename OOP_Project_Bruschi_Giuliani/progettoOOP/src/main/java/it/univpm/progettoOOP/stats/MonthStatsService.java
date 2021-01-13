@@ -2,18 +2,20 @@ package it.univpm.progettoOOP.stats;
 
 import java.util.Vector;
 
-public interface StatsService {
+import it.univpm.progettoOOP.model.Date;
+import it.univpm.progettoOOP.model.Dati;
 
-	public abstract Vector<Double> monthStats();
+public interface MonthStatsService {
+
+	public abstract Vector<Double> media();
 	public abstract Vector<Double> varianza();
-	public abstract double getVarianza(double media, int month, int year);
-	public abstract double seasonStats();
-	public abstract double getVarianzaSeason (double media);
 	public abstract double getValue(String date);
-	public abstract double getMax();
-	public abstract double getMin();
-	public abstract Vector<String> getGiorno();
-	public abstract Vector<String> getGiorni();
+	public abstract Vector<Date> getDate();
+	public abstract Vector<Integer> DayCounter();
+	//public abstract Vector<Double> ValueCollection(int index);
+	public abstract Vector<Double> getMax();
+	public abstract Vector<Double> getMin();
+	public abstract Vector<Dati> DataStats();
 
 	
 }

@@ -14,10 +14,10 @@ public class Winter extends Period{
 	}
 	
 	public String getStart() {
-		return super.getStart()+"/"+this.year;
+		return super.getStart_day()+"-"+super.getStart_month()+"-"+this.year;
 	}
 
 	public String getEnd() {
-		return super.getEnd()+"/"+(this.year+1);
+		return super.getEnd_day()+"-0"+super.getEnd_month()+"-"+(this.year+1);
 	}
 }

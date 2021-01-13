@@ -14,11 +14,11 @@ public class Summer extends Period{
 	}
 	
 	public String getStart() {
-		return super.getStart()+"/"+this.year;
+		return super.getStart_day()+"-0"+super.getStart_month()+"-"+this.year;
 	}
 
 	public String getEnd() {
-		return super.getEnd()+"/"+this.year;
+		return super.getEnd_day()+"-0"+super.getEnd_month()+"-"+this.year;
 	}
 
 }

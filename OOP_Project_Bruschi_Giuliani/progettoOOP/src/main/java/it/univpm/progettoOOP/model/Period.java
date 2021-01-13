@@ -12,8 +12,8 @@ public class Period {
 	private int end_year;	
 
 	public Period(int start_day, int start_month, int start_year, int end_day, int end_month, int end_year) {
-		this.start_date = start_day+"/"+start_month+"/"+ start_year;
-		this.end_date = end_day+"/"+end_month+"/"+end_year;
+		this.start_date = start_day+"-"+start_month+"-"+ start_year;
+		this.end_date = end_day+"-"+end_month+"-"+end_year;
 		this.start_day = start_day;
 		this.start_month = start_month;
 		this.start_year = start_year;

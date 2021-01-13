@@ -18,7 +18,10 @@ import it.univpm.progettoOOP.model.Winter;
 
 @RestController
 public class APICallController {
-
+	
+	private Period p;
+	private City c;
+	
 	//filtraggio dati per un periodo generico
 	@RequestMapping(value = "/data/filter/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall chiamata_api(
@@ -26,8 +29,17 @@ public class APICallController {
 			@RequestParam (name = "start_year", defaultValue = "2019") int start_year, @RequestParam (name = "end_day", defaultValue = "31")int end_day,
 			@RequestParam (name = "end_month", defaultValue = "12") int end_month, @RequestParam (name = "end_year", defaultValue = "2019") int end_year,
 			@PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ){
-		
-		return new APICall(new Period(start_day,start_month,start_year,end_day,end_month,end_year), new CityFileReader(new City(city_name, city_country)));	
+		this.p = new Period(start_day,start_month,start_year,end_day,end_month,end_year);
+		this.c = new City(city_name, city_country);
+		return new APICall(this.p, new CityFileReader(new City(city_name, city_country)));	
+	}
+	
+	public Period getPeriod() {
+		return this.p;
+	}
+	
+	public City getCity() {
+		return this.c;
 	}
 	
 	//filtraggio dati primavera variando anno e coordinate

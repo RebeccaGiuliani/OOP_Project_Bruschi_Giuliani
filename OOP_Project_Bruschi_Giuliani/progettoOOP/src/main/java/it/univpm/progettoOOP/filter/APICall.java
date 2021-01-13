@@ -35,6 +35,10 @@ public class APICall implements APICallService {
 		this.url = "http://api.openweathermap.org/data/2.5/uvi/history?lat="+ this.lat +"&lon="+ this.lon +"&start="+ this.start +"&end="+ this.end +"&appid="+appid;
 	}
 	
+	public Period getPeriod() {
+		return this.period;
+	}
+	
 	public void setPeriod(Period period) {
 		this.period = period;
 	}

@@ -1,5 +1,6 @@
 package it.univpm.progettoOOP.stats;
 
+import java.util.Collection;
 import java.util.Vector;
 
 import org.json.simple.JSONArray;
@@ -7,12 +8,16 @@ import org.json.simple.JSONObject;
 
 import it.univpm.progettoOOP.filter.APICall;
 import it.univpm.progettoOOP.model.Date;
+import it.univpm.progettoOOP.model.Dati;
 
-public class Stats implements StatsService {
+public class Stats{
+	
 	private double value;
 	private int cont;
 	private String giorno = "";
 	Vector<Double> v = new Vector<Double>();
+	Vector<Double> m = new Vector<Double>();
+	Collection<Dati> c;
 
 	JSONArray ja = new JSONArray();
 
@@ -21,8 +26,6 @@ public class Stats implements StatsService {
 	}
 
 	public Vector<Double> monthStats() {
-		Vector<Double> m = new Vector<Double>();
-		Vector<Double> v = new Vector<Double>();
 		int cont = 0;
 		int year = 0;
 		int month = 0;
@@ -55,10 +58,10 @@ public class Stats implements StatsService {
 			month = d.getMonth();
 			}
 		}//Chiusura FOR
-		m.add(media);
-		v.add(getVarianza(media, month, year));
+		this.m.add(media);
+		this.v.add(getVarianza(media, month, year));
 		this.v = v;
-		return m;
+		return this.m;
 	}
 
 	public Vector<Double> varianza() {
@@ -269,5 +272,4 @@ public class Stats implements StatsService {
 		}
 		return v;
 	}
-
 }

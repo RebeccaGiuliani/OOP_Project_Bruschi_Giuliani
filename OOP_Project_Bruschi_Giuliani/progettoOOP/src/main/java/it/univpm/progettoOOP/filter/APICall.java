@@ -12,10 +12,11 @@ import java.util.GregorianCalendar;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Service;
 
 import it.univpm.progettoOOP.model.Period;
 
-
+@Service
 public class APICall implements APICallService {
 
 	private static String appid = "786ef3c38e2018b2823094ad93925380"; //appid Simone "1ea00837bb533c8b22f844c29a16341e"

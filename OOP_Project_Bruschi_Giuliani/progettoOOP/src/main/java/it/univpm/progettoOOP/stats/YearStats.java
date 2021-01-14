@@ -4,30 +4,21 @@ import java.util.Vector;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.springframework.stereotype.Service;
 
 import it.univpm.progettoOOP.filter.APICall;
 import it.univpm.progettoOOP.filter.CityFileReader;
 import it.univpm.progettoOOP.model.City;
 import it.univpm.progettoOOP.model.Date;
-import it.univpm.progettoOOP.model.Dati;
-import it.univpm.progettoOOP.model.Period;
+import it.univpm.progettoOOP.model.Year;
 
-@Service
-public class Stats implements StatsService{
-	
+public class YearStats extends Stats{
+
 	private JSONArray ja = new JSONArray();
-	private Vector<Integer> counter= new Vector<>();
-	protected Vector<Double> varianceValues = new Vector<Double>();
-	protected Vector<Double> mediaValues = new Vector<Double>();
-	
-	
-	public Stats (Period p, City c) {
-		APICall call = new APICall(p, new CityFileReader(c));
-		this.ja = call.getData();
-		this.counter = DayCounter();
+
+	public YearStats (Year y, City c) {
+		super(y, c);
+		this.ja = new APICall (y,new CityFileReader (c)).getData();
 	}
-	
 
 	public Vector<Double> media(){
 		int cont = 0;
@@ -40,24 +31,18 @@ public class Stats implements StatsService{
 			Date d = new Date((String) Object.get("date_iso"));
 			double value = getValue((String) Object.get("date_iso"));
 
-			if(d.getYear() == year){
-				if(d.getMonth() == month) {
-					cont ++;
-					somma += value; 
-				}
-				else {
+			if(d.getMonth() == month) {
+				cont ++;
+				somma += value; 
+			}
+			else {
 
-					if (month != 0){
-						mediaValues.add(somma/cont);
-						varianceValues.add(getVarianza(somma/cont, month, year));
-					}
-					somma=value; cont=1;
-					month = d.getMonth();
+				if (month != 0){
+					mediaValues.add(somma/cont);
+					varianceValues.add(getVarianza(somma/cont, month, year));
 				}
-			}else {  
 				somma=value; cont=1;
 				month = d.getMonth();
-				year = d.getYear(); 
 			}
 
 		}//Chiusura FOR
@@ -66,12 +51,6 @@ public class Stats implements StatsService{
 		return this.mediaValues;
 	}
 
-	
-
-	public Vector<Double> varianza() {
-		return this.varianceValues;
-	}
-	
 	public double getVarianza(double media, int month, int year) {
 		double varianza0 = 0.0;
 		double varianza = 0.0;
@@ -82,49 +61,19 @@ public class Stats implements StatsService{
 			Date d = new Date((String) Object.get("date_iso"));
 			double value = getValue((String) Object.get("date_iso"));
 
-			if(d.getYear() == year) {
-				if(month == 0); else {
-					if(d.getMonth() == month) {
-						cont ++;
-						varianza0 += Math.pow(value-media, 2);
-						varianza = varianza0/cont;
-					}}}
+			if(month == 0); else {
+				if(d.getMonth() == month) {
+					cont ++;
+					varianza0 += Math.pow(value-media, 2);
+					varianza = varianza0/cont;
+				}}
 		}//chiusura FOR
 		return varianza;
 	}
 	
-	public double getValue(String date) {
-		double value = 0;
-		for(int i = 0; i<this.ja.size(); i++) {
-			JSONObject Object = (JSONObject) this.ja.get(i);
-			if(Object.get("date_iso").equals(date)) 
-				try {
-					if(Object.get("value") instanceof Long) {
-						value = (Long) Object.get("value");
-					}else {
-						value = (Double) Object.get("value");
-					}
-				}catch (ClassCastException e) {
-					System.out.println("catch");
-				}
-		}
-		return value;
-	}
-	
-	public Vector<Date> getDate(){
-		Vector<Date> d= new Vector<>();
-		for(int i=0; i<this.ja.size(); i++) {
-			JSONObject Object =(JSONObject) this.ja.get(i);
-			d.add(new Date((String) Object.get("date_iso")));
-		}
-		return d;
-	}
-	
-	
 	public Vector<Integer> DayCounter(){
 		Vector<Integer> counter= new Vector<>();
 		int cont = 1;
-		int year = 0;
 		int month = 0;
 		
 		for(int i = 0; i<this.ja.size(); i++) {
@@ -132,7 +81,6 @@ public class Stats implements StatsService{
 			Date d = new Date((String) Object.get("date_iso"));
 
 			if (month != 0){
-				if(d.getYear() == year){
 				if(d.getMonth() == month) {
 					cont++;
 				}
@@ -141,9 +89,7 @@ public class Stats implements StatsService{
 						cont=1;
 						month = d.getMonth();
 					}
-				}else year = d.getYear();
-			}else { 
-				year = d.getYear();
+			}else {
 				month = d.getMonth();
 			}
 		}
@@ -152,7 +98,6 @@ public class Stats implements StatsService{
 	
 	public Vector<Double> getMax() {
 		int month = 0;
-		int year = 0;
 		Vector<Double> max = new Vector<>();
 		double max_value = 0.0;
 		for(int i=0; i<this.ja.size(); i++) {
@@ -161,7 +106,6 @@ public class Stats implements StatsService{
 			double value = getValue((String) Object.get("date_iso"));
 
 			if(month != 0) {
-				if(d.getYear() == year) {
 					if (d.getMonth() == month) {
 						if(value>max_value) max_value = value;
 					}else {
@@ -170,12 +114,7 @@ public class Stats implements StatsService{
 						month = d.getMonth();
 					}
 				}else {
-					month = d.getMonth();
-					year = d.getYear();
-				}
-			}else {
 				month = d.getMonth();
-				year = d.getYear();
 			}
 		}
 		return max;
@@ -183,7 +122,6 @@ public class Stats implements StatsService{
 	
 	public Vector<Double> getMin() {
 		int month = 0;
-		int year = 0;
 		Vector<Double> min = new Vector<>();
 		double min_value = 15.0;
 		for(int i=0; i<this.ja.size(); i++) {
@@ -192,7 +130,6 @@ public class Stats implements StatsService{
 			double value = getValue((String) Object.get("date_iso"));
 
 			if(month != 0) {
-				if(d.getYear() == year) {
 					if (d.getMonth() == month) {
 						if(value<min_value) min_value = value;
 					}else {
@@ -201,23 +138,9 @@ public class Stats implements StatsService{
 						month = d.getMonth();
 					}
 				}else {
-					month = d.getMonth();
-					year = d.getYear();
-				}
-			}else {
 				month = d.getMonth();
-				year = d.getYear();
 			}
 		}
 		return min;
 	}
-
-	public Vector<Dati> DataStats(){
-		Vector<Dati> data = new Vector<>();
-		for(int i=0; i<counter.size();i++){
-			data.add(new Dati(getMax().get(i), getMin().get(i),mediaValues.get(i),varianceValues.get(i)));
-		}
-		return data;
-	}
-
 }

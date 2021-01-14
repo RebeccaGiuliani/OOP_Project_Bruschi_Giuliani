@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.univpm.progettoOOP.filter.APICall;
 import it.univpm.progettoOOP.filter.CityFileReader;
+import it.univpm.progettoOOP.model.Year;
 import it.univpm.progettoOOP.model.Autumn;
 import it.univpm.progettoOOP.model.City;
 import it.univpm.progettoOOP.model.Period;
@@ -22,6 +23,14 @@ public class APICallController {
 	private Period p;
 	private City c;
 	
+	public Period getPeriod() {
+		return this.p;
+	}
+	
+	public City getCity() {
+		return this.c;
+	}
+	
 	//filtraggio dati per un periodo generico
 	@RequestMapping(value = "/data/filter/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall chiamata_api(
@@ -31,39 +40,46 @@ public class APICallController {
 			@PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ){
 		this.p = new Period(start_day,start_month,start_year,end_day,end_month,end_year);
 		this.c = new City(city_name, city_country);
-		return new APICall(this.p, new CityFileReader(new City(city_name, city_country)));	
+		return new APICall(this.p, new CityFileReader(this.c));	
 	}
-	
-	public Period getPeriod() {
-		return this.p;
+
+	//filtraggio dati per un anno
+	@RequestMapping(value = "/data/filter/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
+	public APICall chiamata_api(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ){
+		this.p = new Year(year);
+		this.c = new City(city_name, city_country);
+		return new APICall(this.p, new CityFileReader(this.c));	
 	}
-	
-	public City getCity() {
-		return this.c;
-	}
-	
+
 	//filtraggio dati primavera variando anno e coordinate
 	@RequestMapping(value = "/data/filter/spring/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall_spring( @PathVariable("year") int year, 
 			@PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ){
-		
-		return new APICall(new Spring(year), new CityFileReader(new City(city_name, city_country)));	
+
+		this.p = new Spring(year);
+		this.c = new City(city_name, city_country);
+
+		return new APICall(this.p, new CityFileReader(this.c));	
 	}
-	
+
 	//filtraggio dati estate variando l'anno
 	@RequestMapping(value = "/data/filter/summer/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall_summer(@PathVariable("year") int year, 
 			@PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ){
 		
-		return new APICall(new Summer(year), new CityFileReader(new City(city_name, city_country)));	
+		this.p = new Summer(year);
+		this.c = new City(city_name, city_country);
+		
+		return new APICall(this.p, new CityFileReader(this.c));	
 	}
 	
 	//filtraggio dati autunno variando l'anno
 	@RequestMapping(value = "/data/filter/autumn/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall_autumn(@PathVariable("year") int year, 
 			@PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ){
-		
-		return new APICall(new Autumn(year), new CityFileReader(new City(city_name, city_country)));	
+		this.p = new Autumn(year);
+		this.c = new City (city_name, city_country);
+		return new APICall(this.p, new CityFileReader(this.c));	
 	}
 	
 	//filtraggio dati inverno variando l'anno
@@ -71,6 +87,9 @@ public class APICallController {
 	public APICall apiCall_winter(@PathVariable("year") int year, 
 			@PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ){
 		
-		return new APICall(new Winter(year), new CityFileReader(new City(city_name, city_country)));	
+		this.p = new Winter(year);
+		this.c = new City(city_name, city_country);
+		
+		return new APICall(this.p, new CityFileReader(this.c));	
 	}
 }

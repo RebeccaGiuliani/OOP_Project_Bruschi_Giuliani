@@ -2,9 +2,11 @@ package it.univpm.progettoOOP.model;
 
 public class Dati {
 	
-	private double max, min, media, varianza;
+	private double max, min, media, varianza, mediaSeason, varianzaSeason, maxSeason, minSeason;
 	
-	public Dati(double max, double min, double media, double varianza) {
+	
+
+	public Dati( double media,double varianza ,double max,double min ) {
 		this.max = max;
 		this.min = min;
 		this.media = media;
@@ -42,13 +44,37 @@ public class Dati {
 	public void setVarianza(double varianza) {
 		this.varianza = varianza;
 	}
-
-	/*public Date getD() {
-		return d;
+	
+	public double getMediaSeason() {
+		return mediaSeason;
 	}
 
-	public void setD(Date d) {
-		this.d = d;
-	}*/
+	public void setMediaSeason(double mediaSeason) {
+		this.mediaSeason = mediaSeason;
+	}
+
+	public double getVarianzaSeason() {
+		return varianzaSeason;
+	}
+
+	public void setVarianzaSeason(double varianzaSeason) {
+		this.varianzaSeason = varianzaSeason;
+	}
+
+	public double getMaxSeason() {
+		return maxSeason;
+	}
+
+	public void setMaxSeason(double maxSeason) {
+		this.maxSeason = maxSeason;
+	}
+
+	public double getMinSeason() {
+		return minSeason;
+	}
+
+	public void setMinSeason(double minSeason) {
+		this.minSeason = minSeason;
+	}
 
 }

@@ -7,8 +7,12 @@ import org.json.simple.JSONObject;
 
 import it.univpm.progettoOOP.filter.APICall;
 import it.univpm.progettoOOP.filter.CityFileReader;
+import it.univpm.progettoOOP.model.Autumn;
 import it.univpm.progettoOOP.model.City;
 import it.univpm.progettoOOP.model.Date;
+import it.univpm.progettoOOP.model.Spring;
+import it.univpm.progettoOOP.model.Summer;
+import it.univpm.progettoOOP.model.Winter;
 import it.univpm.progettoOOP.model.Year;
 
 public class YearStats extends Stats{
@@ -46,8 +50,8 @@ public class YearStats extends Stats{
 			}
 
 		}//Chiusura FOR
-		//this.m.add(media);
-		//this.v.add(getVarianza(media, month, year));
+		this.mediaValues.add(somma/cont);
+		this.varianceValues.add(getVarianza(somma/cont, month, year));
 		return this.mediaValues;
 	}
 
@@ -93,7 +97,75 @@ public class YearStats extends Stats{
 				month = d.getMonth();
 			}
 		}
+		counter.add(cont);
 		return counter;
+	}
+	
+	public Vector<Double> mediaSeason() {
+		int contSpring = 0;
+		int contSummer = 0;
+		int contAutumn = 0;
+		int contWinter = 0;
+		double sommaSpring = 0;
+		double sommaSummer = 0;
+		double sommaAutumn = 0;
+		double sommaWinter = 0;
+		Vector<Double> medieStagionali = new Vector<>();
+		int year = 0;
+
+		for(int i = 0; i<this.ja.size(); i++) {
+			JSONObject Object = (JSONObject) this.ja.get(i);
+			Date d = new Date((String) Object.get("date_iso"));
+			double value = getValue((String) Object.get("date_iso"));
+			year = d.getYear();
+
+				if( (d.getMonth() == 3 && d.getDay() >= 21) || (d.getMonth() == 4 || d.getMonth() == 5) ||
+						(d.getMonth() == 6 && d.getDay() <= 21)) {
+					contSpring ++;
+					sommaSpring += value;	
+				}
+				else {if((d.getMonth() == 6 && d.getDay() >= 22) || (d.getMonth() == 7|| d.getMonth() == 8) ||
+						(d.getMonth() == 9 && d.getDay() <= 23)) {
+					contSummer ++;
+					sommaSummer += value;
+				}
+				else{if((d.getMonth() == 9 && d.getDay() >= 23) ||(d.getMonth()==10||d.getMonth() == 11)||
+						(d.getMonth() == 12 && d.getDay() <= 21)) {
+					contAutumn ++;
+					sommaAutumn += value;
+				}
+				else {if((d.getMonth() == 12 && d.getDay() >= 22) || (d.getMonth() == 1||d.getMonth()==2)||
+						(d.getMonth() == 3 && d.getDay() <= 20)) {
+					contWinter ++;
+					sommaWinter += value;
+				}}}}	
+			if(d.getMonth() == 3 && d.getDay() == 22) {
+				medieStagionali.add(sommaWinter/contWinter);
+				varianzeStagionali.add(getVarianzaSeason(sommaWinter/contWinter, new Winter(year)));
+				maxStagionali.add(MaxSeason(new Winter(year)));
+				minStagionali.add(MinSeason(new Winter(year)));
+				sommaWinter = 0; contWinter = 0;
+			}
+		}//Chiusura FOR
+
+		
+		medieStagionali.add(sommaSpring/contSpring);
+		varianzeStagionali.add(getVarianzaSeason(sommaSpring/contSpring, new Spring(year)));
+		maxStagionali.add(MaxSeason(new Spring(year)));
+		minStagionali.add(MinSeason(new Spring(year)));
+		medieStagionali.add(sommaSummer/contSummer);
+		varianzeStagionali.add(getVarianzaSeason(sommaSummer/contSummer, new Summer(year)));
+		maxStagionali.add(MaxSeason(new Summer(year)));
+		minStagionali.add(MinSeason(new Summer(year)));
+		medieStagionali.add(sommaAutumn/contAutumn);
+		varianzeStagionali.add(getVarianzaSeason(sommaAutumn/contAutumn, new Autumn(year)));
+		maxStagionali.add(MaxSeason(new Autumn(year)));
+		minStagionali.add(MinSeason(new Autumn(year)));
+		medieStagionali.add(sommaWinter/contWinter);
+		varianzeStagionali.add(getVarianzaSeason(sommaWinter/contWinter, new Winter(year)));
+		maxStagionali.add(MaxSeason(new Winter(year)));
+		minStagionali.add(MinSeason(new Winter(year)));
+		return medieStagionali;
 	}
 	
 	public Vector<Double> getMax() {
@@ -117,6 +189,7 @@ public class YearStats extends Stats{
 				month = d.getMonth();
 			}
 		}
+		max.add(max_value);
 		return max;
 	}
 	
@@ -141,6 +214,7 @@ public class YearStats extends Stats{
 				month = d.getMonth();
 			}
 		}
+		min.add(min_value);
 		return min;
 	}
 }

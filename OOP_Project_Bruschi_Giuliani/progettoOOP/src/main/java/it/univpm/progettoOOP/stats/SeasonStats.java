@@ -1,6 +1,5 @@
 package it.univpm.progettoOOP.stats;
 
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -99,12 +98,13 @@ public class SeasonStats implements SeasonStatsService{
 		for(int i = 0; i<this.ja.size(); i++) {
 			JSONObject Object = (JSONObject) this.ja.get(i);
 			double value = getValue((String) Object.get("date_iso"));
-			if(value>min) min = value;
+			if(value<min) min = value;
 		}
 		return min;
-	}
+		}
 	
-	public Dati SeasonDataStats() {
-		return new Dati(getMax(), getMin(), media(), getVarianza(media()));
+	public Dati SeasonDataStats(){
+		Dati data = new Dati(media(), getVarianza(media()), getMax(), getMin());
+		return data;
 	}
 }

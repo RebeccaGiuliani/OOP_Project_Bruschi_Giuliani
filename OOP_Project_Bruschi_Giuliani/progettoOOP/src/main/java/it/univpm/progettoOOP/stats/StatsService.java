@@ -1,9 +1,11 @@
 package it.univpm.progettoOOP.stats;
 
+import java.util.Collection;
 import java.util.Vector;
 
 import it.univpm.progettoOOP.model.Date;
 import it.univpm.progettoOOP.model.Dati;
+import it.univpm.progettoOOP.model.Period;
 
 public interface StatsService {
 
@@ -14,7 +16,14 @@ public interface StatsService {
 	public abstract Vector<Integer> DayCounter();
 	public abstract Vector<Double> getMax();
 	public abstract Vector<Double> getMin();
-	public abstract Vector<Dati> DataStats();
-
+	public abstract Collection<Dati> MonthlyDataStats();
+	public abstract Vector<Double> mediaSeason();
+	public abstract Vector<Double> varianzaSeason();
+	public abstract double getVarianzaSeason (double media, Period period);
+	public abstract double MaxSeason(Period period);
+	public abstract Vector<Double> getMaxSeason();
+	public abstract double MinSeason(Period period);
+	public abstract Vector<Double> getMinSeason();
+	public abstract Vector<Dati> SeasonDataStats();
 	
 }

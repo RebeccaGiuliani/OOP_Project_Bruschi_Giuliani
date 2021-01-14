@@ -1,8 +1,6 @@
 package it.univpm.progettoOOP.model;
 
-import org.springframework.stereotype.Service;
 
-@Service
 public class Period {
 
 	protected String start_date;

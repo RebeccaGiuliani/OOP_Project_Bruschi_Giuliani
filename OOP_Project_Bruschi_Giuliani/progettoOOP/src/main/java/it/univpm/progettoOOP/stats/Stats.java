@@ -1,31 +1,38 @@
 package it.univpm.progettoOOP.stats;
 
-import java.util.Collection;
 import java.util.Vector;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import it.univpm.progettoOOP.filter.APICall;
+import it.univpm.progettoOOP.filter.CityFileReader;
+import it.univpm.progettoOOP.model.City;
 import it.univpm.progettoOOP.model.Date;
 import it.univpm.progettoOOP.model.Dati;
+import it.univpm.progettoOOP.model.Period;
 
-public class Stats{
+public class MonthStats implements MonthStatsService{
 	
-	private double value;
-	private int cont;
-	private String giorno = "";
-	Vector<Double> v = new Vector<Double>();
-	Vector<Double> m = new Vector<Double>();
-	Collection<Dati> c;
-
-	JSONArray ja = new JSONArray();
-
-	public Stats(APICall call) {
-		this.ja = call.getData();	
+	private JSONArray ja = new JSONArray();
+	private Vector<Integer> counter= new Vector<>();
+	private Vector<Double> varianceValues = new Vector<Double>();
+	private Vector<Double> mediaValues = new Vector<Double>();
+	
+	
+	public MonthStats (Period p, City c) {
+		APICall call = new APICall(p, new CityFileReader(c));
+		this.ja = call.getData();
+		this.counter = DayCounter();
+		this.mediaValues = media();
+		this.varianceValues = varianza();
+	}
+	
+public JSONArray getJa() {
+		return ja;
 	}
 
-	public Vector<Double> monthStats() {
+	public Vector<Double> media(){
 		int cont = 0;
 		int year = 0;
 		int month = 0;
@@ -35,7 +42,7 @@ public class Stats{
 		for(int i = 0; i<this.ja.size(); i++) {
 			JSONObject Object = (JSONObject) this.ja.get(i);
 			Date d = new Date((String) Object.get("date_iso"));
-			value = getValue((String) Object.get("date_iso"));
+			double value = getValue((String) Object.get("date_iso"));
 
 			if(d.getYear() == year){
 				if(d.getMonth() == month) {
@@ -46,8 +53,8 @@ public class Stats{
 				else {
 
 				if (month != 0){
-					m.add(media);
-					v.add(getVarianza(media, month, year));
+					mediaValues.add(media);
+					varianceValues.add(getVarianza(media, month, year));
 				}
 
 				media=value; somma=value; cont=1;
@@ -58,14 +65,15 @@ public class Stats{
 			month = d.getMonth();
 			}
 		}//Chiusura FOR
-		this.m.add(media);
-		this.v.add(getVarianza(media, month, year));
-		this.v = v;
-		return this.m;
+		//this.m.add(media);
+		//this.v.add(getVarianza(media, month, year));
+		return this.mediaValues;
 	}
 
+	
+
 	public Vector<Double> varianza() {
-		return this.v;
+		return this.varianceValues;
 	}
 	
 	public double getVarianza(double media, int month, int year) {
@@ -76,7 +84,7 @@ public class Stats{
 		for(int i = 0; i<this.ja.size(); i++) {
 			JSONObject Object = (JSONObject) this.ja.get(i);
 			Date d = new Date((String) Object.get("date_iso"));
-			value = getValue((String) Object.get("date_iso"));
+			double value = getValue((String) Object.get("date_iso"));
 
 			if(d.getYear() == year) {
 				if(month == 0); else {
@@ -89,187 +97,136 @@ public class Stats{
 		return varianza;
 	}
 	
-	public double seasonStats() {
-		int contSpring = 0;
-		int contSummer = 0;
-		int contAutumn = 0;
-		int contWinter = 0;
-		double mediaSpring = 0;
-		double mediaSummer = 0;
-		double mediaAutumn = 0;
-		double mediaWinter = 0;
-		double sommaSpring = 0;
-		double sommaSummer = 0;
-		double sommaAutumn = 0;
-		double sommaWinter = 0;
-
-
-		for(int i = 0; i<this.ja.size(); i++) {
-			JSONObject Object = (JSONObject) this.ja.get(i);
-			Date d = new Date((String) Object.get("date_iso"));
-			value = getValue((String) Object.get("date_iso"));
-
-			if (d.getMonth() == 0);
-			else{if(d.getMonth() >= 3 & d.getDay() >= 21 ||  
-					d.getMonth() <= 6 & d.getDay() <= 21) {
-				contSpring ++;
-				sommaSpring += value;
-				mediaSpring = sommaSpring/contSpring;	
-			}
-			else {if(d.getMonth() >= 6 & d.getDay() >= 22 ||
-					d.getMonth() <= 9 & d.getDay() <= 22) {
-				contSummer ++;
-				sommaSummer += value;
-				mediaSummer = sommaSummer/contSummer;
-			}
-			else{if(d.getMonth() >= 9 & d.getDay() >= 23 ||
-					d.getMonth() <= 12 & d.getDay() <= 21) {
-				contAutumn ++;
-				sommaAutumn += value;
-				mediaAutumn = sommaAutumn/contAutumn;	
-			}
-			else {if(d.getMonth() >= 12 & d.getDay() >= 22 || 
-					d.getMonth() <= 3 & d.getDay() <= 20) {
-				contWinter ++;
-				sommaWinter += value;
-				mediaWinter = sommaWinter/contWinter;
-			}
-			}}}}
-		}//Chiusura FOR
-		if(mediaSpring != 0.0) return mediaSpring;
-		else if(mediaSummer != 0.0) return mediaSummer;
-		else if(mediaAutumn != 0.0) return mediaAutumn;
-		else return mediaWinter;
-	}
-
-	public double getVarianzaSeason (double media) {
-		double varianza0 = 0.0;
-		double varianza = 0.0;
-		int cont = 0;	
-
-		for (int i = 0; i<this.ja.size(); i++) {
-			JSONObject Object = (JSONObject) this.ja.get(i);
-			Date d = new Date((String) Object.get("date_iso"));
-			value = getValue((String) Object.get("date_iso"));
-
-			if (d.getMonth() == 0);
-			else{if(d.getMonth() >= 3 & d.getDay() >= 21 || 
-					d.getMonth() <= 6 & d.getDay() <= 21) {
-				cont ++; //System.out.println("cont varianza:"+cont);
-				varianza0 += Math.pow(value-media, 2); //System.out.println("varianza0: "+varianza0);
-				varianza = varianza0/cont;	
-			}
-			else {if(d.getMonth() >= 6 & d.getDay() >= 22 || 
-					d.getMonth() <= 9 & d.getDay() <= 22) {
-				cont ++; //System.out.println("cont varianza:"+cont);
-				varianza0 += Math.pow(value-media, 2); //System.out.println("varianza0: "+varianza0);
-				varianza = varianza0/cont;	
-			}
-			else{if(d.getMonth() >= 9 & d.getDay() >= 23 || 
-					d.getMonth() <= 12 & d.getDay() <= 21) {
-				cont ++; //System.out.println("cont varianza:"+cont);
-				varianza0 += Math.pow(value-media, 2); //System.out.println("varianza0: "+varianza0);
-				varianza = varianza0/cont;				
-			}
-			else {if(d.getMonth() >= 12 & d.getDay() >= 22 || 
-					d.getMonth() <= 3 & d.getDay() <= 20) {
-				cont ++; //System.out.println("cont varianza:"+cont);
-				varianza0 += Math.pow(value-media, 2); //System.out.println("varianza0: "+varianza0);
-				varianza = varianza0/cont;	
-			}
-			}}}}
-		}//chiusura FOR
-		return varianza;
-	}
-
 	public double getValue(String date) {
-
+		double value = 0;
 		for(int i = 0; i<this.ja.size(); i++) {
 			JSONObject Object = (JSONObject) this.ja.get(i);
-			if(Object.get("date_iso").equals(date))
-				this.value = (Double) Object.get("value");
+			if(Object.get("date_iso").equals(date)) 
+				try {
+					if(Object.get("value") instanceof Long) {
+						value = (Long) Object.get("value");
+					}else {
+						value = (Double) Object.get("value");
+					}
+				}catch (ClassCastException e) {
+					System.out.println("catch");
+				}
 		}
-		return this.value;
+		return value;
 	}
-
-	public double getMax() {
-		String giornoMax = "";
-		double max = 0;
-		int contMax = 1;
+	
+	public Vector<Date> getDate(){
+		Vector<Date> d= new Vector<>();
+		for(int i=0; i<this.ja.size(); i++) {
+			JSONObject Object =(JSONObject) this.ja.get(i);
+			d.add(new Date((String) Object.get("date_iso")));
+		}
+		return d;
+	}
+	
+	
+	public Vector<Integer> DayCounter(){
+		Vector<Integer> counter= new Vector<>();
+		int cont = 1;
 		int year = 0;
-
+		int month = 0;
+		
 		for(int i = 0; i<this.ja.size(); i++) {
 			JSONObject Object = (JSONObject) this.ja.get(i);
 			Date d = new Date((String) Object.get("date_iso"));
-			value = getValue((String) Object.get("date_iso"));
 
-			if(d.getYear() == year){ 
-				if (max < value) { 
-					max = value;
-					giornoMax = d.getDate(); contMax = 1;}
-				else {if(max == value) { 
-					contMax ++; 
-					giornoMax = giornoMax +", "+d.getDate();
-				}}
-			}else { year = d.getYear(); 
-			System.out.println(year);}}
-		this.giorno = giornoMax; this.cont = contMax;
-		getGiorno(/*contMax, giornoMax*/);	
+			if (month != 0){
+				if(d.getYear() == year){
+				if(d.getMonth() == month) {
+					cont++;
+				}
+				else {
+						counter.add(cont);
+						cont=1;
+						month = d.getMonth();
+					}
+				}else year = d.getYear();
+			}else { 
+				year = d.getYear();
+				month = d.getMonth();
+			}
+		}
+		return counter;
+	}
+	
+	/*public Vector<Double> ValueCollection(int index){
+		JSONObject Object;
+		Vector<Double> valore= new Vector<>();
+		do{
+			for(int i=0; i<counter.get(index); i++) {
+		
+			Object =(JSONObject) this.ja.get(indicatore++);
+			valore.add(getValue((String) Object.get("date_iso")));
+		}
+			}while (indicatore<this.ja.size());
+		return valore;
+	}*/
+	
+	public Vector<Double> getMax() {
+		int month = 0;
+		int year = 0;
+		Vector<Double> max = new Vector<>();
+		double max_value = 0.0;
+		for(int i=0; i<this.ja.size(); i++) {
+			JSONObject Object = (JSONObject) this.ja.get(i);
+			Date d = new Date((String) Object.get("date_iso"));
+			double value = getValue((String) Object.get("date_iso"));
+
+			if(month != 0) {
+				if(d.getYear() == year) {
+					if (d.getMonth() == month) {
+						if(value>max_value) max_value = value;
+					}else {
+						max.add(max_value);
+						//max_value = 0.0;
+					}
+				}else year = d.getYear();
+			}else {
+				month = d.getMonth();
+				year = d.getYear();
+			}
+		}
 		return max;
 	}
-
-	public double getMin() {
-		String giornoMin = "";
-		double min = 30;
-		int contMin = 1;
+	
+	public Vector<Double> getMin() {
+		int month = 0;
 		int year = 0;
-
-		for(int i = 0; i<this.ja.size(); i++) {
+		Vector<Double> min = new Vector<>();
+		double min_value = 1.0;
+		for(int i=0; i<this.ja.size(); i++) {
 			JSONObject Object = (JSONObject) this.ja.get(i);
 			Date d = new Date((String) Object.get("date_iso"));
-			value = getValue((String) Object.get("date_iso"));
+			double value = getValue((String) Object.get("date_iso"));
 
-			if(d.getYear() == year){
-				if (min > value) { 
-					min = value;
-					giornoMin = d.getDate(); contMin = 1;}	
-				else {if(min == value) { 
-					contMin ++; 
-					giornoMin = giornoMin +", "+d.getDate();
-				}}
-			}else { year = d.getYear(); 
-			System.out.println(year);}}
-		this.giorno = giornoMin; this.cont = contMin;
-		getGiorno();
+			if(month != 0) {
+				if(d.getYear() == year) {
+					if (d.getMonth() == month) {
+						if(value<min_value) min_value = value;
+					}else {
+						min.add(min_value);
+						//min_value = 1.0;
+					}
+				}else year = d.getYear();
+			}else {
+				month = d.getMonth();
+				year = d.getYear();
+			}
+		}
 		return min;
 	}
 
-	public Vector<String> getGiorno() {
-		Vector<String> v = new Vector<String>();
-		if (this.cont > 1) getGiorni();
-		else {
-			Date d = new Date(giorno);
-			v.add(giorno);
-			System.out.println("DATA: "+d.getDate());
-			System.out.println("DAY: "+d.getDay());
-			System.out.println("MONTH: "+d.getMonth());
-			System.out.println("YEAR: "+d.getYear());
+	public Vector<Dati> DataStats(){
+		Vector<Dati> data = new Vector<>();
+		for(int i=0; i<counter.size();i++){
+			data.add(new Dati(getMax().get(i), getMin().get(i),mediaValues.get(i),varianceValues.get(i)));
 		}
-		return v;
+		return data;
 	}
-	
-	public Vector<String> getGiorni() {
-		Vector<String> v = new Vector<String>();
-		String[] g = giorno.split(", ");
-		for(int i=0; i<this.cont; i++) {
-			String data = g[i];
-			Date d = new Date(data);
-			v.add(data);
-			System.out.println("DATA: "+d.getDate());
-			System.out.println("DAY: "+d.getDay());
-			System.out.println("MONTH: "+d.getMonth());
-			System.out.println("YEAR: "+d.getYear());
-		}
-		return v;
-	}
+
 }

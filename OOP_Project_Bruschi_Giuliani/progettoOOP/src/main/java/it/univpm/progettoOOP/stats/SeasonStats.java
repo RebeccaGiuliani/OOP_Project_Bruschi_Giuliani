@@ -7,7 +7,6 @@ import it.univpm.progettoOOP.filter.APICall;
 import it.univpm.progettoOOP.filter.CityFileReader;
 import it.univpm.progettoOOP.model.Autumn;
 import it.univpm.progettoOOP.model.City;
-import it.univpm.progettoOOP.model.Dati;
 import it.univpm.progettoOOP.model.Period;
 import it.univpm.progettoOOP.model.Spring;
 import it.univpm.progettoOOP.model.Summer;
@@ -17,7 +16,8 @@ public class SeasonStats implements SeasonStatsService{
 	
 	private JSONArray ja = new JSONArray();
 
-	public SeasonStats(Period p, City c) {
+	//nel caso si riesca a rendere il filtraggio "generico", in caso contrario questo costruttore è da eliminare
+	public SeasonStats(Period p, City c) {  
 		APICall call = new APICall(p, new CityFileReader(c));
 		this.ja = call.getData();
 	}
@@ -111,8 +111,13 @@ public class SeasonStats implements SeasonStatsService{
 		return min;
 		}
 	
-	public Dati SeasonDataStats(){
-		Dati data = new Dati(media(), getVarianza(media()), getMax(), getMin());
-		return data;
+	@SuppressWarnings("unchecked")
+	public JSONObject SeasonDataStats(){
+		JSONObject jo = new JSONObject();
+		jo.put("Media", media());
+		jo.put("Varianza", getVarianza(media()));
+		jo.put("Massimo", getMax());
+		jo.put("Minimo", getMin());
+		return jo;
 	}
 }

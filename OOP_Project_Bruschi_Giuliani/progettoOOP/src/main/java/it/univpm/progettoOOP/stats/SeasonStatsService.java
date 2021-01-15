@@ -1,6 +1,6 @@
 package it.univpm.progettoOOP.stats;
 
-import it.univpm.progettoOOP.model.Dati;
+import org.json.simple.JSONObject;
 
 public interface SeasonStatsService {
 	
@@ -9,6 +9,6 @@ public interface SeasonStatsService {
 	public abstract double getValue(String date);
 	public abstract double getMax();
 	public abstract double getMin();
-	public abstract Dati SeasonDataStats();
+	public abstract JSONObject SeasonDataStats();
 
 }

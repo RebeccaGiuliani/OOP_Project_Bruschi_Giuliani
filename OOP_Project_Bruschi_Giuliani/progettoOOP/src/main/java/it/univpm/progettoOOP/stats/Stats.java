@@ -1,6 +1,5 @@
 package it.univpm.progettoOOP.stats;
 
-import java.util.Collection;
 import java.util.Vector;
 
 import org.json.simple.JSONArray;
@@ -11,7 +10,6 @@ import it.univpm.progettoOOP.model.Autumn;
 import it.univpm.progettoOOP.filter.CityFileReader;
 import it.univpm.progettoOOP.model.City;
 import it.univpm.progettoOOP.model.Date;
-import it.univpm.progettoOOP.model.Dati;
 import it.univpm.progettoOOP.model.Period;
 import it.univpm.progettoOOP.model.Spring;
 import it.univpm.progettoOOP.model.Summer;
@@ -20,7 +18,6 @@ import it.univpm.progettoOOP.model.Winter;
 public class Stats implements StatsService{
 	
 	private JSONArray ja = new JSONArray();
-	private Vector<Integer> counter= new Vector<>();
 	protected Vector<Double> varianceValues = new Vector<Double>();
 	protected Vector<Double> mediaValues = new Vector<Double>();
 	protected Vector<Double> varianzeStagionali = new Vector<Double>();
@@ -31,7 +28,6 @@ public class Stats implements StatsService{
 	public Stats (Period p, City c) {
 		APICall call = new APICall(p, new CityFileReader(c));
 		this.ja = call.getData();
-		this.counter = DayCounter();
 	}
 	
 
@@ -341,6 +337,8 @@ public class Stats implements StatsService{
 		return this.minStagionali;
 	}
 	
+	
+//problemi quando si inserisce l'inverno
 	public double MaxSeason(Period period) {
 		double max = 0;
 		
@@ -357,6 +355,8 @@ public class Stats implements StatsService{
 		return max;
 	}
 	
+	
+	//problemi quando si inserisce l'inverno
 	public double MinSeason(Period period) {
 		double min = 15.0;
 		
@@ -374,32 +374,37 @@ public class Stats implements StatsService{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Collection<Dati> MonthlyDataStats(){
-//		Map<Integer, Dati> d =new HashMap<>();
-//		int cont = 0;
-		JSONArray data = new JSONArray();
+	public JSONArray MonthlyDataStats(){
+		JSONArray ja = new JSONArray();
+		Vector<Integer> counter = DayCounter();
 		for(int i=0; i<counter.size();i++){
-			
 			JSONObject jo = new JSONObject();
-			jo.put("media", mediaValues.get(i));
-			jo.put("varianza", varianceValues.get(i));
-			jo.put("max", getMax().get(i));
-			jo.put("min", getMin().get(i));
-//			Dati da = (new Dati(mediaValues.get(i),varianceValues.get(i), getMax().get(i),getMin().get(i)));
-//			d.put(cont++, da);
-			data.add(jo);
+			String nome = (i+1)+"° mese";
+			jo.put("Dati", nome);
+			jo.put("Media", media().get(i));
+			jo.put("Varianza", varianza().get(i));
+			jo.put("Max", getMax().get(i));
+			jo.put("Min", getMin().get(i));
+			ja.add(jo);
 		}
 		
-		return data;
+		return ja;
 	}
 	
 	
-	public Vector<Dati> SeasonDataStats(){
-		Vector<Dati> data = new Vector<>();
-		for(int i=0; i<counter.size();i++){
-			data.add(new Dati(mediaSeason().get(i),varianzeStagionali.get(i) ,maxStagionali.get(i),minStagionali.get(i)));
+	@SuppressWarnings("unchecked")
+	public JSONArray SeasonDataStats(){
+		JSONArray ja = new JSONArray();
+		Vector<Double> medieStagionali = mediaSeason();
+		for(int i=0; i<medieStagionali.size();i++){
+			JSONObject jo = new JSONObject();
+			jo.put("Media stagionale", mediaSeason().get(i));
+			jo.put("Varianza stagionale", varianzaSeason().get(i));
+			jo.put("Massimo stagionale", getMaxSeason().get(i));
+			jo.put("Minimo stagionale", getMinSeason().get(i));
+			ja.add(jo);
 		}
-		return data;
+		return ja;
 	}
 
 }

@@ -50,6 +50,10 @@ public class Confronto implements ConfrontoService {
 		mese.add(s.getMin().get(0));
 		return mese;
 	}
+	
+	public Vector<Double> gestioneDati(SeasonStats s){
+		return new Vector<>();
+	}
 
 	@SuppressWarnings("unchecked")
 	public JSONArray ConfrontoStats(){

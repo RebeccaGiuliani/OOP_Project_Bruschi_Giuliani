@@ -16,6 +16,7 @@ import it.univpm.progettoOOP.model.Summer;
 import it.univpm.progettoOOP.model.Winter;
 import it.univpm.progettoOOP.model.Year;
 import it.univpm.progettoOOP.stats.Confronto;
+import it.univpm.progettoOOP.stats.ConfrontoSeason;
 import it.univpm.progettoOOP.stats.SeasonStats;
 import it.univpm.progettoOOP.stats.Stats;
 
@@ -95,8 +96,36 @@ public class StatsController {
 
 	@RequestMapping(value = "/confronto/stats/{month}/{year}/{city_name}/{country}", method = RequestMethod.GET)
 	public JSONArray ConfrontoStats(@PathVariable ("month") int month, @PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
-		Confronto stats = new Confronto(month, year, new City(city_name, country));
-		JSONArray ja = stats.ConfrontoStats();
+		Confronto confronto = new Confronto(month, year, new City(city_name, country));
+		JSONArray ja = confronto.ConfrontoStats();
+		return ja;
+	}
+	
+	@RequestMapping(value = "/confronto/stats/spring/{year}/{city_name}/{country}", method = RequestMethod.GET)
+	public JSONArray ConfrontoStats_Spring(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
+		ConfrontoSeason confronto = new ConfrontoSeason(new Spring(year), new City(city_name, country));
+		JSONArray ja = confronto.ConfrontoStats();
+		return ja;
+	}
+	
+	@RequestMapping(value = "/confronto/stats/summer/{year}/{city_name}/{country}", method = RequestMethod.GET)
+	public JSONArray ConfrontoStats_Summer(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
+		ConfrontoSeason confronto = new ConfrontoSeason(new Summer(year), new City(city_name, country));
+		JSONArray ja = confronto.ConfrontoStats();
+		return ja;
+	}
+	
+	@RequestMapping(value = "/confronto/stats/autumn/{year}/{city_name}/{country}", method = RequestMethod.GET)
+	public JSONArray ConfrontoStats_Autumn(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
+		ConfrontoSeason confronto = new ConfrontoSeason(new Autumn(year), new City(city_name, country));
+		JSONArray ja = confronto.ConfrontoStats();
+		return ja;
+	}
+	
+	@RequestMapping(value = "/confronto/stats/winter/{year}/{city_name}/{country}", method = RequestMethod.GET)
+	public JSONArray ConfrontoStats_Winter(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
+		ConfrontoSeason confronto = new ConfrontoSeason(new Winter(year), new City(city_name, country));
+		JSONArray ja = confronto.ConfrontoStats();
 		return ja;
 	}
 }

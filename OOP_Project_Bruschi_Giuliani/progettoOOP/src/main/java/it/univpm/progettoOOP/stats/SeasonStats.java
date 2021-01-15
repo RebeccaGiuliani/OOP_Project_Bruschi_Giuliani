@@ -13,7 +13,7 @@ import it.univpm.progettoOOP.model.Summer;
 import it.univpm.progettoOOP.model.Winter;
 
 public class SeasonStats implements SeasonStatsService{
-	
+
 	private JSONArray ja = new JSONArray();
 
 	//nel caso si riesca a rendere il filtraggio "generico", in caso contrario questo costruttore è da eliminare
@@ -21,7 +21,7 @@ public class SeasonStats implements SeasonStatsService{
 		APICall call = new APICall(p, new CityFileReader(c));
 		this.ja = call.getData();
 	}
-	
+
 	public SeasonStats(Spring s, City c) {
 		APICall call = new APICall(s, new CityFileReader(c));
 		this.ja = call.getData();
@@ -42,12 +42,10 @@ public class SeasonStats implements SeasonStatsService{
 		this.ja = call.getData();
 	}
 
-	
-
 	public double media() {
 		double somma = 0;
 		int cont = 0;
-		
+
 		for(int i = 0; i<this.ja.size(); i++) {
 			JSONObject Object = (JSONObject) this.ja.get(i);
 			double value = getValue((String) Object.get("date_iso"));
@@ -56,7 +54,7 @@ public class SeasonStats implements SeasonStatsService{
 		}
 		return somma/cont;
 	}
-	
+
 	public double getVarianza(double media) {
 		double varianza0 = 0.0;
 		int cont = 0;	
@@ -64,14 +62,35 @@ public class SeasonStats implements SeasonStatsService{
 		for(int i = 0; i<this.ja.size(); i++) {
 			JSONObject Object = (JSONObject) this.ja.get(i);
 			double value = getValue((String) Object.get("date_iso"));
-			
+
 			cont ++;
 			varianza0 += Math.pow(value-media, 2);
 
 		}//chiusura FOR
 		return varianza0/cont;
 	}
-	
+
+	public double getMax() {
+		double max = 0.0;
+
+		for(int i = 0; i<this.ja.size(); i++) {
+			JSONObject Object = (JSONObject) this.ja.get(i);
+			double value = getValue((String) Object.get("date_iso"));
+			if(value>max) max = value;
+		}
+		return max;
+	}
+
+	public double getMin() {
+		double min = 15.0;
+		for(int i = 0; i<this.ja.size(); i++) {
+			JSONObject Object = (JSONObject) this.ja.get(i);
+			double value = getValue((String) Object.get("date_iso"));
+			if(value<min) min = value;
+		}
+		return min;
+	}
+
 	public double getValue(String date) {
 		double value = 0;
 		for(int i = 0; i<this.ja.size(); i++) {
@@ -89,28 +108,7 @@ public class SeasonStats implements SeasonStatsService{
 		}
 		return value;
 	}
-	
-	public double getMax() {
-		double max = 0.0;
-		
-		for(int i = 0; i<this.ja.size(); i++) {
-			JSONObject Object = (JSONObject) this.ja.get(i);
-			double value = getValue((String) Object.get("date_iso"));
-			if(value>max) max = value;
-		}
-		return max;
-	}
-	
-	public double getMin() {
-		double min = 15.0;
-		for(int i = 0; i<this.ja.size(); i++) {
-			JSONObject Object = (JSONObject) this.ja.get(i);
-			double value = getValue((String) Object.get("date_iso"));
-			if(value<min) min = value;
-		}
-		return min;
-		}
-	
+
 	@SuppressWarnings("unchecked")
 	public JSONObject SeasonDataStats(){
 		JSONObject jo = new JSONObject();

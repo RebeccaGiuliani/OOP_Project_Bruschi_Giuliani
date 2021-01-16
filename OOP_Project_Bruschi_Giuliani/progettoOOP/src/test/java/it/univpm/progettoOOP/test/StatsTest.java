@@ -17,22 +17,14 @@ import it.univpm.progettoOOP.model.Period;
 import it.univpm.progettoOOP.stats.Stats;
 
 public class StatsTest {
-	
+
 	private JSONArray ja;
-	private City city;
-	private Period period;
 	private Stats stats;
 	private double mediaValue, varValue;
 	private APICall call;
-//	private double m =  1.1825806451612901;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		city = new City("Ancona", "IT");
-		period = new Period(1, 1, 2019, 31, 1, 2019);
-		call = new APICall(period, new CityFileReader(city));
-		ja = call.getData();
-		stats = new Stats(period, city);
 	}
 
 	@AfterEach
@@ -40,8 +32,11 @@ public class StatsTest {
 	}
 
 	@Test
-    @DisplayName("Media Corretta")
-    void mediatest() throws IOException {
+	@DisplayName("Media Corretta")
+	public void mediatest() throws Exception {
+		stats = new Stats(new Period(1, 1, 2019, 31, 1, 2019), new City("Ancona", "IT"));
+		call = new APICall(new Period(1, 1, 2019, 31, 1, 2019), new CityFileReader(new City("Ancona", "IT")));
+		ja = call.getData();
 
 		double somma = 0;
 
@@ -50,29 +45,32 @@ public class StatsTest {
 			double value = stats.getValue((String) Object.get("date_iso"));
 
 			somma += value; 
-			
+
 		}//Chiusura FOR
 		mediaValue = (somma/ja.size());
-		
+
 		assertEquals(mediaValue ,stats.media().get(0));	
-    }
-	
-	
+	}
+
+
 	@Test
-    @DisplayName("Varianza Corretta")
-    void varianzatest() throws IOException {
+	@DisplayName("Varianza Corretta")
+	public void varianzatest() throws IOException {
+		stats = new Stats(new Period(1, 1, 2019, 31, 1, 2019), new City("Ancona", "IT"));
+		call = new APICall(new Period(1, 1, 2019, 31, 1, 2019), new CityFileReader(new City("Ancona", "IT")));
+		ja = call.getData();
 
 		double varianza0 = 0;
-		
+
 		for(int i = 0; i<this.ja.size(); i++) {
 			JSONObject Object = (JSONObject) this.ja.get(i);
 			double value = stats.getValue((String) Object.get("date_iso"));
 
 			varianza0 += Math.pow(value-stats.media().get(0), 2);
-			
+
 		}//Chiusura FOR
 		varValue = (varianza0/ja.size());
-		
-		assertEquals(varValue ,stats.varianza(stats.media().get(0), period.getStart_month(), period.getStart_year()));	
-    }
+
+		assertEquals(varValue ,stats.varianza(stats.media().get(0), 1, 2019));	
+	}
 }

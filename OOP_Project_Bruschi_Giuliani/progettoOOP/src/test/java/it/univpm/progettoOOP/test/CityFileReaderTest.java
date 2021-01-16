@@ -30,28 +30,28 @@ class CityFileReaderTest {
 	}
 
 	@Test
-	@DisplayName("Latitudine Corretta")
+	@DisplayName("Latitudine Corretta Ancona")
 	void getLatTest1() {
 
 		assertEquals(43.59816, c1.getLat());
 	}
 
 	@Test
-	@DisplayName("Latitudine Corretta")
+	@DisplayName("Latitudine Corretta Roma")
 	void getLatTest2() {
 
 		assertEquals(41.894741, c2.getLat());
 	}
 
 	@Test
-	@DisplayName("Longitudine Corretta")
+	@DisplayName("Longitudine Corretta Ancona")
 	void getLonTest1() {
 
 		assertEquals(13.51008, c1.getLon());
 	}
 
 	@Test
-	@DisplayName("Longitudine Corretta")
+	@DisplayName("Longitudine Corretta Roma")
 	void getLonTest2() {
 
 		assertEquals(12.4839, c2.getLon());

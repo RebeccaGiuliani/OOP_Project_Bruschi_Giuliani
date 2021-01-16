@@ -64,7 +64,7 @@ public class APICall implements APICallService {
 
 		String api = this.url;
 		JSONArray ja = null;
-		String data = "";
+		String data_filter = "";
 		String line = "";
 
 		try {
@@ -76,11 +76,11 @@ public class APICall implements APICallService {
 			BufferedReader buf = new BufferedReader( input );
 
 			while ( ( line = buf.readLine() ) != null ) {
-				data+= line;
+				data_filter += line;
 			}
 			
 			in.close();
-			ja = (JSONArray) JSONValue.parseWithException(data);
+			ja = (JSONArray) JSONValue.parseWithException(data_filter);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}	

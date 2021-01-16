@@ -19,9 +19,9 @@ public class YearStats extends Stats{
 
 	private JSONArray ja = new JSONArray();
 
-	public YearStats (Year y, City c) {
-		super(y, c);
-		this.ja = new APICall (y,new CityFileReader (c)).getData();
+	public YearStats (Year year, City city) {
+		super(year, city);
+		this.ja = new APICall (year, new CityFileReader (city)).getData();
 	}
 
 	public Vector<Double> media(){
@@ -57,7 +57,6 @@ public class YearStats extends Stats{
 
 	public double varianza(double media, int month, int year) {
 		double varianza0 = 0.0;
-		double varianza = 0.0;
 		int cont = 0;	
 
 		for(int i = 0; i<this.ja.size(); i++) {
@@ -69,10 +68,9 @@ public class YearStats extends Stats{
 				if(d.getMonth() == month) {
 					cont ++;
 					varianza0 += Math.pow(value-media, 2);
-					varianza = varianza0/cont;
 				}}
 		}//chiusura FOR
-		return varianza;
+		return varianza0/cont;
 	}
 	
 	public Vector<Double> getMax() {

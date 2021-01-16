@@ -24,8 +24,8 @@ public class Stats implements StatsService{
 	protected Vector<Double> maxStagionali = new Vector<>();
 	protected Vector<Double> minStagionali = new Vector<>();
 
-	public Stats (Period p, City c) {
-		APICall call = new APICall(p, new CityFileReader(c));
+	public Stats (Period period, City city) {
+		APICall call = new APICall(period, new CityFileReader(city));
 		this.ja = call.getData();
 	}
 
@@ -174,12 +174,12 @@ public class Stats implements StatsService{
 
 			if (d.getYear() == year) {
 				if( (d.getMonth() == 3 && d.getDay() >= 21) || (d.getMonth() == 4 || d.getMonth() == 5) ||
-						(d.getMonth() == 6 && d.getDay() <= 21)) {
+						(d.getMonth() == 6 && d.getDay() <= 20)) {
 					contSpring ++;
 					sommaSpring += value;	
 				}
-				else {if((d.getMonth() == 6 && d.getDay() >= 22) || (d.getMonth() == 7|| d.getMonth() == 8) ||
-						(d.getMonth() == 9 && d.getDay() <= 23)) {
+				else {if((d.getMonth() == 6 && d.getDay() >= 21) || (d.getMonth() == 7|| d.getMonth() == 8) ||
+						(d.getMonth() == 9 && d.getDay() <= 22)) {
 					contSummer ++;
 					sommaSummer += value;
 				}

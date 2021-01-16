@@ -15,23 +15,23 @@ public class SeasonStats implements SeasonStatsService{
 
 	private JSONArray ja = new JSONArray();
 
-	public SeasonStats(Spring s, City c) {
-		APICall call = new APICall(s, new CityFileReader(c));
+	public SeasonStats(Spring spring, City city) {
+		APICall call = new APICall(spring, new CityFileReader(city));
 		this.ja = call.getData();
 	}
 
-	public SeasonStats(Summer s, City c) {
-		APICall call = new APICall(s, new CityFileReader(c));
+	public SeasonStats(Summer summer, City city) {
+		APICall call = new APICall(summer, new CityFileReader(city));
 		this.ja = call.getData();
 	}
 
-	public SeasonStats(Autumn a, City c) {
-		APICall call = new APICall(a, new CityFileReader(c));
+	public SeasonStats(Autumn autumn, City city) {
+		APICall call = new APICall(autumn, new CityFileReader(city));
 		this.ja = call.getData();
 	}
 
-	public SeasonStats(Winter w, City c) {
-		APICall call = new APICall(w, new CityFileReader(c));
+	public SeasonStats(Winter winter, City city) {
+		APICall call = new APICall(winter, new CityFileReader(city));
 		this.ja = call.getData();
 	}
 

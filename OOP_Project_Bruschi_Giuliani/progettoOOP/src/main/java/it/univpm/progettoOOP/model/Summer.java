@@ -2,7 +2,7 @@ package it.univpm.progettoOOP.model;
 
 public class Summer extends Period{
 
-	private static int start_day = 22;
+	private static int start_day = 21;
 	private static int start_month = 6;
 	private static int end_day = 22;
 	private static int end_month = 9;

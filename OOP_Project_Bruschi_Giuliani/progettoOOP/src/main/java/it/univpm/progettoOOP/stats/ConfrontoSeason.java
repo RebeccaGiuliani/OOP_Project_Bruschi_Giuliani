@@ -13,34 +13,34 @@ import it.univpm.progettoOOP.model.Winter;
 
 public class ConfrontoSeason extends Confronto {
 	private int year;
-	private SeasonStats stats, statsp;
+	private SeasonStats stats, stats_prec;
 
-	public ConfrontoSeason(Spring s, City c) {
-		super(s.getStart_month(), s.getStart_year(), c);
-		this.stats = new SeasonStats(s,c);
-		this.year = s.getStart_year();
-		this.statsp = new SeasonStats(new Spring(this.year-1), c);
+	public ConfrontoSeason(Spring spring, City city) {
+		super(spring.getStart_month(), spring.getStart_year(), city);
+		this.stats = new SeasonStats(spring, city);
+		this.year = spring.getStart_year();
+		this.stats_prec = new SeasonStats(new Spring(this.year-1), city);
 	}
 	
-	public ConfrontoSeason(Summer s, City c) {
-		super(s.getStart_month(), s.getStart_year(), c);
-		this.stats = new SeasonStats(s,c);
-		this.year = s.getStart_year();
-		this.statsp = new SeasonStats(new Summer(this.year-1), c);
+	public ConfrontoSeason(Summer summer, City city) {
+		super(summer.getStart_month(), summer.getStart_year(), city);
+		this.stats = new SeasonStats(summer, city);
+		this.year = summer.getStart_year();
+		this.stats_prec = new SeasonStats(new Summer(this.year-1), city);
 	}
 	
-	public ConfrontoSeason(Autumn a, City c) {
-		super(a.getStart_month(), a.getStart_year(), c);
-		this.stats = new SeasonStats(a,c);
-		this.year = a.getStart_year();
-		this.statsp = new SeasonStats(new Autumn(this.year-1), c);
+	public ConfrontoSeason(Autumn autumn, City city) {
+		super(autumn.getStart_month(), autumn.getStart_year(), city);
+		this.stats = new SeasonStats(autumn, city);
+		this.year = autumn.getStart_year();
+		this.stats_prec = new SeasonStats(new Autumn(this.year-1), city);
 	}
 	
-	public ConfrontoSeason(Winter w, City c) {
-		super(w.getStart_month(), w.getStart_year(), c);
-		this.stats = new SeasonStats(w,c);
-		this.year = w.getStart_year();
-		this.statsp = new SeasonStats(new Winter(this.year-1), c);
+	public ConfrontoSeason(Winter winter, City city) {
+		super(winter.getStart_month(), winter.getStart_year(), city);
+		this.stats = new SeasonStats(winter, city);
+		this.year = winter.getStart_year();
+		this.stats_prec = new SeasonStats(new Winter(this.year-1), city);
 	}
 	
 	public Vector<Double> gestioneDati(SeasonStats s) {
@@ -56,30 +56,30 @@ public class ConfrontoSeason extends Confronto {
 	
 	@SuppressWarnings("unchecked")
 	public JSONArray ConfrontoStats(){
-		Vector<Double> stagioneP = gestioneDati(this.statsp);
+		Vector<Double> stagione_prec = gestioneDati(this.stats_prec);
 		Vector<Double> stagione = gestioneDati(this.stats);
 		
-		JSONObject jop = new JSONObject();
+		JSONObject jo_prec = new JSONObject();
 		JSONObject jo = new JSONObject();
-		JSONObject yp = new JSONObject();
+		JSONObject y_prec = new JSONObject();
 		JSONObject y = new JSONObject();
 	
 		JSONArray ja = new JSONArray();
 		
-		jop.put("Media", stagioneP.get(0));
-		jop.put("Varianza", stagioneP.get(1));
-		jop.put("Massimo", stagioneP.get(2));	
-		jop.put("Minimo", stagioneP.get(3));
+		jo_prec.put("Media", stagione_prec.get(0));
+		jo_prec.put("Varianza", stagione_prec.get(1));
+		jo_prec.put("Massimo", stagione_prec.get(2));	
+		jo_prec.put("Minimo", stagione_prec.get(3));
 		
 		jo.put("Media", stagione.get(0));
 		jo.put("Varianza", stagione.get(1));
 		jo.put("Massimo", stagione.get(2));
 		jo.put("Minimo", stagione.get(3));
 		
-		yp.put("Dati "+ (year-1), jop);
+		y_prec.put("Dati "+ (year-1), jo_prec);
 		y.put("Dati "+ year, jo);
 		
-		ja.add(yp);
+		ja.add(y_prec);
 		ja.add(y);
 		
 		return ja;

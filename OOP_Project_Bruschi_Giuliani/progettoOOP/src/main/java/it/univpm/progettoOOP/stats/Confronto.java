@@ -10,12 +10,12 @@ import it.univpm.progettoOOP.model.Period;
 
 public class Confronto implements ConfrontoService {
 	private int year;
-	private Stats stats, statsp;
+	private Stats stats, stats_prec;
 	private static int start_day = 1;
 
-	public Confronto (int month, int year ,City c) {
-		this.stats = new Stats(new Period(start_day, month, year, end_day(month), month, year),c);
-		this.statsp = new Stats(new Period(start_day, month, year-1, end_day(month), month, year-1), c);
+	public Confronto (int month, int year ,City city) {
+		this.stats = new Stats(new Period(start_day, month, year, end_day(month), month, year),city);
+		this.stats_prec = new Stats(new Period(start_day, month, year-1, end_day(month), month, year-1), city);
 		this.year = year;
 	}
 
@@ -57,30 +57,30 @@ public class Confronto implements ConfrontoService {
 
 	@SuppressWarnings("unchecked")
 	public JSONArray ConfrontoStats(){
-		Vector<Double> meseP = gestioneDati(this.statsp);
+		Vector<Double> mese_prec = gestioneDati(this.stats_prec);
 		Vector<Double> mese = gestioneDati(this.stats);
 		
-		JSONObject jop = new JSONObject();
+		JSONObject jo_prec = new JSONObject();
 		JSONObject jo = new JSONObject();
-		JSONObject yp = new JSONObject();
+		JSONObject y_prec = new JSONObject();
 		JSONObject y = new JSONObject();
 	
 		JSONArray ja = new JSONArray();
 		
-		jop.put("Media", meseP.get(0));
-		jop.put("Varianza", meseP.get(1));
-		jop.put("Massimo", meseP.get(2));	
-		jop.put("Minimo", meseP.get(3));
+		jo_prec.put("Media", mese_prec.get(0));
+		jo_prec.put("Varianza", mese_prec.get(1));
+		jo_prec.put("Massimo", mese_prec.get(2));	
+		jo_prec.put("Minimo", mese_prec.get(3));
 		
 		jo.put("Media", mese.get(0));
 		jo.put("Varianza", mese.get(1));
 		jo.put("Massimo", mese.get(2));
 		jo.put("Minimo", mese.get(3));
 		
-		yp.put("Dati "+ (year-1), jop);
+		y_prec.put("Dati "+ (year-1), jo_prec);
 		y.put("Dati "+ year, jo);
 		
-		ja.add(yp);
+		ja.add(y_prec);
 		ja.add(y);
 		
 		return ja;

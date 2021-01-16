@@ -4,7 +4,7 @@ public class Spring extends Period{
 
 	private static int start_day = 21;
 	private static int start_month = 3;
-	private static int end_day = 21;
+	private static int end_day = 20;
 	private static int end_month = 6;
 	private int year;
 	

@@ -28,7 +28,7 @@ public class Confronto implements ConfrontoService {
 			break;
 
 		case 1: case 3: case 5: case 7 : case 8 : case 10: case 12:
-			end_day = 30;
+			end_day = 31;
 			break;
 
 		case 2:

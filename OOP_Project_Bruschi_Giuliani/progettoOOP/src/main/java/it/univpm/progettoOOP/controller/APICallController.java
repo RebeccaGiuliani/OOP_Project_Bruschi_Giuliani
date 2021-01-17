@@ -19,10 +19,39 @@ import it.univpm.progettoOOP.model.Spring;
 import it.univpm.progettoOOP.model.Summer;
 import it.univpm.progettoOOP.model.Winter;
 
+/**
+ *<p>
+ *La classe <b>APICallController</b> mi permette di gestire le richieste di filtraggio dati,
+ *tramite l'inserimento da parte dell'utente di una città e di un periodo di interesse.
+ *</p>
+ *
+ * @author RebeccaGiuliani
+ * @author SimoneBruschi
+ * 
+ */
+
 @RestController
 public class APICallController {
 
-	//filtraggio dati per un periodo generico
+	/**
+	 * Questo metodo mi permette di filtrare i dati sulla base di una città e di un periodo specifico inseriti dall'utente attraverso i parametri. 
+	 * L'utente può anche scegliere di mantere il periodo di filtraggio di default (1.1.2019-31.12.2019) oppure uno/alcuni dei parametri di default.
+	 * 
+	 * @param start_day   indica il giorno di inizio
+	 * @param start_month  indica il mese di inizio
+	 * @param start_year  indica l'anno di inzio
+	 * @param end_day   indica il giorno di fine
+	 * @param end_month  indica il mese di fine
+	 * @param end_year  indica l'anno di fine
+	 * @param city_name  indica la città di interesse
+	 * @param city_country  indica la sigla dello stato della città di interesse
+	 * 
+	 * @return <code>APICall</code>
+	 * @see it.univpm.progettoOOP.filter.APICall
+	 * 
+	 * @throws WrongPeriodException
+	 * @throws WrongCityException
+	 */
 	@RequestMapping(value = "/data/filter/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall (
 			@RequestParam (name = "start_day", defaultValue = "1") int start_day, @RequestParam (name = "start_month", defaultValue = "1") int start_month,
@@ -32,8 +61,22 @@ public class APICallController {
 
 		return new APICall(new Period(start_day,start_month,start_year,end_day,end_month,end_year), new CityFileReader(new City(city_name, city_country)));		 
 	}
+	
+	/**
+	 * Questo metodo mi permette di filtrare i dati sulla base di una città e di un anno specifico inseriti dall'utente attraverso i parametri. 
+	 * L'utente può anche scegliere di mantere l'anno di filtraggio di default (2019).
+	 * 
+	 * @param year  indica l'anno di interesse
+	 * @param city_name  indica la città di interesse
+	 * @param city_country  indica la sigla dello stato della città di interesse
+	 * 
+	 * @return <code>APICall</code>
+	 * @see it.univpm.progettoOOP.filter.APICall
+	 * 
+	 * @throws WrongPeriodException
+	 * @throws WrongCityException
+	 */
 
-	//filtraggio dati per un anno
 	@RequestMapping(value = "/data/filter/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ) 
 			throws WrongPeriodException, WrongCityException{
@@ -41,7 +84,21 @@ public class APICallController {
 		return new APICall(new Year(year), new CityFileReader(new City(city_name, city_country)));	
 	}
 
-	//filtraggio dati primavera variando anno e coordinate
+	/**
+	 * Questo metodo mi permette di filtrare i dati sulla base di una città inserita dall'utente e del periodo corrispondente 
+	 * alla primavera di un anno specifico, modificabile dall'utente rispetto a quello di default(2019).
+	 * 
+	 * @param year  indica l'anno di interesse
+	 * @param city_name  indica la città di interesse
+	 * @param city_country  indica la sigla dello stato della città di interesse
+	 * 
+	 * @return <code>APICall</code>
+	 * @see it.univpm.progettoOOP.filter.APICall
+	 * 
+	 * @throws WrongPeriodException
+	 * @throws WrongCityException
+	 */
+	
 	@RequestMapping(value = "/data/filter/spring/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall_spring( @PathVariable("year") int year, 
 			@PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ) 
@@ -50,7 +107,20 @@ public class APICallController {
 		return new APICall(new Spring(year), new CityFileReader(new City(city_name, city_country)));	
 	}
 
-	//filtraggio dati estate variando l'anno
+	/**
+	 * Questo metodo mi permette di filtrare i dati sulla base di una città inserita dall'utente e del periodo corrispondente 
+	 * all'estate di un anno specifico, modificabile dall'utente rispetto a quello di default(2019).
+	 * 
+	 * @param year  indica l'anno di interesse
+	 * @param city_name  indica la città di interesse
+	 * @param city_country  indica la sigla dello stato della città di interesse
+	 * 
+	 * @return <code>APICall</code>
+	 * @see it.univpm.progettoOOP.filter.APICall
+	 * 
+	 * @throws WrongPeriodException
+	 * @throws WrongCityException
+	 */
 	@RequestMapping(value = "/data/filter/summer/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall_summer(@PathVariable("year") int year, 
 			@PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ) 
@@ -59,7 +129,21 @@ public class APICallController {
 		return new APICall(new Summer(year), new CityFileReader(new City(city_name, city_country)));	
 	}
 
-	//filtraggio dati autunno variando l'anno
+	/**
+	 * Questo metodo mi permette di filtrare i dati sulla base di una città inserita dall'utente e del periodo corrispondente 
+	 * all'autunno di un anno specifico, modificabile dall'utente rispetto a quello di default(2019). 
+	 * 
+	 * @param year  indica l'anno di interesse
+	 * @param city_name  indica la città di interesse
+	 * @param city_country  indica la sigla dello stato della città di interesse
+	 * 
+	 * @return <code>APICall</code>
+	 * @see it.univpm.progettoOOP.filter.APICall
+	 * 
+	 * @throws WrongPeriodException
+	 * @throws WrongCityException
+	 */
+	
 	@RequestMapping(value = "/data/filter/autumn/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall_autumn(@PathVariable("year") int year, 
 			@PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ) 
@@ -68,7 +152,21 @@ public class APICallController {
 		return new APICall(new Autumn(year), new CityFileReader(new City(city_name, city_country)));	
 	}
 
-	//filtraggio dati inverno variando l'anno
+	/**
+	 * Questo metodo mi permette di filtrare i dati sulla base di una città inserita dall'utente e del periodo corrispondente 
+	 * all'inverno di un anno specifico, modificabile dall'utente rispetto a quello di default(2019). 
+	 * 
+	 * @param year  indica l'anno di interesse
+	 * @param city_name  indica la città di interesse
+	 * @param city_country  indica la sigla dello stato della città di interesse
+	 * 
+	 * @return <code>APICall</code>
+	 * @see it.univpm.progettoOOP.filter.APICall
+	 * 
+	 * @throws WrongPeriodException
+	 * @throws WrongCityException
+	 */
+	
 	@RequestMapping(value = "/data/filter/winter/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall_winter(@PathVariable("year") int year, 
 			@PathVariable ("city_name") String city_name, @PathVariable ("city_country") String city_country ) 
@@ -77,10 +175,32 @@ public class APICallController {
 		return new APICall(new Winter(year), new CityFileReader(new City(city_name, city_country)));	
 	}
 
+	/**
+	 * Questo metodo gestisce le eccezioni dovute all'inserimento di un periodo erroneo.
+	 * 
+	 * @see it.univpm.progettoOOP.exception.WrongPeriodException
+	 * @see it.univpm.progettoOOP.exception.WrongPeriodException#getMex()
+	 * 
+	 * @param e indica l'eccezione
+	 * 
+	 * @return <code>String</code>
+	 */
+	
 	@ExceptionHandler(WrongPeriodException.class)
 	public static String ErrorPage(WrongPeriodException e) {
 		return e.getMex();
 	}
+	
+	/**
+	 * Questo metodo gestisce le eccezioni dovute all'inserimento di una città o di uno stato erronei.
+	 * 
+	 * @see it.univpm.progettoOOP.exception.WrongCityException
+	 * @see it.univpm.progettoOOP.exception.WrongCityException#getMex()
+	 * 
+	 * @param e indica l'eccezione
+	 * 
+	 * @return <code>String</code>
+	 */
 	
 	@ExceptionHandler(WrongCityException.class)
 	public static String ErrorPage(WrongCityException e) {

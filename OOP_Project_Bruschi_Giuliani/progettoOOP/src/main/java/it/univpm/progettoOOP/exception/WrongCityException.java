@@ -3,9 +3,11 @@ package it.univpm.progettoOOP.exception;
 import java.io.IOException;
 
 /**
+ *<p>
  *L'eccezione <b>WrongCityException</b> estende <b>IOException</b>.
  *Questa viene generata quando l'utente inserisce una città non presente nel file 
  *oppure quando inserisce il nome della città o la sigla dello stato in modo erroneo.
+ *</p>
  *
  * @author RebeccaGiuliani
  * @author SimoneBruschi

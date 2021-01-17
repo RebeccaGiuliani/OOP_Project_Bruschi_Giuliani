@@ -3,8 +3,10 @@ package it.univpm.progettoOOP.exception;
 import java.io.IOException;
 
 /**
+ *<p>
  *L'eccezione <b>WrongPeriodException</b> estende <b>IOException</b>.
  *Questa viene generata quando l'utente inserisce un periodo non valido.
+ *</p>
  *
  * @author RebeccaGiuliani
  * @author SimoneBruschi

@@ -21,9 +21,39 @@ import it.univpm.progettoOOP.model.Year;
 import it.univpm.progettoOOP.stats.SeasonStats;
 import it.univpm.progettoOOP.stats.Stats;
 
+/**
+ *<p>
+ *La classe <b>StatsController</b> permette all'utente di visualizzare le statistiche (mensili/stagionali) di un periodo generico inserito dall'utente 
+ *e di visualizzare le statistiche generiche di una specifica stagione, dopo l'inserimento dell'anno di interesse.
+ *</p>
+ *
+ * @author RebeccaGiuliani
+ * @author SimoneBruschi
+ * 
+ */
+
 @RestController
 public class StatsController {
 
+	/**
+	 * Questo metodo permette di visualizzare le statistiche mensili relativamente ad un periodo specifico e ad una città inseriti dall'utente.
+	 * Quest'ultimo può scegliere di mantenere il periodo di default (1.1.2019-31.12.2019).
+	 * 
+	 * @param start_day indica il giorno di inizio del periodo di interesse
+	 * @param start_month  indica il mese di inizio del periodo di interesse
+	 * @param start_year  indica l'anno di inizio del periodo di interesse
+	 * @param end_day  indica il giorno di fine del periodo di interesse
+	 * @param end_month  indica il mese di fine del periodo di interesse
+	 * @param end_year  indica l'anno di fine del periodo di interesse
+	 * @param city_name  indica la città di interesse
+	 * @param country  indica lo stato della città di interesse
+	 * 
+	 * @return <code>JSONArray</code>
+	 * 
+	 * @throws WrongPeriodException
+	 * @throws WrongCityException
+	 */
+	
 	@RequestMapping(value = "/stats/monthly/{city_name}/{country}", method = RequestMethod.GET)
 	public JSONArray getMonthlyStats(
 			@RequestParam (name = "start_day", defaultValue = "1") int start_day, @RequestParam (name = "start_month", defaultValue = "1") int start_month,
@@ -35,6 +65,20 @@ public class StatsController {
 		JSONArray ja = (JSONArray) stats.MonthlyDataStats();
 		return ja;
 	}
+	
+	/**
+	 * Questo metodo permette di visualizzare le statistiche mensili relativamente ad un anno speficifico e ad una città inseriti dall'utente.
+	 * Quest'ultimo può scegliere di mantenere l'anno di default (2019).
+	 * 
+	 * @param year indica l'anno di interesse
+	 * @param city_name  indica la città di interesse
+	 * @param country  indica lo stato della città di interesse
+	 * 
+	 * @return <code>JSONArray</code>
+	 * 
+	 * @throws WrongPeriodException
+	 * @throws WrongCityException
+	 */
 
 	@RequestMapping(value = "/stats/monthly/{year}/{city_name}/{country}", method = RequestMethod.GET)
 	public JSONArray getMonthlyStats(@PathVariable("year") int year,
@@ -45,8 +89,26 @@ public class StatsController {
 		JSONArray ja = (JSONArray) stats.MonthlyDataStats();
 		return ja;
 	}
+	
+	/**
+	 * Questo metodo permette di visualizzare le statistiche stagionali relativamente ad un periodo specifico e ad una città inseriti dall'utente.
+	 * Quest'ultimo può scegliere di mantenere il periodo di default (1.1.2019-31.12.2019).
+	 * 
+	 * @param start_day indica il giorno di inizio del periodo di interesse
+	 * @param start_month  indica il mese di inizio del periodo di interesse
+	 * @param start_year  indica l'anno di inizio del periodo di interesse
+	 * @param end_day  indica il giorno di fine del periodo di interesse
+	 * @param end_month  indica il mese di fine del periodo di interesse
+	 * @param end_year  indica l'anno di fine del periodo di interesse
+	 * @param city_name  indica la città di interesse
+	 * @param country  indica lo stato della città di interesse
+	 * 
+	 * @return <code>JSONArray</code>
+	 * 
+	 * @throws WrongPeriodException
+	 * @throws WrongCityException
+	 */
 
-	//da sistemare per periodi diversi da un anno
 	@RequestMapping(value = "/stats/seasonally/{city_name}/{country}", method = RequestMethod.GET)
 	public JSONArray getSeasonallyStats(
 			@RequestParam (name = "start_day", defaultValue = "1") int start_day, @RequestParam (name = "start_month", defaultValue = "1") int start_month,
@@ -58,6 +120,20 @@ public class StatsController {
 		JSONArray ja = stats.SeasonDataStats();
 		return ja;
 	}
+	
+	/**
+	 * Questo metodo permette di visualizzare le statistiche stagionali relativamente ad un anno speficifico e ad una città inseriti dall'utente.
+	 * Quest'ultimo può scegliere di mantenere l'anno di default (2019).
+	 * 
+	 * @param year indica l'anno di interesse
+	 * @param city_name  indica la città di interesse
+	 * @param country  indica lo stato della città di interesse
+	 * 
+	 * @return <code>JSONArray</code>
+	 * 
+	 * @throws WrongPeriodException
+	 * @throws WrongCityException
+	 */
 
 	@RequestMapping(value = "/stats/seasonally/{year}/{city_name}/{country}", method = RequestMethod.GET)
 	public JSONArray getSeasonallyStats(@PathVariable("year") int year,
@@ -68,6 +144,20 @@ public class StatsController {
 		JSONArray ja = (JSONArray) stats.SeasonDataStats();
 		return ja;
 	}
+	
+	/**
+	 * Questo metodo permette di visualizzare le statistiche della primavera relativamente ad un anno e ad una città inseriti dall'utente.
+	 * Quest'ultimo può scegliere di mantenere l'anno di default (2019).
+	 * 
+	 * @param year indica l'anno di interesse
+	 * @param city_name  indica la città di interesse
+	 * @param country  indica lo stato della città di interesse
+	 * 
+	 * @return <code>JSONObject</code>
+	 * 
+	 * @throws WrongPeriodException
+	 * @throws WrongCityException
+	 */
 
 	@RequestMapping(value = "/stats/spring/{year}/{city_name}/{country}", method = RequestMethod.GET)
 	public JSONObject SeasonStats_Spring(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country) 
@@ -76,6 +166,20 @@ public class StatsController {
 		JSONObject jo = stats.SeasonDataStats();
 		return jo;
 	}
+	
+	/**
+	 * Questo metodo permette di visualizzare le statistiche dell'estate relativamente ad un anno e ad una città inseriti dall'utente.
+	 * Quest'ultimo può scegliere di mantenere l'anno di default (2019).
+	 * 
+	 * @param year indica l'anno di interesse
+	 * @param city_name  indica la città di interesse
+	 * @param country  indica lo stato della città di interesse
+	 * 
+	 * @return <code>JSONObject</code>
+	 * 
+	 * @throws WrongPeriodException
+	 * @throws WrongCityException
+	 */
 
 	@RequestMapping(value = "/stats/summer/{year}/{city_name}/{country}", method = RequestMethod.GET)
 	public JSONObject SeasonStats_Summer(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country) 
@@ -84,6 +188,20 @@ public class StatsController {
 		JSONObject jo = stats.SeasonDataStats();
 		return jo;
 	}
+	
+	/**
+	 * Questo metodo permette di visualizzare le statistiche dell'autunno relativamente ad un anno e ad una città inseriti dall'utente.
+	 * Quest'ultimo può scegliere di mantenere l'anno di default (2019).
+	 * 
+	 * @param year indica l'anno di interesse
+	 * @param city_name  indica la città di interesse
+	 * @param country  indica lo stato della città di interesse
+	 * 
+	 * @return <code>JSONObject</code>
+	 * 
+	 * @throws WrongPeriodException
+	 * @throws WrongCityException
+	 */
 
 	@RequestMapping(value = "/stats/autumn/{year}/{city_name}/{country}", method = RequestMethod.GET)
 	public JSONObject SeasonStats_Autumn(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country) 
@@ -92,6 +210,20 @@ public class StatsController {
 		JSONObject jo = stats.SeasonDataStats();
 		return jo;
 	}
+	
+	/**
+	 * Questo metodo permette di visualizzare le statistiche dell'inverno relativamente ad un anno e ad una città inseriti dall'utente.
+	 * Quest'ultimo può scegliere di mantenere l'anno di default (2019).
+	 * 
+	 * @param year indica l'anno di interesse
+	 * @param city_name  indica la città di interesse
+	 * @param country  indica lo stato della città di interesse
+	 * 
+	 * @return <code>JSONObject</code>
+	 * 
+	 * @throws WrongPeriodException
+	 * @throws WrongCityException
+	 */
 
 	@RequestMapping(value = "/stats/winter/{year}/{city_name}/{country}", method = RequestMethod.GET)
 	public JSONObject SeasonStats_Winter(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country) 
@@ -100,11 +232,33 @@ public class StatsController {
 		JSONObject jo = stats.SeasonDataStats();
 		return jo;
 	}
+	
+	/**
+	 * Questo metodo gestisce le eccezioni dovute all'inserimento di un periodo erroneo.
+	 * 
+	 * @see it.univpm.progettoOOP.exception.WrongPeriodException
+	 * @see it.univpm.progettoOOP.exception.WrongPeriodException#getMex()
+	 * 
+	 * @param e indica l'eccezione
+	 * 
+	 * @return <code>String</code>
+	 */
 
 	@ExceptionHandler(WrongPeriodException.class)
 	public static String ErrorPage(WrongPeriodException e) {
 		return e.getMex();
 	}
+	
+	/**
+	 * Questo metodo gestisce le eccezioni dovute all'inserimento di una città o di uno stato erronei.
+	 * 
+	 * @see it.univpm.progettoOOP.exception.WrongCityException
+	 * @see it.univpm.progettoOOP.exception.WrongCityException#getMex()
+	 * 
+	 * @param e indica l'eccezione
+	 * 
+	 * @return <code>String</code>
+	 */
 	
 	@ExceptionHandler(WrongCityException.class)
 	public static String ErrorPage(WrongCityException e) {

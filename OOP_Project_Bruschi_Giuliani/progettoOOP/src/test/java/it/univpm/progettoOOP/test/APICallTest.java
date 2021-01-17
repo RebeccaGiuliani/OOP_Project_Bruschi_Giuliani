@@ -14,6 +14,16 @@ import it.univpm.progettoOOP.filter.CityFileReader;
 import it.univpm.progettoOOP.model.City;
 import it.univpm.progettoOOP.model.Period;
 
+/**
+ *<p>
+ *L'unità di test <b>ConfrontoTest</b> è generata per testare i metodi generici della classe <b>APICall</b>.
+ *</p>
+ *
+ * @author RebeccaGiuliani
+ * @author SimoneBruschi
+ *
+ */
+
 class APICallTest {
 
 	private APICall api_call, api_call2;
@@ -32,6 +42,12 @@ class APICallTest {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
+	
+	/**
+	 * test del metodo che converte la data iniziale del periodo in codice unix
+	 * 
+	 * @see it.univpm.progettoOOP.filter.APICall#StartDateUnixConverter()
+	 */
 
 	@Test
 	@DisplayName("Data d'inizio convertita correttamente")
@@ -41,6 +57,12 @@ class APICallTest {
 		
 	}
 	
+	/**
+	 * test del metodo che converte la data finale del periodo in codice unix
+	 * 
+	 * @see it.univpm.progettoOOP.filter.APICall#EndDateUnixConverter()
+	 */
+	
 	@Test
 	@DisplayName("Data di fine convertita correttamente")
 	void EndDateUnixConverterTest() {
@@ -48,6 +70,12 @@ class APICallTest {
 		assertEquals(1577793600, api_call.EndDateUnixConverter());
 		
 	}
+	
+	/**
+	 * test del metodo che legge dall'URL i dati relativamente al periodo e alla città inseriti dall'utente
+	 * 
+	 * @see it.univpm.progettoOOP.filter.APICall#getData()
+	 */
 	
 	@SuppressWarnings("unchecked")
 	@Test

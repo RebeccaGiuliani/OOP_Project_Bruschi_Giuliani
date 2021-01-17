@@ -1,5 +1,7 @@
 package it.univpm.progettoOOP.model;
 
+import it.univpm.progettoOOP.exception.WrongPeriodException;
+
 public class Winter extends Period{
 	
 	private static int start_day = 22;
@@ -8,7 +10,7 @@ public class Winter extends Period{
 	private static int end_month = 3;
 	private int year;
 	
-	public Winter (int year) {   //per l'inverno prendiamo in considerazione l'anno d'inizio
+	public Winter (int year) throws WrongPeriodException {   //per l'inverno prendiamo in considerazione l'anno d'inizio
 		super (start_day, start_month, year, end_day, end_month, year+1);
 		this.year = year;		
 	}

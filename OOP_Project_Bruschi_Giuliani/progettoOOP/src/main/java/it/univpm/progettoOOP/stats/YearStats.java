@@ -5,6 +5,8 @@ import java.util.Vector;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import it.univpm.progettoOOP.exception.WrongCityException;
+import it.univpm.progettoOOP.exception.WrongPeriodException;
 import it.univpm.progettoOOP.filter.APICall;
 import it.univpm.progettoOOP.filter.CityFileReader;
 import it.univpm.progettoOOP.model.Autumn;
@@ -19,7 +21,7 @@ public class YearStats extends Stats{
 
 	private JSONArray ja = new JSONArray();
 
-	public YearStats (Year year, City city) {
+	public YearStats (Year year, City city) throws WrongCityException {
 		super(year, city);
 		this.ja = new APICall (year, new CityFileReader (city)).getData();
 	}
@@ -123,7 +125,7 @@ public class YearStats extends Stats{
 		return min;
 	}
 	
-	public Vector<Double> mediaSeason() {
+	public Vector<Double> mediaSeason() throws WrongPeriodException {
 		int contSpring = 0;
 		int contSummer = 0;
 		int contAutumn = 0;

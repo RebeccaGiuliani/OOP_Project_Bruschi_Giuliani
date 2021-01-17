@@ -1,5 +1,7 @@
 package it.univpm.progettoOOP.model;
 
+import it.univpm.progettoOOP.exception.WrongPeriodException;
+
 public class Spring extends Period{
 
 	private static int start_day = 21;
@@ -8,7 +10,7 @@ public class Spring extends Period{
 	private static int end_month = 6;
 	private int year;
 	
-	public Spring (int year) {
+	public Spring (int year) throws WrongPeriodException {
 		super (start_day, start_month, year, end_day, end_month, year);
 		this.year = year;
 	}

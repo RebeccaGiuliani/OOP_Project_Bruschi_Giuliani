@@ -8,8 +8,9 @@ import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import  static org.junit.jupiter.api.Assertions.*; 
+import  static org.junit.jupiter.api.Assertions.*;
 
+import it.univpm.progettoOOP.exception.WrongCityException;
 import it.univpm.progettoOOP.filter.APICall;
 import it.univpm.progettoOOP.filter.CityFileReader;
 import it.univpm.progettoOOP.model.City;
@@ -55,7 +56,7 @@ public class StatsTest {
 
 	@Test
 	@DisplayName("Varianza Corretta")
-	public void varianzatest() throws IOException {
+	public void varianzatest() throws IOException, WrongCityException {
 		stats = new Stats(new Period(1, 1, 2019, 31, 1, 2019), new City("Ancona", "IT"));
 		call = new APICall(new Period(1, 1, 2019, 31, 1, 2019), new CityFileReader(new City("Ancona", "IT")));
 		ja = call.getData();

@@ -5,6 +5,8 @@ import java.util.Vector;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import it.univpm.progettoOOP.exception.WrongCityException;
+import it.univpm.progettoOOP.exception.WrongPeriodException;
 import it.univpm.progettoOOP.model.City;
 import it.univpm.progettoOOP.model.Period;
 
@@ -13,7 +15,7 @@ public class Confronto implements ConfrontoService {
 	private Stats stats, stats_prec;
 	private static int start_day = 1;
 
-	public Confronto (int month, int year ,City city) {
+	public Confronto (int month, int year ,City city) throws WrongPeriodException, WrongCityException {
 		this.stats = new Stats(new Period(start_day, month, year, end_day(month), month, year),city);
 		this.stats_prec = new Stats(new Period(start_day, month, year-1, end_day(month), month, year-1), city);
 		this.year = year;

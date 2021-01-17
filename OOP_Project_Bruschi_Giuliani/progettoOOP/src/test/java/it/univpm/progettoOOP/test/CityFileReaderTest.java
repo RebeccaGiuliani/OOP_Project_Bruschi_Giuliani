@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import it.univpm.progettoOOP.exception.WrongCityException;
 import it.univpm.progettoOOP.filter.CityFileReader;
 import it.univpm.progettoOOP.model.City;
 
@@ -31,28 +32,28 @@ class CityFileReaderTest {
 
 	@Test
 	@DisplayName("Latitudine Corretta Ancona")
-	void getLatTest1() {
+	void getLatTest1() throws WrongCityException {
 
 		assertEquals(43.59816, c1.getLat());
 	}
 
 	@Test
 	@DisplayName("Latitudine Corretta Roma")
-	void getLatTest2() {
+	void getLatTest2() throws WrongCityException {
 
 		assertEquals(41.894741, c2.getLat());
 	}
 
 	@Test
 	@DisplayName("Longitudine Corretta Ancona")
-	void getLonTest1() {
+	void getLonTest1() throws WrongCityException {
 
 		assertEquals(13.51008, c1.getLon());
 	}
 
 	@Test
 	@DisplayName("Longitudine Corretta Roma")
-	void getLonTest2() {
+	void getLonTest2() throws WrongCityException {
 
 		assertEquals(12.4839, c2.getLon());
 	}

@@ -1,5 +1,6 @@
 package it.univpm.progettoOOP.filter;
 
+import it.univpm.progettoOOP.exception.WrongCityException;
 import it.univpm.progettoOOP.model.City;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class CityFileReader implements CityFileReaderService {
 		return cityList;
 	}
 
-	public void getCity(JSONArray ja) {
+	public void getCity(JSONArray ja) throws WrongCityException {
 		//Get city object within list
 		for(int i =0; i<ja.size(); i++) {
 			JSONObject cityObject = (JSONObject) ja.get(i);
@@ -55,15 +56,16 @@ public class CityFileReader implements CityFileReaderService {
 					this.lat = (Double) coordObject.get("lat");  
 				}
 			}
-		}
+		} 
+		if (lat == 0 && lon == 0) throw new WrongCityException();
 	}
-	public double getLat() {
+	public double getLat() throws WrongCityException {
 		JSONArray ja = new JSONArray();
 		ja = caricaArray();
 		getCity(ja);
 		return this.lat;
 	}
-	public double getLon() {
+	public double getLon() throws WrongCityException {
 		JSONArray ja = new JSONArray();
 		ja = caricaArray();
 		getCity(ja);

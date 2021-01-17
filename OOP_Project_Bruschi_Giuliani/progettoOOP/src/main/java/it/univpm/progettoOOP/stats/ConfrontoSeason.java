@@ -5,6 +5,8 @@ import java.util.Vector;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import it.univpm.progettoOOP.exception.WrongCityException;
+import it.univpm.progettoOOP.exception.WrongPeriodException;
 import it.univpm.progettoOOP.model.Autumn;
 import it.univpm.progettoOOP.model.City;
 import it.univpm.progettoOOP.model.Spring;
@@ -15,28 +17,28 @@ public class ConfrontoSeason extends Confronto {
 	private int year;
 	private SeasonStats stats, stats_prec;
 
-	public ConfrontoSeason(Spring spring, City city) {
+	public ConfrontoSeason(Spring spring, City city) throws WrongPeriodException, WrongCityException {
 		super(spring.getStart_month(), spring.getStart_year(), city);
 		this.stats = new SeasonStats(spring, city);
 		this.year = spring.getStart_year();
 		this.stats_prec = new SeasonStats(new Spring(this.year-1), city);
 	}
 	
-	public ConfrontoSeason(Summer summer, City city) {
+	public ConfrontoSeason(Summer summer, City city) throws WrongPeriodException, WrongCityException {
 		super(summer.getStart_month(), summer.getStart_year(), city);
 		this.stats = new SeasonStats(summer, city);
 		this.year = summer.getStart_year();
 		this.stats_prec = new SeasonStats(new Summer(this.year-1), city);
 	}
 	
-	public ConfrontoSeason(Autumn autumn, City city) {
+	public ConfrontoSeason(Autumn autumn, City city) throws WrongPeriodException, WrongCityException {
 		super(autumn.getStart_month(), autumn.getStart_year(), city);
 		this.stats = new SeasonStats(autumn, city);
 		this.year = autumn.getStart_year();
 		this.stats_prec = new SeasonStats(new Autumn(this.year-1), city);
 	}
 	
-	public ConfrontoSeason(Winter winter, City city) {
+	public ConfrontoSeason(Winter winter, City city) throws WrongPeriodException, WrongCityException {
 		super(winter.getStart_month(), winter.getStart_year(), city);
 		this.stats = new SeasonStats(winter, city);
 		this.year = winter.getStart_year();

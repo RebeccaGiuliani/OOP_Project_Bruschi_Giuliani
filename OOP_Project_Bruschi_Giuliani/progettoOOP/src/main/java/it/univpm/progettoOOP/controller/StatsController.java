@@ -2,12 +2,15 @@ package it.univpm.progettoOOP.controller;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.univpm.progettoOOP.exception.WrongCityException;
+import it.univpm.progettoOOP.exception.WrongPeriodException;
 import it.univpm.progettoOOP.model.Autumn;
 import it.univpm.progettoOOP.model.City;
 import it.univpm.progettoOOP.model.Period;
@@ -15,8 +18,6 @@ import it.univpm.progettoOOP.model.Spring;
 import it.univpm.progettoOOP.model.Summer;
 import it.univpm.progettoOOP.model.Winter;
 import it.univpm.progettoOOP.model.Year;
-import it.univpm.progettoOOP.stats.Confronto;
-import it.univpm.progettoOOP.stats.ConfrontoSeason;
 import it.univpm.progettoOOP.stats.SeasonStats;
 import it.univpm.progettoOOP.stats.Stats;
 
@@ -28,7 +29,7 @@ public class StatsController {
 			@RequestParam (name = "start_day", defaultValue = "1") int start_day, @RequestParam (name = "start_month", defaultValue = "1") int start_month,
 			@RequestParam (name = "start_year", defaultValue = "2019") int start_year, @RequestParam (name = "end_day", defaultValue = "31")int end_day,
 			@RequestParam (name = "end_month", defaultValue = "12") int end_month, @RequestParam (name = "end_year", defaultValue = "2019") int end_year,
-			@PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
+			@PathVariable ("city_name") String city_name, @PathVariable ("country") String country) throws WrongPeriodException, WrongCityException {
 
 		Stats stats = new Stats(new Period(start_day,start_month,start_year,end_day,end_month,end_year), new City(city_name, country));
 		JSONArray ja = (JSONArray) stats.MonthlyDataStats();
@@ -37,7 +38,8 @@ public class StatsController {
 
 	@RequestMapping(value = "/stats/monthly/{year}/{city_name}/{country}", method = RequestMethod.GET)
 	public JSONArray getMonthlyStats(@PathVariable("year") int year,
-			@PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
+			@PathVariable ("city_name") String city_name, @PathVariable ("country") String country) 
+					throws WrongPeriodException, WrongCityException {
 
 		Stats stats = new Stats(new Year(year), new City(city_name, country));
 		JSONArray ja = (JSONArray) stats.MonthlyDataStats();
@@ -50,7 +52,7 @@ public class StatsController {
 			@RequestParam (name = "start_day", defaultValue = "1") int start_day, @RequestParam (name = "start_month", defaultValue = "1") int start_month,
 			@RequestParam (name = "start_year", defaultValue = "2019") int start_year, @RequestParam (name = "end_day", defaultValue = "31")int end_day,
 			@RequestParam (name = "end_month", defaultValue = "12") int end_month, @RequestParam (name = "end_year", defaultValue = "2019") int end_year,
-			@PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
+			@PathVariable ("city_name") String city_name, @PathVariable ("country") String country) throws WrongPeriodException, WrongCityException {
 
 		Stats stats = new Stats(new Period(start_day,start_month,start_year,end_day,end_month,end_year), new City(city_name, country));
 		JSONArray ja = stats.SeasonDataStats();
@@ -59,7 +61,8 @@ public class StatsController {
 
 	@RequestMapping(value = "/stats/seasonally/{year}/{city_name}/{country}", method = RequestMethod.GET)
 	public JSONArray getSeasonallyStats(@PathVariable("year") int year,
-			@PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
+			@PathVariable ("city_name") String city_name, @PathVariable ("country") String country) 
+					throws WrongPeriodException, WrongCityException{
 
 		Stats stats = new Stats(new Year(year), new City(city_name, country));
 		JSONArray ja = (JSONArray) stats.SeasonDataStats();
@@ -67,65 +70,44 @@ public class StatsController {
 	}
 
 	@RequestMapping(value = "/stats/spring/{year}/{city_name}/{country}", method = RequestMethod.GET)
-	public JSONObject SeasonStats_Spring(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
+	public JSONObject SeasonStats_Spring(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country) 
+			throws WrongPeriodException, WrongCityException{
 		SeasonStats stats = new SeasonStats(new Spring(year), new City(city_name, country));
 		JSONObject jo = stats.SeasonDataStats();
 		return jo;
 	}
 
 	@RequestMapping(value = "/stats/summer/{year}/{city_name}/{country}", method = RequestMethod.GET)
-	public JSONObject SeasonStats_Summer(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
+	public JSONObject SeasonStats_Summer(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country) 
+			throws WrongPeriodException, WrongCityException{
 		SeasonStats stats = new SeasonStats(new Summer(year), new City(city_name, country));
 		JSONObject jo = stats.SeasonDataStats();
 		return jo;
 	}
 
 	@RequestMapping(value = "/stats/autumn/{year}/{city_name}/{country}", method = RequestMethod.GET)
-	public JSONObject SeasonStats_Autumn(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
+	public JSONObject SeasonStats_Autumn(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country) 
+			throws WrongPeriodException, WrongCityException{
 		SeasonStats stats = new SeasonStats(new Autumn(year), new City(city_name, country));
 		JSONObject jo = stats.SeasonDataStats();
 		return jo;
 	}
 
 	@RequestMapping(value = "/stats/winter/{year}/{city_name}/{country}", method = RequestMethod.GET)
-	public JSONObject SeasonStats_Winter(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
+	public JSONObject SeasonStats_Winter(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country) 
+			throws WrongPeriodException, WrongCityException{
 		SeasonStats stats = new SeasonStats(new Winter(year), new City(city_name, country));
 		JSONObject jo = stats.SeasonDataStats();
 		return jo;
 	}
 
-	@RequestMapping(value = "/confronto/stats/{month}/{year}/{city_name}/{country}", method = RequestMethod.GET)
-	public JSONArray ConfrontoStats(@PathVariable ("month") int month, @PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
-		Confronto confronto = new Confronto(month, year, new City(city_name, country));
-		JSONArray ja = confronto.ConfrontoStats();
-		return ja;
+	@ExceptionHandler(WrongPeriodException.class)
+	public static String ErrorPage(WrongPeriodException e) {
+		return e.getMex();
 	}
 	
-	@RequestMapping(value = "/confronto/stats/spring/{year}/{city_name}/{country}", method = RequestMethod.GET)
-	public JSONArray ConfrontoStats_Spring(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
-		ConfrontoSeason confronto = new ConfrontoSeason(new Spring(year), new City(city_name, country));
-		JSONArray ja = confronto.ConfrontoStats();
-		return ja;
-	}
-	
-	@RequestMapping(value = "/confronto/stats/summer/{year}/{city_name}/{country}", method = RequestMethod.GET)
-	public JSONArray ConfrontoStats_Summer(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
-		ConfrontoSeason confronto = new ConfrontoSeason(new Summer(year), new City(city_name, country));
-		JSONArray ja = confronto.ConfrontoStats();
-		return ja;
-	}
-	
-	@RequestMapping(value = "/confronto/stats/autumn/{year}/{city_name}/{country}", method = RequestMethod.GET)
-	public JSONArray ConfrontoStats_Autumn(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
-		ConfrontoSeason confronto = new ConfrontoSeason(new Autumn(year), new City(city_name, country));
-		JSONArray ja = confronto.ConfrontoStats();
-		return ja;
-	}
-	
-	@RequestMapping(value = "/confronto/stats/winter/{year}/{city_name}/{country}", method = RequestMethod.GET)
-	public JSONArray ConfrontoStats_Winter(@PathVariable ("year") int year, @PathVariable ("city_name") String city_name, @PathVariable ("country") String country){
-		ConfrontoSeason confronto = new ConfrontoSeason(new Winter(year), new City(city_name, country));
-		JSONArray ja = confronto.ConfrontoStats();
-		return ja;
+	@ExceptionHandler(WrongCityException.class)
+	public static String ErrorPage(WrongCityException e) {
+		return e.getMex();
 	}
 }

@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import it.univpm.progettoOOP.exception.WrongCityException;
+import it.univpm.progettoOOP.exception.WrongPeriodException;
 import it.univpm.progettoOOP.model.City;
 import it.univpm.progettoOOP.model.Period;
 import it.univpm.progettoOOP.stats.Confronto;
@@ -63,7 +65,7 @@ class ConfrontoTest {
 
 	@Test
 	@DisplayName("Corretta Gestione Dati")
-	void gestioneDatiTest() {
+	void gestioneDatiTest() throws WrongPeriodException, WrongCityException {
 		dati_mese.add(7.633333333333334);
 		dati_mese.add(0.33922222222222237);
 		dati_mese.add(8.8);

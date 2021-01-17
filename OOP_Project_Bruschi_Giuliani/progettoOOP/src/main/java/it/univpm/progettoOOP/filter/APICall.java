@@ -13,6 +13,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
+import it.univpm.progettoOOP.exception.WrongCityException;
 import it.univpm.progettoOOP.model.Period;
 
 
@@ -26,7 +27,7 @@ public class APICall implements APICallService {
 	private long start, end;
 	private String url;
 	
-	public APICall(Period period, CityFileReader city) {
+	public APICall (Period period, CityFileReader city) throws WrongCityException {
 		this.period = period;
 		this.lat = city.getLat();
 		this.lon = city.getLon();
@@ -38,11 +39,6 @@ public class APICall implements APICallService {
 	public Period getPeriod() {
 		return this.period;
 	}
-	
-	public void setPeriod(Period period) {
-		this.period = period;
-	}
-	 
 	
 	public long StartDateUnixConverter() {
 		int month = (this.period.getStart_month())-1;
@@ -82,10 +78,10 @@ public class APICall implements APICallService {
 			in.close();
 			ja = (JSONArray) JSONValue.parseWithException(data_filter);
 		} catch (ParseException e) {
-			e.printStackTrace();
-		}	
-		catch (IOException e) {
-			e.printStackTrace();
+//			it.univpm.progettoOOP.controller.APICallController.ErrorPage(e);
+		}
+		catch (IOException e ) {
+//			it.univpm.progettoOOP.controller.APICallController.ErrorPage(e);
 		}
 		
 		return ja;

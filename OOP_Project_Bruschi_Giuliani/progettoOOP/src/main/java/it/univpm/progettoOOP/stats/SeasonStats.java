@@ -3,6 +3,7 @@ package it.univpm.progettoOOP.stats;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import it.univpm.progettoOOP.exception.WrongCityException;
 import it.univpm.progettoOOP.filter.APICall;
 import it.univpm.progettoOOP.filter.CityFileReader;
 import it.univpm.progettoOOP.model.Autumn;
@@ -15,22 +16,22 @@ public class SeasonStats implements SeasonStatsService{
 
 	private JSONArray ja = new JSONArray();
 
-	public SeasonStats(Spring spring, City city) {
+	public SeasonStats(Spring spring, City city) throws WrongCityException {
 		APICall call = new APICall(spring, new CityFileReader(city));
 		this.ja = call.getData();
 	}
 
-	public SeasonStats(Summer summer, City city) {
+	public SeasonStats(Summer summer, City city) throws WrongCityException {
 		APICall call = new APICall(summer, new CityFileReader(city));
 		this.ja = call.getData();
 	}
 
-	public SeasonStats(Autumn autumn, City city) {
+	public SeasonStats(Autumn autumn, City city) throws WrongCityException {
 		APICall call = new APICall(autumn, new CityFileReader(city));
 		this.ja = call.getData();
 	}
 
-	public SeasonStats(Winter winter, City city) {
+	public SeasonStats(Winter winter, City city) throws WrongCityException {
 		APICall call = new APICall(winter, new CityFileReader(city));
 		this.ja = call.getData();
 	}

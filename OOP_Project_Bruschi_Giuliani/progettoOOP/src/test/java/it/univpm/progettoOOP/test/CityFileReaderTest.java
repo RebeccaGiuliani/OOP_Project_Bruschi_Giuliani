@@ -11,6 +11,16 @@ import it.univpm.progettoOOP.exception.WrongCityException;
 import it.univpm.progettoOOP.filter.CityFileReader;
 import it.univpm.progettoOOP.model.City;
 
+/**
+ *<p>
+ *L'unità di test <b>ConfrontoTest</b> è generata per testare i metodi generici della classe <b>CityFileReader</b>.
+ *</p>
+ *
+ * @author RebeccaGiuliani
+ * @author SimoneBruschi
+ *
+ */
+
 class CityFileReaderTest {
 
 	private City city1;
@@ -29,6 +39,14 @@ class CityFileReaderTest {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
+	
+	/**
+	 * test del metodo che ritorna la latidutine essendo Ancona la città di interesse
+	 * 
+	 * @see it.univpm.progettoOOP.filter.CityFileReader#getLat()
+	 * 
+	 * @throws WrongCityException
+	 */
 
 	@Test
 	@DisplayName("Latitudine Corretta Ancona")
@@ -36,6 +54,14 @@ class CityFileReaderTest {
 
 		assertEquals(43.59816, c1.getLat());
 	}
+	
+	/**
+	 * test del metodo che ritorna la latidutine essendo Roma la città di interesse
+	 * 
+	 * @see it.univpm.progettoOOP.filter.CityFileReader#getLat()
+	 * 
+	 * @throws WrongCityException
+	 */
 
 	@Test
 	@DisplayName("Latitudine Corretta Roma")
@@ -43,6 +69,14 @@ class CityFileReaderTest {
 
 		assertEquals(41.894741, c2.getLat());
 	}
+	
+	/**
+	 * test del metodo che ritorna la longitudine essendo Ancona la città di interesse
+	 * 
+	 * @see it.univpm.progettoOOP.filter.CityFileReader#getLon()
+	 * 
+	 * @throws WrongCityException
+	 */
 
 	@Test
 	@DisplayName("Longitudine Corretta Ancona")
@@ -50,6 +84,14 @@ class CityFileReaderTest {
 
 		assertEquals(13.51008, c1.getLon());
 	}
+	
+	/**
+	 * test del metodo che ritorna la longitudine essendo Roma la città di interesse
+	 * 
+	 * @see it.univpm.progettoOOP.filter.CityFileReader#getLon()
+	 * 
+	 * @throws WrongCityException
+	 */
 
 	@Test
 	@DisplayName("Longitudine Corretta Roma")

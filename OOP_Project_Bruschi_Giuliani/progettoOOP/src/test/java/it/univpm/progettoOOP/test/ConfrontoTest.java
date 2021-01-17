@@ -18,6 +18,16 @@ import it.univpm.progettoOOP.model.Period;
 import it.univpm.progettoOOP.stats.Confronto;
 import it.univpm.progettoOOP.stats.Stats;
 
+/**
+ *<p>
+ *L'unità di test <b>ConfrontoTest</b> è generata per testare i metodi generici della classe <b>Confronto</b>.
+ *</p>
+ *
+ * @author RebeccaGiuliani
+ * @author SimoneBruschi
+ *
+ */
+
 class ConfrontoTest {
 	
 	Confronto c1, c2, c3;
@@ -41,6 +51,12 @@ class ConfrontoTest {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
+	
+	/**
+	 * test del metodo che ritorna il valore che identifica il giorno finale del mese, considerando Agosto
+	 * 
+	 * @see it.univpm.progettoOOP.stats.Confronto#end_day(int)
+	 */
 
 	@Test
 	@DisplayName("Corretto giorno finale di Agosto")
@@ -49,6 +65,12 @@ class ConfrontoTest {
 		assertEquals(31, c1.end_day(8));
 	}
 	
+	/**
+	 * test del metodo che ritorna il valore che identifica il giorno finale del mese, considerando Novembre
+	 * 
+	 * @see it.univpm.progettoOOP.stats.Confronto#end_day(int)
+	 */
+	
 	@Test
 	@DisplayName("Corretto giorno finale di Novembre")
 	void end_dayTest2() {
@@ -56,16 +78,29 @@ class ConfrontoTest {
 		assertEquals(30, c2.end_day(11));
 	}
 	
+	/**
+	 * test del metodo che ritorna il valore che identifica il giorno finale del mese, considerando Febbraio
+	 * 
+	 * @see it.univpm.progettoOOP.stats.Confronto#end_day(int)
+	 */
+	
 	@Test
 	@DisplayName("Corretto giorno finale di Febbraio")
 	void end_dayTest3() {
 
 		assertEquals(28, c3.end_day(2));
 	}
+	
+	/**
+	 * test del metodo che inserisce i dati di un mese(media, varianza, max, min) in un vettore
+	 * 
+	 * @see it.univpm.progettoOOP.stats.Confronto#gestioneDati(Stats)
+	 */
 
 	@Test
 	@DisplayName("Corretta Gestione Dati")
 	void gestioneDatiTest() throws WrongPeriodException, WrongCityException {
+		
 		dati_mese.add(7.633333333333334);
 		dati_mese.add(0.33922222222222237);
 		dati_mese.add(8.8);
@@ -74,6 +109,12 @@ class ConfrontoTest {
 		assertEquals(dati_mese, c1.gestioneDati(new Stats(new Period(1,8,2019,31,8,2019), new City("Ancona", "IT"))));
 	}
 
+	/**
+	 * test del metodo che ritorna un JSONArray con 2 JSONObject contenenti i dati del medesimo mese presi in due anni consecutivi
+	 * 
+	 * @see it.univpm.progettoOOP.stats.Confronto#ConfrontoStats()
+	 */
+	
 	@SuppressWarnings("unchecked")
 	@Test
 	@DisplayName("Confronto Stats Corretto")

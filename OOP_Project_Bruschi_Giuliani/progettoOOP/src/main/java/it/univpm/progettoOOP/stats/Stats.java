@@ -16,7 +16,16 @@ import it.univpm.progettoOOP.model.Period;
 import it.univpm.progettoOOP.model.Spring;
 import it.univpm.progettoOOP.model.Summer;
 import it.univpm.progettoOOP.model.Winter;
-
+/**
+ * 
+ * <p>
+ * <b>Classe</b> che calcola le <i>statistiche (media, varianza, max e min)</i> di un determinato <i>periodo</i> e che implementa l'interfaccia <b>StatsService</b>
+ * <p>
+ * 
+ * @author SimoneBruschi
+ * @author RebeccaGiuliani
+ *
+ */
 public class Stats implements StatsService{
 
 	private JSONArray ja = new JSONArray();
@@ -25,12 +34,26 @@ public class Stats implements StatsService{
 	protected Vector<Double> varianzeStagionali = new Vector<Double>();
 	protected Vector<Double> maxStagionali = new Vector<>();
 	protected Vector<Double> minStagionali = new Vector<>();
-
+/**
+ * trova i valori UV della città desiderata in un determinato periodo tramite una chiamata API
+ * 
+ * @param period indica il periodo
+ * @param city indica la città
+ * @throws WrongCityException
+ */
 	public Stats (Period period, City city) throws WrongCityException {
 		APICall call = new APICall(period, new CityFileReader(city));
 		this.ja = call.getData();
 	}
-
+/**
+ * crea un vettore con le mediedie dei mesi nel periodo preso in esame
+ * 
+ * @see it.univpm.progettoOOP.model.Date#getMonth
+ * @see it.univpm.progettoOOP.model.Date#getYear
+ * @see #varianza
+ * 
+ * @return un <code>Vector</code> con le medie mensili 
+ */
 	public Vector<Double> media(){
 		int cont = 0;
 		int year = 0;
@@ -67,7 +90,18 @@ public class Stats implements StatsService{
 		this.varianceValues.add(varianza(somma/cont, month, year));
 		return this.mediaValues;
 	}
-
+/**
+ * ritorna la varianza del mese inserito
+ * 
+ * @param media indica la media del mese
+ * @param month indica il mese
+ * @param year indica l'anno
+ * 
+ * @see it.univpm.progettoOOP.model.Date#getMonth
+ * @see it.univpm.progettoOOP.model.Date#getYear
+ * 
+ * @return un <code>double</code> che indica la varianza
+ */
 	public double varianza(double media, int month, int year) {
 		double varianza0 = 0.0;
 		double varianza = 0.0;
@@ -88,11 +122,22 @@ public class Stats implements StatsService{
 		}//chiusura FOR
 		return varianza;
 	}
-
+/**
+ * ritorna un vettore con la varianza dei vari mesi
+ * 
+ * @return un <code>Vector</code> con la varianza dei vari mesi
+ */
 	public Vector<Double> getVarianza() {
 		return this.varianceValues;
 	}
-
+/**
+ * trova il valore massimo per ogni mese
+ * 
+ * @see it.univpm.progettoOOP.model.Date#getMonth
+ * @see it.univpm.progettoOOP.model.Date#getYear
+ * 
+ * @return un <code>Vector</code> con i valori massimi di ogni mese
+ */
 	public Vector<Double> getMax() {
 		int month = 0;
 		int year = 0;
@@ -124,7 +169,14 @@ public class Stats implements StatsService{
 		max.add(max_value);
 		return max;
 	}
-
+	/**
+	 * trova il valore minimo per ogni mese
+	 * 
+	 * @see it.univpm.progettoOOP.model.Date#getMonth
+	 * @see it.univpm.progettoOOP.model.Date#getYear
+	 * 
+	 * @return un <code>Vector</code> con i valori minimi di ogni mese
+	 */
 	public Vector<Double> getMin() {
 		int month = 0;
 		int year = 0;
@@ -156,7 +208,18 @@ public class Stats implements StatsService{
 		min.add(min_value);
 		return min;
 	}
-
+	/**
+	 * crea un vettore con le medie delle stagioni nel periodo preso in esame
+	 * 
+	 * @see it.univpm.progettoOOP.model.Date#getMonth
+	 * @see it.univpm.progettoOOP.model.Date#getYear
+	 * @see it.univpm.progettoOOP.model.Date#getDay
+	 * @see #varianzaSeason
+	 * @see #MaxSeason
+	 * @see #MinSeason
+	 * 
+	 * @return un <code>Vector</code> con le medie stagionali 
+	 */
 	public Vector<Double> mediaSeason() throws WrongPeriodException {
 		int contSpring = 0;
 		int contSummer = 0;
@@ -245,7 +308,24 @@ public class Stats implements StatsService{
 
 		return medieStagionali;
 	}
-
+	/**
+	 * ritorna la varianza della stagione inserita
+	 * 
+	 * @param media indica la media del mese
+	 * @param period indica la stagione
+	 * 
+	 * @see it.univpm.progettoOOP.model.Date#getMonth
+	 * @see it.univpm.progettoOOP.model.Date#getYear
+	 * @see it.univpm.progettoOOP.model.Date#getDay
+	 * @see it.univpm.progettoOOP.model.Period#getEnd_month
+	 * @see it.univpm.progettoOOP.model.Period#getEnd_year
+	 * @see it.univpm.progettoOOP.model.Period#getEnd_day
+	 * @see it.univpm.progettoOOP.model.Period#getStart_month
+	 * @see it.univpm.progettoOOP.model.Period#getStart_year
+	 * @see it.univpm.progettoOOP.model.Period#getStart_day
+	 * 
+	 * @return un <code>double</code> che indica la varianza
+	 */
 	public double varianzaSeason (double media, Period period) {
 		double varianza0 = 0.0;
 		int cont = 0;	
@@ -265,11 +345,29 @@ public class Stats implements StatsService{
 		}//chiusura FOR
 		return varianza0/cont;
 	}
-
+	/**
+	 * ritorna un vettore con la varianza delle varie stagioni
+	 * 
+	 * @return un <code>Vector</code> con la varianza delle varie stagioni
+	 */
 	public Vector<Double> getVarianzaSeason() {
 		return this.varianzeStagionali;
 	}
-
+	/**
+	 * trova il valore massimo della stagione inserita
+	 * 
+	 * @see it.univpm.progettoOOP.model.Date#getMonth
+	 * @see it.univpm.progettoOOP.model.Date#getYear
+	 * @see it.univpm.progettoOOP.model.Date#getDay
+	 * @see it.univpm.progettoOOP.model.Period#getEnd_month
+	 * @see it.univpm.progettoOOP.model.Period#getEnd_year
+	 * @see it.univpm.progettoOOP.model.Period#getEnd_day
+	 * @see it.univpm.progettoOOP.model.Period#getStart_month
+	 * @see it.univpm.progettoOOP.model.Period#getStart_year
+	 * @see it.univpm.progettoOOP.model.Period#getStart_day
+	 * 
+	 * @return un <code>double</code> con i valori massimi di una stagione
+	 */
 	public double MaxSeason(Period period) {
 		double max = 0;
 
@@ -287,11 +385,29 @@ public class Stats implements StatsService{
 		}
 		return max;
 	}	
-
+	/**
+	 * ritorna il valore massimo per ogni mese
+	 * 
+	 * @return un <code>Vector</code> con i valori massimi di ogni mese
+	 */
 	public Vector<Double> getMaxSeason(){
 		return this.maxStagionali;
 	}
-
+	/**
+	 * trova il valore minimo della stagione inserita
+	 * 
+	 * @see it.univpm.progettoOOP.model.Date#getMonth
+	 * @see it.univpm.progettoOOP.model.Date#getYear
+	 * @see it.univpm.progettoOOP.model.Date#getDay
+	 * @see it.univpm.progettoOOP.model.Period#getEnd_month
+	 * @see it.univpm.progettoOOP.model.Period#getEnd_year
+	 * @see it.univpm.progettoOOP.model.Period#getEnd_day
+	 * @see it.univpm.progettoOOP.model.Period#getStart_month
+	 * @see it.univpm.progettoOOP.model.Period#getStart_year
+	 * @see it.univpm.progettoOOP.model.Period#getStart_day
+	 * 
+	 * @return un <code>double</code> con i valori minimi di una stagione
+	 */
 	public double MinSeason(Period period) {
 		double min = 15.0;
 
@@ -309,11 +425,21 @@ public class Stats implements StatsService{
 		}
 		return min;
 	}
-
+	/**
+	 * ritorna il valore minimo per ogni mese
+	 * 
+	 * @return un <code>Vector</code> con i valori minimi di ogni mese
+	 */
 	public Vector<Double> getMinSeason(){
 		return this.minStagionali;
 	}
-
+/**
+ * prende il valore UV di un determinato giorno dal JSONArray
+ * 
+ * @param date indica la data
+ * 
+ * @return un <code>double</code> con il valore UV
+ */
 	public double getValue(String date) {
 		double value = 0;
 		for(int i = 0; i<this.ja.size(); i++) {
@@ -331,16 +457,14 @@ public class Stats implements StatsService{
 		}
 		return value;
 	}
-
-	public Vector<Date> getDate(){
-		Vector<Date> d= new Vector<>();
-		for(int i=0; i<this.ja.size(); i++) {
-			JSONObject Object =(JSONObject) this.ja.get(i);
-			d.add(new Date((String) Object.get("date_iso")));
-		}
-		return d;
-	}
-
+/**
+ * conta i giorni di ogni mese
+ * 
+ * @see it.univpm.progettoOOP.model.Date#getMonth
+ * @see it.univpm.progettoOOP.model.Date#getYear
+ * 
+ * @return un <code>Vector</code> con il numero dei giorni dei vari mesi
+ */
 	public Vector<Integer> DayCounter(){
 		Vector<Integer> counter= new Vector<>();
 		int cont = 1;
@@ -370,7 +494,15 @@ public class Stats implements StatsService{
 		counter.add(cont);
 		return counter;
 	}
-
+/**
+ * ritorna le statistiche mensili
+ * @see #media
+ * @see #getVarianza
+ * @see #getMax 
+ * @see #getMin 
+ * 
+ * @return un <code>JSONArray</code> composto da <code>JSONObject</code> con le statistiche mensili
+ */
 	@SuppressWarnings("unchecked")
 	public JSONArray MonthlyDataStats(){
 		JSONArray ja = new JSONArray();
@@ -388,7 +520,15 @@ public class Stats implements StatsService{
 
 		return ja;
 	}
-
+	/**
+	 * ritorna le statistiche stagionali
+	 * @see #mediaSeason
+	 * @see #getVarianzaSeason
+	 * @see #getMaxSeason 
+	 * @see #getMinSeason
+	 * 
+	 * @return un <code>JSONArray</code> composto da <code>JSONObject</code> con le statistiche stagionali
+	 */
 	@SuppressWarnings("unchecked")
 	public JSONArray SeasonDataStats() throws WrongPeriodException{
 		JSONArray ja = new JSONArray();

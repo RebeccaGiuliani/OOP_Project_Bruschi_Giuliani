@@ -1,5 +1,5 @@
 # OOP_Project_Bruschi_Giuliani
-#Introduzione
+# Introduzione
 Il programma restituisce lo storico dei valori UV di una determinata città in un determinato periodo. 
 Richiede in ingresso la città d'interesse e il relativo stato (es. Anona, IT) e il periodo che può essere generico oppure una stagione o un anno specicico.
 Una volta ottenuti i dati tramite una chiamata API l'utente può richiedere il calcolo delle statistiche del periodo inserito (media, varianza, max e min) decidendo di filtrarli mensilmente o in maniera stagionale.

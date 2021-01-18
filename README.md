@@ -104,6 +104,7 @@ Abbiamo implementato quattro unità di test:
 # Javadoc
 Qui sotto è riportato l'indirizzo html per visualizzare la Javadoc del programma
 file:///C:/Users/simob/git/OOP_Project_Bruschi_Giuliani/OOP_Project_Bruschi_Giuliani/progettoOOP/doc/index.html
+file:///C:/Users/Utente/Documents/GitHub/OOP_Project_Bruschi_Giuliani/OOP_Project_Bruschi_Giuliani/progettoOOP/doc/index.html
 
 # Autori
 Il programma è stato sviluppato in modo equo da:

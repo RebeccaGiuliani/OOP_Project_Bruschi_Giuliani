@@ -50,8 +50,8 @@ public class StatsController {
 	 * 
 	 * @return <code>JSONArray</code>
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	
 	@RequestMapping(value = "/stats/monthly/{city_name}/{country}", method = RequestMethod.GET)
@@ -76,8 +76,8 @@ public class StatsController {
 	 * 
 	 * @return <code>JSONArray</code>
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 
 	@RequestMapping(value = "/stats/monthly/{year}/{city_name}/{country}", method = RequestMethod.GET)
@@ -105,8 +105,8 @@ public class StatsController {
 	 * 
 	 * @return <code>JSONArray</code>
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 
 	@RequestMapping(value = "/stats/seasonally/{city_name}/{country}", method = RequestMethod.GET)
@@ -131,8 +131,8 @@ public class StatsController {
 	 * 
 	 * @return <code>JSONArray</code>
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 
 	@RequestMapping(value = "/stats/seasonally/{year}/{city_name}/{country}", method = RequestMethod.GET)
@@ -155,8 +155,8 @@ public class StatsController {
 	 * 
 	 * @return <code>JSONObject</code>
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 
 	@RequestMapping(value = "/stats/spring/{year}/{city_name}/{country}", method = RequestMethod.GET)
@@ -177,8 +177,8 @@ public class StatsController {
 	 * 
 	 * @return <code>JSONObject</code>
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 
 	@RequestMapping(value = "/stats/summer/{year}/{city_name}/{country}", method = RequestMethod.GET)
@@ -199,8 +199,8 @@ public class StatsController {
 	 * 
 	 * @return <code>JSONObject</code>
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 
 	@RequestMapping(value = "/stats/autumn/{year}/{city_name}/{country}", method = RequestMethod.GET)
@@ -221,8 +221,8 @@ public class StatsController {
 	 * 
 	 * @return <code>JSONObject</code>
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 
 	@RequestMapping(value = "/stats/winter/{year}/{city_name}/{country}", method = RequestMethod.GET)

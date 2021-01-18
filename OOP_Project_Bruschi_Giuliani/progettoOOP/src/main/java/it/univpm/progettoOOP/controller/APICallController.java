@@ -49,8 +49,8 @@ public class APICallController {
 	 * @return <code>APICall</code>
 	 * @see it.univpm.progettoOOP.filter.APICall
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	@RequestMapping(value = "/data/filter/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall (
@@ -73,8 +73,8 @@ public class APICallController {
 	 * @return <code>APICall</code>
 	 * @see it.univpm.progettoOOP.filter.APICall
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 
 	@RequestMapping(value = "/data/filter/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
@@ -95,8 +95,8 @@ public class APICallController {
 	 * @return <code>APICall</code>
 	 * @see it.univpm.progettoOOP.filter.APICall
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	
 	@RequestMapping(value = "/data/filter/spring/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
@@ -118,8 +118,8 @@ public class APICallController {
 	 * @return <code>APICall</code>
 	 * @see it.univpm.progettoOOP.filter.APICall
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	@RequestMapping(value = "/data/filter/summer/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
 	public APICall apiCall_summer(@PathVariable("year") int year, 
@@ -140,8 +140,8 @@ public class APICallController {
 	 * @return <code>APICall</code>
 	 * @see it.univpm.progettoOOP.filter.APICall
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	
 	@RequestMapping(value = "/data/filter/autumn/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   
@@ -163,8 +163,8 @@ public class APICallController {
 	 * @return <code>APICall</code>
 	 * @see it.univpm.progettoOOP.filter.APICall
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	
 	@RequestMapping(value = "/data/filter/winter/{year}/{city_name}/{city_country}", method = RequestMethod.POST)   

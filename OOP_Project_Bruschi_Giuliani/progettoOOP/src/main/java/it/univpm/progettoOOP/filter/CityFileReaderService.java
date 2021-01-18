@@ -6,7 +6,7 @@ import it.univpm.progettoOOP.exception.WrongCityException;
 
 /**
  * <p>
- * <b>Interfaccia</b> che gestisce le <i>chiamate API</i> 
+ * <b>Interfaccia</b> che permette di leggere il file e estrarne i dati di interesse 
  * <p>
  * 
  * @author RebeccaGiuliani

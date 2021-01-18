@@ -23,6 +23,8 @@ public interface SeasonStatsService {
 	/**
 	 * calcola la varianza dei valori UV della stagione d'interesse
 	 * 
+	 * @param media indica la media stagionale
+	 * 
 	 * @see #getValue
 	 * 
 	 * @return un <code>double</code> che indica la varianza di una stagione

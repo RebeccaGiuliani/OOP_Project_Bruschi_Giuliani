@@ -75,6 +75,8 @@ public interface StatsService {
 	 * @see #MinSeason
 	 * 
 	 * @return un <code>Vector</code> con le medie stagionali 
+	 * 
+	 * @throws WrongPeriodException periodo inserito sbagliato
 	 */
 	public abstract Vector<Double> mediaSeason() throws WrongPeriodException;
 	/**
@@ -105,6 +107,8 @@ public interface StatsService {
 	/**
 	 * trova il valore massimo della stagione inserita
 	 * 
+	 * @param period indica il periodo
+	 * 
 	 * @see it.univpm.progettoOOP.model.Date#getMonth
 	 * @see it.univpm.progettoOOP.model.Date#getYear
 	 * @see it.univpm.progettoOOP.model.Date#getDay
@@ -126,6 +130,8 @@ public interface StatsService {
 	public abstract Vector<Double> getMaxSeason();
 	/**
 	 * trova il valore minimo della stagione inserita
+	 * 
+	 * @param period indica il periodo
 	 * 
 	 * @see it.univpm.progettoOOP.model.Date#getMonth
 	 * @see it.univpm.progettoOOP.model.Date#getYear
@@ -181,6 +187,8 @@ public interface StatsService {
 	 * @see #getMinSeason
 	 * 
 	 * @return un <code>JSONArray</code> composto da <code>JSONObject</code> con le statistiche stagionali
+	 * 
+	 * @throws WrongPeriodException periodo inserito sbagliato
 	 */
 	public abstract JSONArray SeasonDataStats() throws WrongPeriodException;
 	

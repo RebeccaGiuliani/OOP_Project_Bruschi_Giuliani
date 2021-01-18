@@ -53,8 +53,6 @@ public class StatsTest {
 	/**
 	 * test del metodo che calcola la media
 	 * 
-	 * @see it.univpm.OOP.stats.Stats#media
-	 * 
 	 * @throws Exception eccezione
 	 */
 	
@@ -81,8 +79,6 @@ public class StatsTest {
 
 	/**
 	 * test del metodo che calcola la varianza
-	 * 
-	 * @see it.univpm.OOP.stats.Stats#varianza
 	 * 
 	 * @throws IOException Input/Output exception
 	 * @throws WrongCityException città insrita sbagliata

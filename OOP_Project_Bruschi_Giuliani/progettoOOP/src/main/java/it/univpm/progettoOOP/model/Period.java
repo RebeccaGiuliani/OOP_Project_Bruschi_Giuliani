@@ -28,7 +28,8 @@ public class Period {
  * @param end_day indica il giorno di fine
  * @param end_month indica il mese di fine
  * @param end_year indica l'anno di fine
- * @throws WrongPeriodException
+ * 
+ * @throws WrongPeriodException periodo inserito sbagliato
  */
 	public Period(int start_day, int start_month, int start_year, int end_day, int end_month, int end_year) throws WrongPeriodException {
 		this.start_date = start_day+"-"+start_month+"-"+ start_year;
@@ -67,7 +68,7 @@ public class Period {
 	/**
 	 *  permette di scegliere la data di fine
 	 * 
-	 * @param start_date indica la data di fine
+	 * @param end_date indica la data di fine
 	 */
 	public void setEnd(String end_date) {
 		this.end_date = end_date;
@@ -81,9 +82,10 @@ public class Period {
 		return start_day;
 	}
 	/**
-	 *  permette di scegliere il giorno d'inizio
-	 * 
-	 * @param start_date indica il giorno d'inizio
+	 * permette di scegliere il giorno d'inizio
+	 *  
+	 * @param start_day indica il giorno d'inizio
+	 * @throws WrongPeriodException periodo inserito sbagliato
 	 */
 	public void setStart_day(int start_day) throws WrongPeriodException {
 		if(start_day>31 || start_day == 0)throw new WrongPeriodException();
@@ -98,9 +100,10 @@ public class Period {
 		return start_month;
 	}
 	/**
-	 *  permette di scegliere il mese d'inizio
+	 * permette di scegliere il mese d'inizio
 	 * 
-	 * @param start_date indica il mese d'inizio
+	 * @param start_month indica il mese d'inizio
+	 * @throws WrongPeriodException periodo inserito sbagliato
 	 */
 	public void setStart_month(int start_month) throws WrongPeriodException {
 		if(start_month>12 || start_month == 0) throw new WrongPeriodException();
@@ -115,9 +118,10 @@ public class Period {
 		return start_year;
 	}
 	/**
-	 *  permette di scegliere l'anno d'inizio
+	 * permette di scegliere l'anno d'inizio
 	 * 
-	 * @param start_date indica l'anno d'inizio
+	 * @param start_year indica l'anno d'inizio
+	 * @throws WrongPeriodException periodo inserito sbagliato
 	 */
 	public void setStart_year(int start_year) throws WrongPeriodException {
 		if(start_year<2017 || start_day<22 && start_month <= 6 && start_year ==2017) throw new WrongPeriodException();
@@ -132,9 +136,10 @@ public class Period {
 		return end_day;
 	}
 	/**
-	 *  permette di scegliere il giorno di fine
+	 * permette di scegliere il giorno di fine
 	 * 
-	 * @param start_date indica il giorno di fine
+	 * @param end_day indica il giorno di fine
+	 * @throws WrongPeriodException periodo inserito sbagliato
 	 */
 	public void setEnd_day(int end_day) throws WrongPeriodException {
 		if(end_day == 0 || end_day >31) throw new WrongPeriodException();
@@ -149,9 +154,11 @@ public class Period {
 		return end_month;
 	}
 	/**
-	 *  permette di scegliere il mese di fine
+	 * permette di scegliere il mese di fine
 	 * 
-	 * @param start_date indica il mese di fine
+	 * 
+	 * @param end_month indica il mese di fine
+	 * @throws WrongPeriodException periodo inserito sbagliato
 	 */
 	public void setEnd_month(int end_month) throws WrongPeriodException {
 		if(end_month>12 || end_month == 0 ) throw new WrongPeriodException();
@@ -166,9 +173,10 @@ public class Period {
 		return end_year;
 	}
 	/**
-	 *  permette di scegliere l'anno di fine
+	 * permette di scegliere l'anno di fine
 	 * 
-	 * @param start_date indica l'anno di fine
+	 * @param end_year indica l'anno di fine
+	 * @throws WrongPeriodException periodo inserito sbagliato
 	 */
 	public void setEnd_year(int end_year) throws WrongPeriodException {
 		

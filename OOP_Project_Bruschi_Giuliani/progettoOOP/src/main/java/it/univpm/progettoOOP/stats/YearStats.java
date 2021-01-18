@@ -34,7 +34,7 @@ public class YearStats extends Stats{
 	 * 
 	 * @param year indica l'anno
 	 * @param city indica la città
-	 * @throws WrongCityException
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 	public YearStats (Year year, City city) throws WrongCityException {
 		super(year, city);

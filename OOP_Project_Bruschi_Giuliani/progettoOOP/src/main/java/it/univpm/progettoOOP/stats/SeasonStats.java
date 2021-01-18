@@ -39,7 +39,7 @@ public class SeasonStats implements SeasonStatsService{
 	/**
 	 * trova i valori UV della città desiderata in estate tramite una chiamata API
 	 * 
-	 * @param spring indica l'estate
+	 * @param summer indica l'estate
 	 * @param city indica la città
 	 * 
 	 * @throws WrongCityException città insrita sbagliata
@@ -51,7 +51,7 @@ public class SeasonStats implements SeasonStatsService{
 	/**
 	 * trova i valori UV della città desiderata in autuno tramite una chiamata API
 	 * 
-	 * @param spring indica l'autuno
+	 * @param autumn indica l'autunno
 	 * @param city indica la città
 	 * 
 	 * @throws WrongCityException città insrita sbagliata
@@ -63,7 +63,7 @@ public class SeasonStats implements SeasonStatsService{
 	/**
 	 * trova i valori UV della città desiderata in inverno tramite una chiamata API
 	 * 
-	 * @param spring indica l'inverno
+	 * @param winter indica l'inverno
 	 * @param city indica la città
 	 * 
 	 * @throws WrongCityException città insrita sbagliata

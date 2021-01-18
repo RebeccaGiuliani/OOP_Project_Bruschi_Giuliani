@@ -36,11 +36,8 @@ public class CityFileReader implements CityFileReaderService {
 		this.nameCity = city.getName();
 		this.country = city.getCountry();
 	}
-	
-	/**
-	 * 
-	 */
 
+	@Override
 	public JSONArray caricaArray() {
 		JSONParser jsonParser = new JSONParser();
 		JSONArray cityList = null;
@@ -60,11 +57,8 @@ public class CityFileReader implements CityFileReaderService {
 		}
 		return cityList;
 	}
-	
-	/**
-	 * 
-	 */
 
+	@Override
 	public void getCity(JSONArray ja) throws WrongCityException {
 		//Get city object within list
 		for(int i =0; i<ja.size(); i++) {
@@ -83,10 +77,7 @@ public class CityFileReader implements CityFileReaderService {
 		if (lat == 0 && lon == 0) throw new WrongCityException();
 	}
 	
-	/**
-	 * 
-	 */
-	
+	@Override
 	public double getLat() throws WrongCityException {
 		JSONArray ja = new JSONArray();
 		ja = caricaArray();
@@ -94,9 +85,7 @@ public class CityFileReader implements CityFileReaderService {
 		return this.lat;
 	}
 	
-	/**
-	 * 
-	 */
+	@Override
 	public double getLon() throws WrongCityException {
 		JSONArray ja = new JSONArray();
 		ja = caricaArray();

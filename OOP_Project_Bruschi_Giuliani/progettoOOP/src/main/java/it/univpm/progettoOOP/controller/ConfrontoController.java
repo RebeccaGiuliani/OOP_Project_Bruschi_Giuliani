@@ -41,8 +41,8 @@ public class ConfrontoController {
 	 * 
 	 * @return <code>JSONArray</code>
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	
 	@RequestMapping(value = "/confronto/stats/{month}/{year}/{city_name}/{country}", method = RequestMethod.GET)
@@ -62,8 +62,8 @@ public class ConfrontoController {
 	 * 
 	 * @return <code>JSONArray</code>
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	
 	@RequestMapping(value = "/confronto/stats/spring/{year}/{city_name}/{country}", method = RequestMethod.GET)
@@ -83,8 +83,8 @@ public class ConfrontoController {
 	 * 
 	 * @return <code>JSONArray</code>
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	
 	@RequestMapping(value = "/confronto/stats/summer/{year}/{city_name}/{country}", method = RequestMethod.GET)
@@ -104,8 +104,8 @@ public class ConfrontoController {
 	 * 
 	 * @return <code>JSONArray</code>
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	
 	@RequestMapping(value = "/confronto/stats/autumn/{year}/{city_name}/{country}", method = RequestMethod.GET)
@@ -125,8 +125,8 @@ public class ConfrontoController {
 	 * 
 	 * @return <code>JSONArray</code>
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato 
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	
 	@RequestMapping(value = "/confronto/stats/winter/{year}/{city_name}/{country}", method = RequestMethod.GET)

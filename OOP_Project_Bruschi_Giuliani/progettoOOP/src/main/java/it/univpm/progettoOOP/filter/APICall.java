@@ -44,7 +44,7 @@ public class APICall implements APICallService {
 	 * @param period indica il periodo di interesse
 	 * @param city indica la città di interesse
 	 * 
-	 * @throws WrongCityException
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	
 	public APICall (Period period, CityFileReader city) throws WrongCityException {
@@ -66,9 +66,7 @@ public class APICall implements APICallService {
 		return this.period;
 	}
 	
-	/**
-	 * override del metodo definito nell'interfaccia
-	 */
+	@Override
 	public long StartDateUnixConverter() {
 		int month = (this.period.getStart_month())-1;
 		GregorianCalendar cal = new GregorianCalendar(this.period.getStart_year(), month, this.period.getStart_day(), hour, min);
@@ -77,10 +75,7 @@ public class APICall implements APICallService {
 		return start;
 	}
 	
-	/**
-	 * override del metodo definito nell'interfaccia
-	 */
-	
+	@Override
 	public long EndDateUnixConverter() {
 		int month = (this.period.getEnd_month())-1;
 		GregorianCalendar cal = new GregorianCalendar(this.period.getEnd_year(), month, this.period.getEnd_day(), hour, min);
@@ -89,10 +84,7 @@ public class APICall implements APICallService {
 		return end;
 	}
 	
-	/**
-	 * override del metodo definito nell'interfaccia
-	 */
-	
+	@Override
 	public JSONArray getData() {   
 
 		String api = this.url;
@@ -115,10 +107,10 @@ public class APICall implements APICallService {
 			in.close();
 			ja = (JSONArray) JSONValue.parseWithException(data_filter);
 		} catch (ParseException e) {
-//			it.univpm.progettoOOP.controller.APICallController.ErrorPage(e);
+			e.printStackTrace();
 		}
 		catch (IOException e ) {
-//			it.univpm.progettoOOP.controller.APICallController.ErrorPage(e);
+			e.printStackTrace();
 		}
 		
 		return ja;

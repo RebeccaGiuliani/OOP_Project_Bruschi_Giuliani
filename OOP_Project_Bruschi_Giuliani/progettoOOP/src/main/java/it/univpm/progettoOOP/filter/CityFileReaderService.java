@@ -29,7 +29,7 @@ public interface CityFileReaderService {
 	 * 
 	 * @param ja indica il JSONArray copiato dal file
 	 * 
-	 * @throws WrongCityException
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	
 	public abstract void getCity(JSONArray ja) throws WrongCityException;
@@ -39,7 +39,7 @@ public interface CityFileReaderService {
 	 * 
 	 * @return <code>double</code>
 	 * 
-	 * @throws WrongCityException
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	
 	public abstract double getLat() throws WrongCityException;
@@ -49,7 +49,7 @@ public interface CityFileReaderService {
 	 * 
 	 * @return <code>double</code>
 	 * 
-	 * @throws WrongCityException
+	 * @throws WrongCityException città inserita sbagliata
 	 */
 	
 	public abstract double getLon() throws WrongCityException;

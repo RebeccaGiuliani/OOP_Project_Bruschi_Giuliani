@@ -23,7 +23,7 @@ localhost:8080
 # Rotte relative ai Filter
 ![filter](https://user-images.githubusercontent.com/75033190/104925405-1613ca80-599f-11eb-8283-c5e0d08fdd81.PNG)
 
-Es. /data/filter/Ancona/IT
+<b>Es.</b> /data/filter/Ancona/IT
 
 Se non inserisco informazioni riguardanti il periodo considera di default tutto l'anno 2019
 
@@ -60,6 +60,24 @@ Restituisce le statistiche in estate nel 2018 e nell'anno precedente
 
 ![seas Conf](https://user-images.githubusercontent.com/75033311/104926923-12814300-59a1-11eb-9952-2fd8cae97e9f.png)
 
+# Gestione Eccezioni
+Abbiamo gestito le eccezioni creando due nuove classi: <b>WrongPeriodException</b> e <b>WrongCityException</b>.
+
+
+La seconda eccezione viene generata quando l'utente inserisce una città non presente nell file di riferimento(tale file è presente nella repository) o scrive in maniera errata il nome della città o la sigla dello stato. 
+
+<b><i>ATTENZIONE</i></b>: I nomi delle città devono essere scritti in inglese. Ad esempio, se si inserisce "Roma" il programma genererà l'eccezione <b>WrongCityException</b> e stamperà a video <i>"ERR: La città o lo stato inseriti non sono validi!"</i>.
+
+<i>Esempi:</i> 
+1. In questo caso Ancona è stata scritta in modo errato 
+
+![eccezioni](https://user-images.githubusercontent.com/75033190/104930514-89203f80-59a5-11eb-8ce2-97f9618216b1.PNG)
+
+2. In questo caso la sigla dello stato italiano è stata scritta in modo errato 
+
+![eccezioni2](https://user-images.githubusercontent.com/75033190/104930553-94736b00-59a5-11eb-9dea-b5f98eeb791c.PNG)
+
 # Autori
 Il programma è stato sviluppato in modo equo da:
+
 @ RebeccaGiuliani & @ SimoneBruschi

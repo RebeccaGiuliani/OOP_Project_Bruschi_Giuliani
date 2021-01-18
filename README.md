@@ -18,7 +18,8 @@ Sequence Diagram
 
 # Rotte
 Le richieste che l'utente può effettuare tramite Postman devono essere effettuate all'indirizzo
-localhost:8080
+localhost:8080.
+Nel caso in cui l'utente voglia analizzare un periodo generico, diverso da quello di default, dovrà inserire come parametri il giorno, il mese e l'anno d'inizio e di fine dello stesso.
 
 # Rotte relative ai Filter
 ![filter](https://user-images.githubusercontent.com/75033190/104925405-1613ca80-599f-11eb-8283-c5e0d08fdd81.PNG)

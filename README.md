@@ -26,7 +26,7 @@ Nel caso in cui l'utente voglia analizzare un periodo generico, diverso da quell
 
 <i>Esempio</i>
 
-![Cattura](https://user-images.githubusercontent.com/75033190/104933135-cdf9a580-59a8-11eb-885e-2dfc9610c8a4.PNG)
+![Cattura](https://user-images.githubusercontent.com/75033190/104933833-ace58480-59a9-11eb-83b5-58b163ab965c.PNG)
 
 # Rotte relative ai Filter
 ![filter](https://user-images.githubusercontent.com/75033190/104932105-90484d00-59a7-11eb-8b92-cede2bcdaf11.PNG)

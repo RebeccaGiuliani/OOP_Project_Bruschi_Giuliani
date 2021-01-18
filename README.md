@@ -63,8 +63,9 @@ Restituisce le statistiche in estate nel 2018 e nell'anno precedente
 # Gestione Eccezioni
 Abbiamo gestito le eccezioni creando due nuove classi: <b>WrongPeriodException</b> e <b>WrongCityException</b>.
 
-Nella data di fine il giorno inserito è 32, chiaramente è un valore non accettabile
-<b>ATTENZIONE!</b> Lo stesso errore viene ritornato se il giorno è =0 o >31, se il mese è =0 o >12, o se l'anno è < 2017
+La prima eccezione viene generate quando l'utente inserisce dei parametri riguardanti il tempo in maniera errata (se il <i>giorno</i> è =0 o >31, se il mese è =0 o >12, o se l'anno è < 2017).
+
+<b>ATTENZIONE!</b>: In questo caso nella data di fine il giorno inserito è 32, chiaramente è un valore non accettabile e verrà stampato a video il messaggio: <i>"ERR: Il periodo inserito non è valido!"</i>. 
 
 ![err](https://user-images.githubusercontent.com/75033311/104929217-e3200580-59a3-11eb-9a48-5ce94f548934.png)
 

@@ -4,14 +4,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * 
- * @author simob
+ * @author SimoneBruschi
+ * @author RebeccaGiuliani
  *
  */
 @SpringBootApplication
 public class ProgettoOopApplication {
 /**
  * 
- * @param args indica non lo so
+ * @param args indica gli argomenti del main
  */
 	public static void main(String[] args) {
 		SpringApplication.run(ProgettoOopApplication.class, args);

@@ -22,6 +22,11 @@ localhost:8080
 
 Rotte relative ai Filter
 ![filter](https://user-images.githubusercontent.com/75033190/104923399-4c037f80-599c-11eb-8aea-cdd67155b4fe.PNG)
+# 1. /data/filter/Ancona/IT
+Se non inserisco informazioni riguardanti il periodo considera di default tutto l'anno 2019
+
+![data_filter](https://user-images.githubusercontent.com/75033311/104924493-cc76b000-599d-11eb-85c8-7be5f100a15f.png)
+
 
 Rotte relative alle Stats
 ![stats](https://user-images.githubusercontent.com/75033190/104923049-cf70a100-599b-11eb-85dc-5251f1f3d5c7.PNG)

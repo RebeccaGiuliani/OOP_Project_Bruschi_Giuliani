@@ -30,6 +30,8 @@ Se non inserisco informazioni riguardanti il periodo considera di default tutto 
 
 Rotte relative alle Stats
 ![stats](https://user-images.githubusercontent.com/75033190/104923049-cf70a100-599b-11eb-85dc-5251f1f3d5c7.PNG)
+# 2. /stats/monthly/Ancona/IT
+![stat_monthly](https://user-images.githubusercontent.com/75033311/104925408-1613ca80-599f-11eb-999f-6063631f3689.png)
 
 Rotte relative ai Confronti
 ![confronto](https://user-images.githubusercontent.com/75033190/104923149-f5964100-599b-11eb-8de8-3ad46f12da77.PNG)

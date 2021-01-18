@@ -63,6 +63,9 @@ Restituisce le statistiche in estate nel 2018 e nell'anno precedente
 # Gestione Eccezioni
 Abbiamo gestito le eccezioni creando due nuove classi: <b>WrongPeriodException</b> e <b>WrongCityException</b>.
 
+Nella data di fine il giorno inserito è 32, chiaramente è un valore non accettabile
+<b>ATTENZIONE!</b> Lo stesso errore viene ritornato se il giorno è =0 o >31, se il mese è =0 o >12, o se l'anno è < 2017
+
 ![err](https://user-images.githubusercontent.com/75033311/104929217-e3200580-59a3-11eb-9a48-5ce94f548934.png)
 
 La seconda eccezione viene generata quando l'utente inserisce una città non presente nell file di riferimento(tale file è presente nella repository) o scrive in maniera errata il nome della città o la sigla dello stato. 

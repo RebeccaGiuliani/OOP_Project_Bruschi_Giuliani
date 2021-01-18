@@ -55,6 +55,8 @@ Restituisce le statistiche del mese di agosto nel 2018 e nell'anno precedente
 ![conf](https://user-images.githubusercontent.com/75033311/104925967-d0a3cd00-599f-11eb-9dc2-b49b8c8d57db.png)
 
 # Autori
+Lavoro svolto equamente da:
+
 @ RebeccaGiuliani
 
 @ SimoneBruschi

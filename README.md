@@ -61,5 +61,5 @@ Restituisce le statistiche in estate nel 2018 e nell'anno precedente
 ![seas Conf](https://user-images.githubusercontent.com/75033311/104926923-12814300-59a1-11eb-9952-2fd8cae97e9f.png)
 
 # Autori
-Lavoro svolto equamente da:
+Il programma è stato sviluppato in modo equo da:
 @ RebeccaGiuliani & @ SimoneBruschi

@@ -11,16 +11,35 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * <p>
+ * <b>Classe</b> che implementa l'interfaccia <b>CityFileReaderService</b> e permette di leggere il file e estrarne i dati di interesse 
+ * <p>
+ * 
+ * @see it.univpm.progettoOOP.filter.CityFileReaderService
+ * 
+ * @author RebeccaGiuliani
+ * @author SimoneBruschi
+ */
 public class CityFileReader implements CityFileReaderService {
 
 	private static String name = "city.list.json";	
 	private double lat, lon;
 	private String nameCity, country;
 
+	/**
+	 * costruttore
+	 * 
+	 * @param city indica la città di interesse
+	 */
 	public CityFileReader(City city) {
 		this.nameCity = city.getName();
 		this.country = city.getCountry();
 	}
+	
+	/**
+	 * 
+	 */
 
 	public JSONArray caricaArray() {
 		JSONParser jsonParser = new JSONParser();
@@ -41,6 +60,10 @@ public class CityFileReader implements CityFileReaderService {
 		}
 		return cityList;
 	}
+	
+	/**
+	 * 
+	 */
 
 	public void getCity(JSONArray ja) throws WrongCityException {
 		//Get city object within list
@@ -59,12 +82,21 @@ public class CityFileReader implements CityFileReaderService {
 		} 
 		if (lat == 0 && lon == 0) throw new WrongCityException();
 	}
+	
+	/**
+	 * 
+	 */
+	
 	public double getLat() throws WrongCityException {
 		JSONArray ja = new JSONArray();
 		ja = caricaArray();
 		getCity(ja);
 		return this.lat;
 	}
+	
+	/**
+	 * 
+	 */
 	public double getLon() throws WrongCityException {
 		JSONArray ja = new JSONArray();
 		ja = caricaArray();

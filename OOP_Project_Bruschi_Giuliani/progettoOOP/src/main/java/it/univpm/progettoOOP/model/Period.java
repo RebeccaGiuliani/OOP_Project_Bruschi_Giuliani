@@ -120,7 +120,7 @@ public class Period {
 	 * @param start_date indica l'anno d'inizio
 	 */
 	public void setStart_year(int start_year) throws WrongPeriodException {
-		if(start_year<2017) throw new WrongPeriodException();
+		if(start_year<2017 || start_day<22 && start_month <= 6 && start_year ==2017) throw new WrongPeriodException();
 		else this.start_year = start_year;
 	}
 	/**
@@ -172,7 +172,7 @@ public class Period {
 	 */
 	public void setEnd_year(int end_year) throws WrongPeriodException {
 		
-		if(end_year<2017) throw new WrongPeriodException();
+		if(end_year<2017 || end_day<22 && end_month <= 6 && end_year ==2017) throw new WrongPeriodException();
 		else this.end_year = end_year;
 		
 	}

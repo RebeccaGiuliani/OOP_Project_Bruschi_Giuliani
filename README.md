@@ -20,17 +20,17 @@ Sequence Diagram
 Le richieste che l'utente può effettuare tramite Postman devono essere effettuate all'indirizzo
 localhost:8080
 
-Rotte relative ai Filter
+# Rotte relative ai Filter
 ![filter](https://user-images.githubusercontent.com/75033190/104925405-1613ca80-599f-11eb-8283-c5e0d08fdd81.PNG)
 
-1. /data/filter/Ancona/IT
+Es. /data/filter/Ancona/IT
 
 Se non inserisco informazioni riguardanti il periodo considera di default tutto l'anno 2019
 
 ![data_filter](https://user-images.githubusercontent.com/75033311/104925036-90901a80-599e-11eb-94ba-76c73c4e3a33.png)
 
 
-Rotte relative alle Stats
+# Rotte relative alle Stats
 ![stats](https://user-images.githubusercontent.com/75033190/104923049-cf70a100-599b-11eb-85dc-5251f1f3d5c7.PNG)
 
 1. /stats/monthly/Ancona/IT
@@ -45,20 +45,21 @@ Restituisce le statistiche della primavera 2019 di Ancona
 
 ![esempio stats](https://user-images.githubusercontent.com/75033190/104926577-a272bd00-59a0-11eb-82a1-45fe97b69477.PNG)
 
-Rotte relative ai Confronti
+# Rotte relative ai Confronti
 ![confronto](https://user-images.githubusercontent.com/75033190/104923149-f5964100-599b-11eb-8de8-3ad46f12da77.PNG)
 
-es. /confronto/stats/8/2018/Ancona/IT
+1. /confronto/stats/8/2018/Ancona/IT
 
 Restituisce le statistiche del mese di agosto nel 2018 e nell'anno precedente
 
 ![conf](https://user-images.githubusercontent.com/75033311/104925967-d0a3cd00-599f-11eb-9dc2-b49b8c8d57db.png)
+
+2. /confronto/stats/summer/2018/Ancona/IT
 
 Restituisce le statistiche in estate nel 2018 e nell'anno precedente
 
 ![seas Conf](https://user-images.githubusercontent.com/75033311/104926923-12814300-59a1-11eb-9952-2fd8cae97e9f.png)
 
 # Autori
-@ RebeccaGiuliani
-
-@ SimoneBruschi
+Lavoro svolto equamente da:
+@ RebeccaGiuliani & @ SimoneBruschi

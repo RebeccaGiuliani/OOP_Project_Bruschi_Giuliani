@@ -25,7 +25,7 @@ Rotte relative ai Filter
 # 1. /data/filter/Ancona/IT
 Se non inserisco informazioni riguardanti il periodo considera di default tutto l'anno 2019
 
-![data_filter](https://user-images.githubusercontent.com/75033311/104924493-cc76b000-599d-11eb-85c8-7be5f100a15f.png)
+![data_filter](https://user-images.githubusercontent.com/75033311/104925036-90901a80-599e-11eb-94ba-76c73c4e3a33.png)
 
 
 Rotte relative alle Stats

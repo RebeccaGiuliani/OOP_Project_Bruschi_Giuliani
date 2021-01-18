@@ -101,10 +101,6 @@ Abbiamo implementato quattro unità di test:
 3. <b>StatsTest</b> per testare la classe <i>StatsTest</i>, che definisce le statistiche mensili e stagionali predendo i dati dal JSONArray restituito dalla APICall
 4. <b>ConfrontoTest</b> per testare la classe <i>Confronto</i>, che restituisce un JSONArray composto da due JSONObject le statistiche prese in due anni consecutivi di un medesimo periodo
 
-# Javadoc
-Qui sotto è riportato l'indirizzo html per visualizzare la Javadoc del programma
-file:///C:/Users/simob/git/OOP_Project_Bruschi_Giuliani/OOP_Project_Bruschi_Giuliani/progettoOOP/doc/index.html
-
 # Autori
 Il programma è stato sviluppato in modo equo da:
 

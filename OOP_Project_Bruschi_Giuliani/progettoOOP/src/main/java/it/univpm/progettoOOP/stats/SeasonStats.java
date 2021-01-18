@@ -68,13 +68,7 @@ public class SeasonStats implements SeasonStatsService{
 		APICall call = new APICall(winter, new CityFileReader(city));
 		this.ja = call.getData();
 	}
-    /**
-     * calcola la media dei valori UV della stagione d'interesse
-     * 
-     * @see #getValue
-     * 
-     * @return un <code>double</code> che indica la media di una stagione
-     */
+    
 	public double media() {
 		double somma = 0;
 		int cont = 0;
@@ -87,13 +81,7 @@ public class SeasonStats implements SeasonStatsService{
 		}
 		return somma/cont;
 	}
-	/**
-	 * calcola la varianza dei valori UV della stagione d'interesse
-	 * 
-	 * @see #getValue
-	 * 
-	 * @return un <code>double</code> che indica la varianza di una stagione
-	 */
+	
 	public double getVarianza(double media) {
 		double varianza0 = 0.0;
 		int cont = 0;	
@@ -108,13 +96,7 @@ public class SeasonStats implements SeasonStatsService{
 		}//chiusura FOR
 		return varianza0/cont;
 	}
-	/**
-	 * calcola il massimo dei valori UV della stagione d'interesse
-	 * 
-	 * @see #getValue
-	 * 
-	 * @return un <code>double</code> che indica il massimo di una stagione
-	 */
+	
 	public double getMax() {
 		double max = 0.0;
 
@@ -125,13 +107,7 @@ public class SeasonStats implements SeasonStatsService{
 		}
 		return max;
 	}
-	/**
-	 * calcola il minimo dei valori UV della stagione d'interesse
-	 * 
-	 * @see #getValue
-	 * 
-	 * @return un <code>double</code> che indica il minimo di una stagione
-	 */
+	
 	public double getMin() {
 		double min = 15.0;
 		for(int i = 0; i<this.ja.size(); i++) {
@@ -141,13 +117,7 @@ public class SeasonStats implements SeasonStatsService{
 		}
 		return min;
 	}
-	/**
-	 * prende il valore UV di un determinato giorno dal JSONArray
-	 * 
-	 * @param date indica la data
-	 * 
-	 * @return un <code>double</code> con il valore UV
-	 */
+	
 	public double getValue(String date) {
 		double value = 0;
 		for(int i = 0; i<this.ja.size(); i++) {
@@ -165,15 +135,7 @@ public class SeasonStats implements SeasonStatsService{
 		}
 		return value;
 	}
-	/**
-	 * ritorna le statistiche della stagione 
-	 * @see #media
-	 * @see #getVarianza
-	 * @see #getMax 
-	 * @see #getMin 
-	 * 
-	 * @return un <code>JSONObject</code> con le statistiche
-	 */
+	
 	@SuppressWarnings("unchecked")
 	public JSONObject SeasonDataStats(){
 		JSONObject jo = new JSONObject();

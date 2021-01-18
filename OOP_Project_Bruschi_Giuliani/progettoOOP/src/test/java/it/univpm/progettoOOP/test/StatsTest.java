@@ -34,10 +34,18 @@ public class StatsTest {
 	private double mediaValue, varValue;
 	private APICall call;
 
+	/**
+	 * 
+	 * @throws Exception eccezione
+	 */
 	@BeforeEach
 	void setUp() throws Exception {
 	}
 
+	/**
+	 * 
+	 * @throws Exception eccezione
+	 */
 	@AfterEach
 	void tearDown() throws Exception {
 	}
@@ -45,9 +53,7 @@ public class StatsTest {
 	/**
 	 * test del metodo che calcola la media
 	 * 
-	 * @see it.univpm.OOP.stats.Stats#media
-	 * 
-	 * @throws Exception
+	 * @throws Exception eccezione
 	 */
 	
 	@Test
@@ -74,10 +80,8 @@ public class StatsTest {
 	/**
 	 * test del metodo che calcola la varianza
 	 * 
-	 * @see it.univpm.OOP.stats.Stats#varianza
-	 * 
-	 * @throws IOException
-	 * @throws WrongCityException
+	 * @throws IOException Input/Output exception
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 
 	@Test
@@ -106,8 +110,8 @@ public class StatsTest {
 	 * 
 	 * @see it.univpm.progettoOOP.stats.Stats#getMax()
 	 * 
-	 * @throws IOException
-	 * @throws WrongCityException
+	 * @throws IOException Input/Output exception
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 	
 	@Test
@@ -135,8 +139,8 @@ public class StatsTest {
 	 * 
 	 * @see it.univpm.progettoOOP.stats.Stats#getMin()
 	 * 
-	 * @throws IOException
-	 * @throws WrongCityException
+	 * @throws IOException Input/Output exception
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 	
 	@Test

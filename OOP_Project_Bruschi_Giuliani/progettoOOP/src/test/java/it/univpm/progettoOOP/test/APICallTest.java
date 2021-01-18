@@ -29,7 +29,10 @@ class APICallTest {
 	private APICall api_call, api_call2;
 	private JSONArray ja;
 	private JSONObject jo1, jo2;
-	
+	/**
+	 * 
+	 * @throws Exception eccezione
+	 */
 	@BeforeEach
 	void setUp() throws Exception {
 		api_call = new APICall(new Period(1,1,2019,31,12,2019), new CityFileReader(new City("Ancona", "IT")));
@@ -39,6 +42,10 @@ class APICallTest {
 		jo2 = new JSONObject();
 	}
 
+	/**
+	 * 
+	 * @throws Exception eccezione
+	 */
 	@AfterEach
 	void tearDown() throws Exception {
 	}

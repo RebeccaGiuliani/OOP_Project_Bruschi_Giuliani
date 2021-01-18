@@ -20,7 +20,7 @@ public class Winter extends Period{
 	 * costruzione dell'oggetto inverno
 	 * 
 	 * @param year indica l'anno
-	 * @throws WrongPeriodException
+	 * @throws WrongPeriodException periodo inserito sbagliato
 	 */	
 	public Winter (int year) throws WrongPeriodException {   //per l'inverno prendiamo in considerazione l'anno d'inizio
 		super (start_day, start_month, year, end_day, end_month, year+1);

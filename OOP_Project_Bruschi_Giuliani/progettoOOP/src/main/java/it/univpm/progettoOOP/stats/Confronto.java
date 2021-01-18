@@ -28,21 +28,16 @@ public class Confronto implements ConfrontoService {
  * @param year indica l'anno
  * @param city indica la città
  * 
- * @throws WrongPeriodException
- * @throws WrongCityException
+ * @throws WrongPeriodException periodo inserito sbagliato
+ * @throws WrongCityException città insrita sbagliata
  */
 	public Confronto (int month, int year ,City city) throws WrongPeriodException, WrongCityException {
 		this.stats = new Stats(new Period(start_day, month, year, end_day(month), month, year),city);
 		this.stats_prec = new Stats(new Period(start_day, month, year-1, end_day(month), month, year-1), city);
 		this.year = year;
 	}
-/**
- * restituisce il numero dei giorni del mese inserito
- * 
- * @param month indica il mese
- * 
- * @return un <code>int</code> con il numero dei giorni del mese
- */
+
+	@Override
 	public int end_day(int month) {
 		int end_day = 0;
 
@@ -64,18 +59,8 @@ public class Confronto implements ConfrontoService {
 		}
 		return end_day;
 	}
-/**
- * crea il vettore con le statiche del mese d'interesse
- * 
- * @param s indica un oggetto Stats
- * 
- * @see Stats#media 
- * @see Stats#getVarianza
- * @see Stats#getMax
- * @see Stats#getMin 
- * 
- * @return un <code>Vector</code> con le statistiche del mese preso in esame
- */
+
+	@Override
 	public Vector<Double> gestioneDati(Stats s) {
 		Vector<Double> mese = new Vector<Double>();
 
@@ -85,21 +70,13 @@ public class Confronto implements ConfrontoService {
 		mese.add(s.getMin().get(0));
 		return mese;
 	}
-/**
- * crea il vettore con le statiche della stagione d'interesse
- * 
- * @param s indica un oggetto Stats
- * 
- * @return un <code>Vector</code> con le statistiche della stagione presa in esame
- */
+
+	@Override
 	public Vector<Double> gestioneDati(SeasonStats s){
 		return new Vector<>();
 	}
-/**
- * ritorna un JSONArray con le statistiche del mese/stagione di due anni consecutivi
- * 
- * @return un <code>JSONAray</code> contenente due <code>JSONObject</code> con le statistiche del mese/stagione di due anni consecutivi
- */
+
+	@Override
 	@SuppressWarnings("unchecked")
 	public JSONArray ConfrontoStats(){
 		Vector<Double> mese_prec = gestioneDati(this.stats_prec);

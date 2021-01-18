@@ -16,6 +16,17 @@ import org.json.simple.parser.ParseException;
 import it.univpm.progettoOOP.exception.WrongCityException;
 import it.univpm.progettoOOP.model.Period;
 
+/**
+ * <p>
+ * <b>Classe</b> che implementa l'interfaccia <b>APICallService</b> e permette di gestire le <i>chiamate API</i> 
+ * <p>
+ * 
+ *  * @see it.univpm.progettoOOP.filter.APICallService
+ * 
+ * @author RebeccaGiuliani
+ * @author SimoneBruschi
+ *
+ */
 
 public class APICall implements APICallService {
 
@@ -27,6 +38,15 @@ public class APICall implements APICallService {
 	private long start, end;
 	private String url;
 	
+	/**
+	 * Costruttore della classe
+	 * 
+	 * @param period indica il periodo di interesse
+	 * @param city indica la città di interesse
+	 * 
+	 * @throws WrongCityException città inserita sbagliata
+	 */
+	
 	public APICall (Period period, CityFileReader city) throws WrongCityException {
 		this.period = period;
 		this.lat = city.getLat();
@@ -36,10 +56,17 @@ public class APICall implements APICallService {
 		this.url = "http://api.openweathermap.org/data/2.5/uvi/history?lat="+ this.lat +"&lon="+ this.lon +"&start="+ this.start +"&end="+ this.end +"&appid="+appid;
 	}
 	
+	/**
+	 * metodo che ritorna il valore del periodo
+	 * 
+	 * @return <code>Period</code>
+	 */
+	
 	public Period getPeriod() {
 		return this.period;
 	}
 	
+	@Override
 	public long StartDateUnixConverter() {
 		int month = (this.period.getStart_month())-1;
 		GregorianCalendar cal = new GregorianCalendar(this.period.getStart_year(), month, this.period.getStart_day(), hour, min);
@@ -48,6 +75,7 @@ public class APICall implements APICallService {
 		return start;
 	}
 	
+	@Override
 	public long EndDateUnixConverter() {
 		int month = (this.period.getEnd_month())-1;
 		GregorianCalendar cal = new GregorianCalendar(this.period.getEnd_year(), month, this.period.getEnd_day(), hour, min);
@@ -56,6 +84,7 @@ public class APICall implements APICallService {
 		return end;
 	}
 	
+	@Override
 	public JSONArray getData() {   
 
 		String api = this.url;
@@ -78,10 +107,10 @@ public class APICall implements APICallService {
 			in.close();
 			ja = (JSONArray) JSONValue.parseWithException(data_filter);
 		} catch (ParseException e) {
-//			it.univpm.progettoOOP.controller.APICallController.ErrorPage(e);
+			e.printStackTrace();
 		}
 		catch (IOException e ) {
-//			it.univpm.progettoOOP.controller.APICallController.ErrorPage(e);
+			e.printStackTrace();
 		}
 		
 		return ja;

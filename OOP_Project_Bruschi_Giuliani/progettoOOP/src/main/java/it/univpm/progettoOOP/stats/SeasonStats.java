@@ -29,7 +29,8 @@ public class SeasonStats implements SeasonStatsService{
 	 * 
 	 * @param spring indica la primavera
 	 * @param city indica la città
-	 * @throws WrongCityException
+	 * 
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 	public SeasonStats(Spring spring, City city) throws WrongCityException {
 		APICall call = new APICall(spring, new CityFileReader(city));
@@ -38,9 +39,10 @@ public class SeasonStats implements SeasonStatsService{
 	/**
 	 * trova i valori UV della città desiderata in estate tramite una chiamata API
 	 * 
-	 * @param spring indica l'estate
+	 * @param summer indica l'estate
 	 * @param city indica la città
-	 * @throws WrongCityException
+	 * 
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 	public SeasonStats(Summer summer, City city) throws WrongCityException {
 		APICall call = new APICall(summer, new CityFileReader(city));
@@ -49,9 +51,10 @@ public class SeasonStats implements SeasonStatsService{
 	/**
 	 * trova i valori UV della città desiderata in autuno tramite una chiamata API
 	 * 
-	 * @param spring indica l'autuno
+	 * @param autumn indica l'autunno
 	 * @param city indica la città
-	 * @throws WrongCityException
+	 * 
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 	public SeasonStats(Autumn autumn, City city) throws WrongCityException {
 		APICall call = new APICall(autumn, new CityFileReader(city));
@@ -60,21 +63,17 @@ public class SeasonStats implements SeasonStatsService{
 	/**
 	 * trova i valori UV della città desiderata in inverno tramite una chiamata API
 	 * 
-	 * @param spring indica l'inverno
+	 * @param winter indica l'inverno
 	 * @param city indica la città
-	 * @throws WrongCityException
+	 * 
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 	public SeasonStats(Winter winter, City city) throws WrongCityException {
 		APICall call = new APICall(winter, new CityFileReader(city));
 		this.ja = call.getData();
 	}
-    /**
-     * calcola la media dei valori UV della stagione d'interesse
-     * 
-     * @see #getValue
-     * 
-     * @return un <code>double</code> che indica la media di una stagione
-     */
+    
+	@Override
 	public double media() {
 		double somma = 0;
 		int cont = 0;
@@ -87,13 +86,8 @@ public class SeasonStats implements SeasonStatsService{
 		}
 		return somma/cont;
 	}
-	/**
-	 * calcola la varianza dei valori UV della stagione d'interesse
-	 * 
-	 * @see #getValue
-	 * 
-	 * @return un <code>double</code> che indica la varianza di una stagione
-	 */
+	
+	@Override
 	public double getVarianza(double media) {
 		double varianza0 = 0.0;
 		int cont = 0;	
@@ -108,13 +102,8 @@ public class SeasonStats implements SeasonStatsService{
 		}//chiusura FOR
 		return varianza0/cont;
 	}
-	/**
-	 * calcola il massimo dei valori UV della stagione d'interesse
-	 * 
-	 * @see #getValue
-	 * 
-	 * @return un <code>double</code> che indica il massimo di una stagione
-	 */
+	
+	@Override
 	public double getMax() {
 		double max = 0.0;
 
@@ -125,13 +114,8 @@ public class SeasonStats implements SeasonStatsService{
 		}
 		return max;
 	}
-	/**
-	 * calcola il minimo dei valori UV della stagione d'interesse
-	 * 
-	 * @see #getValue
-	 * 
-	 * @return un <code>double</code> che indica il minimo di una stagione
-	 */
+	
+	@Override
 	public double getMin() {
 		double min = 15.0;
 		for(int i = 0; i<this.ja.size(); i++) {
@@ -141,13 +125,8 @@ public class SeasonStats implements SeasonStatsService{
 		}
 		return min;
 	}
-	/**
-	 * prende il valore UV di un determinato giorno dal JSONArray
-	 * 
-	 * @param date indica la data
-	 * 
-	 * @return un <code>double</code> con il valore UV
-	 */
+	
+	@Override
 	public double getValue(String date) {
 		double value = 0;
 		for(int i = 0; i<this.ja.size(); i++) {
@@ -165,15 +144,8 @@ public class SeasonStats implements SeasonStatsService{
 		}
 		return value;
 	}
-	/**
-	 * ritorna le statistiche della stagione 
-	 * @see #media
-	 * @see #getVarianza
-	 * @see #getMax 
-	 * @see #getMin 
-	 * 
-	 * @return un <code>JSONObject</code> con le statistiche
-	 */
+	
+	@Override
 	@SuppressWarnings("unchecked")
 	public JSONObject SeasonDataStats(){
 		JSONObject jo = new JSONObject();

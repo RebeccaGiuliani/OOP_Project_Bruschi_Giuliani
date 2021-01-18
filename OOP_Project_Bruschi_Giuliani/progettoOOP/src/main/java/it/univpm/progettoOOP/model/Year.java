@@ -20,7 +20,7 @@ public class Year extends Period{
  * costruzione dell'oggetto anno
  * 
  * @param year indica l'anno
- * @throws WrongPeriodException
+ * @throws WrongPeriodException periodo inserito sbagliato
  */
 	public Year(int year) throws WrongPeriodException {
 		super (start_day, start_month, year, end_day, end_month, year);

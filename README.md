@@ -73,9 +73,11 @@ Abbiamo gestito le eccezioni creando due nuove classi: <b>WrongPeriodException</
 
 La prima eccezione viene generate quando l'utente inserisce dei parametri riguardanti il tempo in maniera errata (se il <i>giorno</i> è =0 o >31, se il mese è =0 o >12, o se l'anno è < 2017).
 
-<i>Esempio:</i>
+<b><i>ATTENZIONE!</i></b> Non sono registrati dati per periodi precedenti al 22.6.2017, quindi qualsiasi periodo precedente sarà considerato non valido e quindi il programma genererà l'eccezione <b>WrongPeriodException</b> e stamperà a video <i>"ERR: Il periodo inserito non è valido!"</i>.
 
-<b><i>ATTENZIONE!</i></b> In questo caso nella data di fine il giorno inserito è 32, chiaramente è un valore non accettabile e verrà stampato a video il messaggio: <i>"ERR: Il periodo inserito non è valido!"</i>. 
+</b> <i>Esempio:</i>
+
+In questo caso nella data di fine il giorno inserito è 32, chiaramente è un valore non accettabile
 
 ![err](https://user-images.githubusercontent.com/75033311/104929217-e3200580-59a3-11eb-9a48-5ce94f548934.png)
 
@@ -91,6 +93,13 @@ La seconda eccezione viene generata quando l'utente inserisce una città non pre
 2. In questo caso la sigla dello stato italiano è stata scritta in modo errato 
 
 ![eccezioni2](https://user-images.githubusercontent.com/75033190/104930553-94736b00-59a5-11eb-9dea-b5f98eeb791c.PNG)
+
+# Test
+Abbiamo implementato quattro unità di test: 
+1. <b>APICallTest</b> per testare la classe <i>APICall</i>, che gestisce le chiamate API e restituisce il JSONArray con i dati della città e del periodo introdotti
+2. <b>CityFileReaderTest</b> per testare la classe <i>CityFileReader</i>, che gestisce il file delle città e restituisce latitudine e longitudine della cottà inserita 
+3. <b>StatsTest</b> per testare la classe <i>StatsTest</i>, che definisce le statistiche mensili e stagionali predendo i dati dal JSONArray restituito dalla APICall
+4. <b>ConfrontoTest</b> per testare la classe <i>Confronto</i>, che restituisce un JSONArray composto da due JSONObject le statistiche prese in due anni consecutivi di un medesimo periodo
 
 # Autori
 Il programma è stato sviluppato in modo equo da:

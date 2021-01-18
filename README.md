@@ -21,10 +21,15 @@ Sequence Diagram
 # Rotte
 Le richieste che l'utente può effettuare tramite Postman devono essere effettuate all'indirizzo
 localhost:8080.
+
 Nel caso in cui l'utente voglia analizzare un periodo generico, diverso da quello di default, dovrà inserire come parametri il giorno, il mese e l'anno d'inizio e di fine dello stesso.
 
+<i>Esempio</i>
+
+![Cattura](https://user-images.githubusercontent.com/75033190/104933135-cdf9a580-59a8-11eb-885e-2dfc9610c8a4.PNG)
+
 # Rotte relative ai Filter
-![filter](https://user-images.githubusercontent.com/75033190/104925405-1613ca80-599f-11eb-8283-c5e0d08fdd81.PNG)
+![filter](https://user-images.githubusercontent.com/75033190/104932105-90484d00-59a7-11eb-8b92-cede2bcdaf11.PNG)
 
 <b>Es.</b> /data/filter/Ancona/IT
 
@@ -68,13 +73,15 @@ Abbiamo gestito le eccezioni creando due nuove classi: <b>WrongPeriodException</
 
 La prima eccezione viene generate quando l'utente inserisce dei parametri riguardanti il tempo in maniera errata (se il <i>giorno</i> è =0 o >31, se il mese è =0 o >12, o se l'anno è < 2017).
 
-<b>ATTENZIONE!</b>: In questo caso nella data di fine il giorno inserito è 32, chiaramente è un valore non accettabile e verrà stampato a video il messaggio: <i>"ERR: Il periodo inserito non è valido!"</i>. 
+<i>Esempio:</i>
+
+<b><i>ATTENZIONE!</i></b> In questo caso nella data di fine il giorno inserito è 32, chiaramente è un valore non accettabile e verrà stampato a video il messaggio: <i>"ERR: Il periodo inserito non è valido!"</i>. 
 
 ![err](https://user-images.githubusercontent.com/75033311/104929217-e3200580-59a3-11eb-9a48-5ce94f548934.png)
 
 La seconda eccezione viene generata quando l'utente inserisce una città non presente nell file di riferimento(tale file è presente nella repository) o scrive in maniera errata il nome della città o la sigla dello stato. 
 
-<b><i>ATTENZIONE</i></b>: I nomi delle città devono essere scritti in inglese. Ad esempio, se si inserisce "Roma" il programma genererà l'eccezione <b>WrongCityException</b> e stamperà a video <i>"ERR: La città o lo stato inseriti non sono validi!"</i>.
+<b><i>ATTENZIONE!</i></b> I nomi delle città devono essere scritti in inglese. Ad esempio, se si inserisce "Roma" il programma genererà l'eccezione <b>WrongCityException</b> e stamperà a video <i>"ERR: La città o lo stato inseriti non sono validi!"</i>.
 
 <i>Esempi:</i> 
 1. In questo caso Ancona è stata scritta in modo errato 

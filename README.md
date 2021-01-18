@@ -21,8 +21,10 @@ Le richieste che l'utente può effettuare tramite Postman devono essere effettua
 localhost:8080
 
 Rotte relative ai Filter
-![filter](https://user-images.githubusercontent.com/75033190/104923399-4c037f80-599c-11eb-8aea-cdd67155b4fe.PNG)
-# 1. /data/filter/Ancona/IT
+![filter](https://user-images.githubusercontent.com/75033190/104925405-1613ca80-599f-11eb-8283-c5e0d08fdd81.PNG)
+
+1. /data/filter/Ancona/IT
+
 Se non inserisco informazioni riguardanti il periodo considera di default tutto l'anno 2019
 
 ![data_filter](https://user-images.githubusercontent.com/75033311/104925036-90901a80-599e-11eb-94ba-76c73c4e3a33.png)
@@ -30,10 +32,17 @@ Se non inserisco informazioni riguardanti il periodo considera di default tutto 
 
 Rotte relative alle Stats
 ![stats](https://user-images.githubusercontent.com/75033190/104923049-cf70a100-599b-11eb-85dc-5251f1f3d5c7.PNG)
-# 2. /stats/monthly/Ancona/IT
+
+2. /stats/monthly/Ancona/IT
+
 Di default restituisce le statistiche mensili dell'anno 2019
 
 ![stat_monthly](https://user-images.githubusercontent.com/75033311/104925408-1613ca80-599f-11eb-999f-6063631f3689.png)
 
 Rotte relative ai Confronti
 ![confronto](https://user-images.githubusercontent.com/75033190/104923149-f5964100-599b-11eb-8de8-3ad46f12da77.PNG)
+
+# Autori
+@ RebeccaGiuliani
+
+@SimoneBruschi

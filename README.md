@@ -33,11 +33,17 @@ Se non inserisco informazioni riguardanti il periodo considera di default tutto 
 Rotte relative alle Stats
 ![stats](https://user-images.githubusercontent.com/75033190/104923049-cf70a100-599b-11eb-85dc-5251f1f3d5c7.PNG)
 
-2. /stats/monthly/Ancona/IT
+1. /stats/monthly/Ancona/IT
 
-Di default restituisce le statistiche mensili dell'anno 2019
+Di default restituisce le statistiche mensili dell'anno 2019 di Ancona
 
 ![stat_monthly](https://user-images.githubusercontent.com/75033311/104925408-1613ca80-599f-11eb-999f-6063631f3689.png)
+
+2. /stats/spring/2019/Ancona/IT
+
+Restituisce le statistiche della primavera 2019 di Ancona
+
+![esempio stats](https://user-images.githubusercontent.com/75033190/104926577-a272bd00-59a0-11eb-82a1-45fe97b69477.PNG)
 
 Rotte relative ai Confronti
 ![confronto](https://user-images.githubusercontent.com/75033190/104923149-f5964100-599b-11eb-8de8-3ad46f12da77.PNG)
@@ -51,4 +57,4 @@ Restituisce le statistiche del mese di agosto nel 2018 e nell'anno precedente
 # Autori
 @ RebeccaGiuliani
 
-@SimoneBruschi
+@ SimoneBruschi

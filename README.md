@@ -8,6 +8,8 @@ Una volta ottenuti i dati tramite una chiamata API l'utente può richiedere il c
 
 # Diagrammi UML
 UseCase Diagram
+![Utente](https://user-images.githubusercontent.com/75033311/104932809-62afd380-59a8-11eb-8d9d-7126ff6a427f.jpg)
+
 ![Utente](https://user-images.githubusercontent.com/75033311/103019597-671ed300-4547-11eb-9552-b974b4baa5c6.jpg)
 
 Class Diagram

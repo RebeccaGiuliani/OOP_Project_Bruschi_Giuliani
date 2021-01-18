@@ -28,8 +28,8 @@ public class Confronto implements ConfrontoService {
  * @param year indica l'anno
  * @param city indica la città
  * 
- * @throws WrongPeriodException
- * @throws WrongCityException
+ * @throws WrongPeriodException periodo inserito sbagliato
+ * @throws WrongCityException città insrita sbagliata
  */
 	public Confronto (int month, int year ,City city) throws WrongPeriodException, WrongCityException {
 		this.stats = new Stats(new Period(start_day, month, year, end_day(month), month, year),city);
@@ -37,6 +37,7 @@ public class Confronto implements ConfrontoService {
 		this.year = year;
 	}
 
+	@Override
 	public int end_day(int month) {
 		int end_day = 0;
 
@@ -59,6 +60,7 @@ public class Confronto implements ConfrontoService {
 		return end_day;
 	}
 
+	@Override
 	public Vector<Double> gestioneDati(Stats s) {
 		Vector<Double> mese = new Vector<Double>();
 
@@ -69,10 +71,12 @@ public class Confronto implements ConfrontoService {
 		return mese;
 	}
 
+	@Override
 	public Vector<Double> gestioneDati(SeasonStats s){
 		return new Vector<>();
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public JSONArray ConfrontoStats(){
 		Vector<Double> mese_prec = gestioneDati(this.stats_prec);

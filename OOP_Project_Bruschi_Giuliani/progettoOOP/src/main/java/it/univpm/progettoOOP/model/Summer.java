@@ -20,7 +20,7 @@ public class Summer extends Period{
 	 * costruzione dell'oggetto estate
 	 * 
 	 * @param year indica l'anno
-	 * @throws WrongPeriodException
+	 * @throws WrongPeriodException periodo inserito sbagliato
 	 */	
 	public Summer (int year) throws WrongPeriodException {
 		super (start_day, start_month, year, end_day, end_month, year);

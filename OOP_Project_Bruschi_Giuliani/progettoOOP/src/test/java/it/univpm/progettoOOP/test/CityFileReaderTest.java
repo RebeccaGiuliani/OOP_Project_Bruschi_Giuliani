@@ -28,6 +28,10 @@ class CityFileReaderTest {
 	private CityFileReader c1;
 	private CityFileReader c2;
 
+	/**
+	 * 
+	 * @throws Exception eccezione
+	 */
 	@BeforeEach
 	void setUp() throws Exception {
 		city1 = new City("Ancona", "IT");  
@@ -36,6 +40,10 @@ class CityFileReaderTest {
 		c2 = new CityFileReader(city2);	
 	}
 
+	/**
+	 * 
+	 * @throws Exception eccezione
+	 */
 	@AfterEach
 	void tearDown() throws Exception {
 	}
@@ -45,7 +53,7 @@ class CityFileReaderTest {
 	 * 
 	 * @see it.univpm.progettoOOP.filter.CityFileReader#getLat()
 	 * 
-	 * @throws WrongCityException
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 
 	@Test
@@ -60,7 +68,7 @@ class CityFileReaderTest {
 	 * 
 	 * @see it.univpm.progettoOOP.filter.CityFileReader#getLat()
 	 * 
-	 * @throws WrongCityException
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 
 	@Test
@@ -75,7 +83,7 @@ class CityFileReaderTest {
 	 * 
 	 * @see it.univpm.progettoOOP.filter.CityFileReader#getLon()
 	 * 
-	 * @throws WrongCityException
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 
 	@Test
@@ -90,7 +98,7 @@ class CityFileReaderTest {
 	 * 
 	 * @see it.univpm.progettoOOP.filter.CityFileReader#getLon()
 	 * 
-	 * @throws WrongCityException
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 
 	@Test

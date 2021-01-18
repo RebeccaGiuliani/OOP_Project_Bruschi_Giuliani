@@ -30,8 +30,8 @@ public class ConfrontoSeason extends Confronto {
 	 * @param spring indica la primavera 
 	 * @param city indica la città
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 	public ConfrontoSeason(Spring spring, City city) throws WrongPeriodException, WrongCityException {
 		super(spring.getStart_month(), spring.getStart_year(), city);
@@ -45,8 +45,8 @@ public class ConfrontoSeason extends Confronto {
 	 * @param summer indica l'estate
 	 * @param city indica la città
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 	public ConfrontoSeason(Summer summer, City city) throws WrongPeriodException, WrongCityException {
 		super(summer.getStart_month(), summer.getStart_year(), city);
@@ -60,8 +60,8 @@ public class ConfrontoSeason extends Confronto {
 	 * @param autumn indica l'autunno
 	 * @param city indica la città
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato
+	 * @throws WrongCityException città insrita sbagliata
 	 */	
 	public ConfrontoSeason(Autumn autumn, City city) throws WrongPeriodException, WrongCityException {
 		super(autumn.getStart_month(), autumn.getStart_year(), city);
@@ -75,8 +75,8 @@ public class ConfrontoSeason extends Confronto {
 	 * @param winter indica l'inverno 
 	 * @param city indica la città
 	 * 
-	 * @throws WrongPeriodException
-	 * @throws WrongCityException
+	 * @throws WrongPeriodException periodo inserito sbagliato
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 	public ConfrontoSeason(Winter winter, City city) throws WrongPeriodException, WrongCityException {
 		super(winter.getStart_month(), winter.getStart_year(), city);

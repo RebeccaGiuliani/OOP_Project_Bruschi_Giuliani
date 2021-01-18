@@ -35,6 +35,10 @@ class ConfrontoTest {
 	JSONArray ja;
 	JSONObject jo,jop,y,yp;
 
+	/**
+	 * 
+	 * @throws Exception eccezione
+	 */
 	@BeforeEach
 	void setUp() throws Exception {
 		c1 = new Confronto(8,2019, new City("Ancona", "IT"));
@@ -48,6 +52,10 @@ class ConfrontoTest {
 		yp = new JSONObject();
 	}
 
+	/**
+	 * 
+	 * @throws Exception eccezione
+	 */
 	@AfterEach
 	void tearDown() throws Exception {
 	}

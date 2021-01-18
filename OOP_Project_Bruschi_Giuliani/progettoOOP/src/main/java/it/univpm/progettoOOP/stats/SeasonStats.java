@@ -29,7 +29,8 @@ public class SeasonStats implements SeasonStatsService{
 	 * 
 	 * @param spring indica la primavera
 	 * @param city indica la città
-	 * @throws WrongCityException
+	 * 
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 	public SeasonStats(Spring spring, City city) throws WrongCityException {
 		APICall call = new APICall(spring, new CityFileReader(city));
@@ -40,7 +41,8 @@ public class SeasonStats implements SeasonStatsService{
 	 * 
 	 * @param spring indica l'estate
 	 * @param city indica la città
-	 * @throws WrongCityException
+	 * 
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 	public SeasonStats(Summer summer, City city) throws WrongCityException {
 		APICall call = new APICall(summer, new CityFileReader(city));
@@ -51,7 +53,8 @@ public class SeasonStats implements SeasonStatsService{
 	 * 
 	 * @param spring indica l'autuno
 	 * @param city indica la città
-	 * @throws WrongCityException
+	 * 
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 	public SeasonStats(Autumn autumn, City city) throws WrongCityException {
 		APICall call = new APICall(autumn, new CityFileReader(city));
@@ -62,13 +65,15 @@ public class SeasonStats implements SeasonStatsService{
 	 * 
 	 * @param spring indica l'inverno
 	 * @param city indica la città
-	 * @throws WrongCityException
+	 * 
+	 * @throws WrongCityException città insrita sbagliata
 	 */
 	public SeasonStats(Winter winter, City city) throws WrongCityException {
 		APICall call = new APICall(winter, new CityFileReader(city));
 		this.ja = call.getData();
 	}
     
+	@Override
 	public double media() {
 		double somma = 0;
 		int cont = 0;
@@ -82,6 +87,7 @@ public class SeasonStats implements SeasonStatsService{
 		return somma/cont;
 	}
 	
+	@Override
 	public double getVarianza(double media) {
 		double varianza0 = 0.0;
 		int cont = 0;	
@@ -97,6 +103,7 @@ public class SeasonStats implements SeasonStatsService{
 		return varianza0/cont;
 	}
 	
+	@Override
 	public double getMax() {
 		double max = 0.0;
 
@@ -108,6 +115,7 @@ public class SeasonStats implements SeasonStatsService{
 		return max;
 	}
 	
+	@Override
 	public double getMin() {
 		double min = 15.0;
 		for(int i = 0; i<this.ja.size(); i++) {
@@ -118,6 +126,7 @@ public class SeasonStats implements SeasonStatsService{
 		return min;
 	}
 	
+	@Override
 	public double getValue(String date) {
 		double value = 0;
 		for(int i = 0; i<this.ja.size(); i++) {
@@ -136,6 +145,7 @@ public class SeasonStats implements SeasonStatsService{
 		return value;
 	}
 	
+	@Override
 	@SuppressWarnings("unchecked")
 	public JSONObject SeasonDataStats(){
 		JSONObject jo = new JSONObject();

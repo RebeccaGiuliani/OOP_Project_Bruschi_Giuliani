@@ -39,7 +39,8 @@ public class Stats implements StatsService{
  * 
  * @param period indica il periodo
  * @param city indica la città
- * @throws WrongCityException
+ * 
+ * @throws WrongCityException città insrita sbagliata
  */
 	public Stats (Period period, City city) throws WrongCityException {
 		APICall call = new APICall(period, new CityFileReader(city));

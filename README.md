@@ -56,7 +56,7 @@ Restituisce le statistiche del mese di agosto nel 2018 e nell'anno precedente
 
 2. /confronto/stats/summer/2018/Ancona/IT
 
-<b>Restituisce</b> le statistiche in estate nel 2018 e nell'anno precedente
+Restituisce le statistiche in estate nel 2018 e nell'anno precedente
 
 ![seas Conf](https://user-images.githubusercontent.com/75033311/104926923-12814300-59a1-11eb-9952-2fd8cae97e9f.png)
 

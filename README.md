@@ -32,6 +32,7 @@ Rotte relative alle Stats
 ![stats](https://user-images.githubusercontent.com/75033190/104923049-cf70a100-599b-11eb-85dc-5251f1f3d5c7.PNG)
 # 2. /stats/monthly/Ancona/IT
 Di default restituisce le statistiche mensili dell'anno 2019
+
 ![stat_monthly](https://user-images.githubusercontent.com/75033311/104925408-1613ca80-599f-11eb-999f-6063631f3689.png)
 
 Rotte relative ai Confronti

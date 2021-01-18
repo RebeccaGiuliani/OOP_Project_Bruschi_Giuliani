@@ -42,6 +42,11 @@ Di default restituisce le statistiche mensili dell'anno 2019
 Rotte relative ai Confronti
 ![confronto](https://user-images.githubusercontent.com/75033190/104923149-f5964100-599b-11eb-8de8-3ad46f12da77.PNG)
 
+es. /confronto/stats/8/2018/Ancona/IT
+Restituisce le statistiche del mese di agosto nel 2018 e nell'anno precedente
+
+![conf](https://user-images.githubusercontent.com/75033311/104925967-d0a3cd00-599f-11eb-9dc2-b49b8c8d57db.png)
+
 # Autori
 @ RebeccaGiuliani
 

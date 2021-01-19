@@ -14,10 +14,29 @@ Una volta ottenuti i dati tramite una chiamata API l'utente può richiedere il c
 ![Sequence](https://user-images.githubusercontent.com/75033311/103019791-a9481480-4547-11eb-9bf6-42e6c377d318.jpg)
 
 Nei diagrammi riportati qui sopra (dei casi d'uso e delle sequenze) l'attore <i>Utente</i> rappresenta appunto un utente che si interfaccia al programma per ricercare i dati storici dei raggi UV in un periodo e una città di interesse, ha inoltre la possibilità di leggere le statistiche relative ai dati scegliendo la modalità di filtraggio (mensile o stagionale).
-L'attore non umano <i>Amministratore</i> si occupa della gestione del programma ovvero date delle richieste effettuate dall'utente opererà di conseguenza. Richiesto lo storico dei dati UV, farà una chiamata all'API di OpenWeather con i parametri inseriti dall'utente. L'amministratore si occuperà inoltre anche del calcolo delle statistiche e della generazione di un confronto qualora fosse richiesta.
+<br>L'attore non umano <i>Amministratore</i> si occupa della gestione del programma ovvero, date delle richieste effettuate dall'utente, opererà di conseguenza. Richiesto lo storico dei dati UV, farà una chiamata all'API di OpenWeather con i parametri inseriti dall'utente. L'amministratore si occuperà inoltre anche del calcolo delle statistiche e della generazione di un confronto qualora fosse richiesta.
 
 <b>Class Diagram</b>
 ![ClassDiagram](https://user-images.githubusercontent.com/75033190/103371837-be392080-4ad0-11eb-9d22-f75168f13fea.jpg)
+
+Il diagramma potrebbe non essere del tutto fedele al progetto finale in quanto nel corso dello sviluppo del programma l'idea iniziele è stata rielaborata.
+<br>Ad esempio, nel diagramma delle classi non è presente il package <i><b>exception</b></i> che contiene le classi <i>WrongCityException</i> e <i>WrongPeriodException</i>, adibite alla gestione delle eccezioni dovute all'inserimento errato delle richieste (periodo e/o città).
+
+Il package <i><b>model</b></i> contiene le classi che definiscono gli oggetti utilizzati. 
+Diversamente da come riportato nel diagramma, la classe <i>UV</i> non è presente e sono state aggiunte le classi <i>Date</i> e <i>Year</i>.
+
+Il package <i><b>filter</b></i> contiene le classi <i>CityFileReader</i> e <i>APICall</i> che implementano le relative interfacce.
+Le classi si occupano rispettivamente di leggere il file contenente le città (<i>city.list.json</i>) in modo da poter trovare la latitudine e la longitudine della città e di fare una chiamata API per ottenere i valori UV, filtrando i dati con il periodo e i parametri trovati dalla classe precedente.
+
+Il package <i><b>stats</b></i> contiene le classi <i>Stats</i>, <i>SeasonStats</i> e <i>Confronto</i> con le relative interfacce ed alcune sottoclassi che le estendono.
+<br>La prima si occupa di calcolare le statistiche (media, varianza, massimo e minimo) filtrando il periodo per stagioni o mensilmente.
+<br>La seconda ha lo stesso scopo della precedente ma gestisce i valori delle singole stagioni (non accetta un periodo generico in ingresso).
+<br>La terza permette di stampare a video e quindi confrontare le statistiche di un mese/una stagione prese in due anni consecutivi.
+
+Il package <i><b>controller</b></i> contiene le classi <i>APICallController</i>, <i>StatsController</i> e <i>ConfrontoController</i> che si occupano di gestire le rispettive richieste GET e POST per le classi sopracitate.
+
+Il package <i><b>test</b></i> ha il compito di effettuare dei test sul corretto funzionamento delle classi principali.
+
 
 # Rotte
 Le richieste che l'utente può effettuare tramite Postman devono essere effettuate all'indirizzo
@@ -96,7 +115,7 @@ La seconda eccezione viene generata quando l'utente inserisce una città  non p
 ![eccezioni2](https://user-images.githubusercontent.com/75033190/104930553-94736b00-59a5-11eb-9dea-b5f98eeb791c.PNG)
 
 # Test
-Abbiamo implementato sei unità  di test: 
+Abbiamo implementato sei unità di test: 
 1. <b>APICallTest</b> per testare la classe <i>APICall</i>, che gestisce le chiamate API e restituisce il JSONArray con i dati della città  e del periodo introdotti
 2. <b>CityFileReaderTest</b> per testare la classe <i>CityFileReader</i>, che gestisce il file delle città  e restituisce latitudine e longitudine della città  inserita 
 3. <b>StatsTest</b> per testare la classe <i>Stats</i>, che definisce le statistiche mensili e stagionali predendo i dati dal JSONArray restituito dalla APICall

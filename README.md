@@ -71,7 +71,7 @@ Abbiamo gestito le eccezioni creando due nuove classi: <b>WrongPeriodException</
 
 La prima eccezione viene generate quando l'utente inserisce dei parametri riguardanti il tempo in maniera errata (se il <i>giorno</i> è =0 o >31, se il mese è =0 o >12, o se l'anno è < 2017).
 
-<b><i>ATTENZIONE!</i></b> Non sono registrati dati per periodi precedenti al 22.6.2017, quindi qualsiasi periodo precedente sarà considerato non valido e quindi il programma genererà l'eccezione <b>WrongPeriodException</b> e stamperà a video <i>"ERR: Il periodo inserito non è valido!"</i>.
+<b><i>ATTENZIONE!</i></b> Non sono registrati dati per periodi precedenti al 22.6.2017, quindi qualsiasi periodo che terminer� prima di tale data sarà considerato non valido e quindi il programma genererà l'eccezione <b>WrongPeriodException</b> e stamperà a video <i>"ERR: Il periodo inserito non è valido!"</i>.
 
 </b> <i>Esempio:</i>
 

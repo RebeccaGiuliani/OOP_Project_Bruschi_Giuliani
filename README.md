@@ -1,7 +1,7 @@
 # OOP_Project_Bruschi_Giuliani
 # Introduzione
-Il programma permette all'utente di visualizzare lo storico e le statistiche dei valori UV relativamente ad una determinata città e un determinato periodo. 
-Richiede in ingresso la città d'interesse e il relativo stato (es. Ancona, IT) e il periodo che può essere generico oppure una stagione o un anno specifico.
+Il programma permette all'utente di visualizzare lo storico e le statistiche dei valori UV relativamente ad una determinata città  e un determinato periodo. 
+Richiede in ingresso la città  d'interesse e il relativo stato (es. Ancona, IT) e il periodo che può essere generico oppure una stagione o un anno specifico.
 Una volta ottenuti i dati tramite una chiamata API l'utente può richiedere il calcolo delle statistiche del periodo inserito (media, varianza, max e min) decidendo di filtrarli mensilmente o in maniera stagionale. Inoltre l'utente può anche richiedere di confrontare le statistiche di uno specifico mese o di una specifica stagione prese in due anni consecutivi.
 
 
@@ -20,7 +20,7 @@ Una volta ottenuti i dati tramite una chiamata API l'utente può richiedere il c
 Le richieste che l'utente può effettuare tramite Postman devono essere effettuate all'indirizzo
 localhost:8080.
 
-Nel caso in cui l'utente voglia analizzare un periodo generico, diverso da quello di default, dovrà inserire come parametri il giorno, il mese e l'anno d'inizio e di fine dello stesso.
+Nel caso in cui l'utente voglia analizzare un periodo generico, diverso da quello di default, dovrà  inserire come parametri il giorno, il mese e l'anno d'inizio e di fine dello stesso.
 
 <i>Esempio</i>
 
@@ -71,7 +71,7 @@ Abbiamo gestito le eccezioni creando due nuove classi: <b>WrongPeriodException</
 
 La prima eccezione viene generate quando l'utente inserisce dei parametri riguardanti il tempo in maniera errata (se il <i>giorno</i> è =0 o >31, se il mese è =0 o >12, o se l'anno è < 2017).
 
-<b><i>ATTENZIONE!</i></b> Non sono registrati dati per periodi precedenti al 22.6.2017, quindi qualsiasi periodo precedente sarà considerato non valido e quindi il programma genererà l'eccezione <b>WrongPeriodException</b> e stamperà a video <i>"ERR: Il periodo inserito non è valido!"</i>.
+<b><i>ATTENZIONE!</i></b> Non sono registrati dati per periodi precedenti al 22.6.2017, quindi qualsiasi periodo che terminerà prima di tale data sarà  considerato non valido e quindi il programma genererà  l'eccezione <b>WrongPeriodException</b> e stamperà  a video <i>"ERR: Il periodo inserito non è valido!"</i>.
 
 </b> <i>Esempio:</i>
 
@@ -79,9 +79,9 @@ In questo caso nella data di fine il giorno inserito è 32, chiaramente è un va
 
 ![err](https://user-images.githubusercontent.com/75033311/104929217-e3200580-59a3-11eb-9a48-5ce94f548934.png)
 
-La seconda eccezione viene generata quando l'utente inserisce una città non presente nell file di riferimento(tale file è presente nella repository) o scrive in maniera errata il nome della città o la sigla dello stato. 
+La seconda eccezione viene generata quando l'utente inserisce una città  non presente nell file di riferimento(tale file è presente nella repository) o scrive in maniera errata il nome della città  o la sigla dello stato. 
 
-<b><i>ATTENZIONE!</i></b> I nomi delle città devono essere scritti in inglese. Ad esempio, se si inserisce "Roma" il programma genererà l'eccezione <b>WrongCityException</b> e stamperà a video <i>"ERR: La città o lo stato inseriti non sono validi!"</i>.
+<b><i>ATTENZIONE!</i></b> I nomi delle città  devono essere scritti in inglese. Ad esempio, se si inserisce "Roma" il programma genererà  l'eccezione <b>WrongCityException</b> e stamperà  a video <i>"ERR: La città  o lo stato inseriti non sono validi!"</i>.
 
 <i>Esempi:</i> 
 1. In questo caso Ancona è stata scritta in modo errato 
@@ -93,11 +93,13 @@ La seconda eccezione viene generata quando l'utente inserisce una città non pre
 ![eccezioni2](https://user-images.githubusercontent.com/75033190/104930553-94736b00-59a5-11eb-9dea-b5f98eeb791c.PNG)
 
 # Test
-Abbiamo implementato quattro unità di test: 
-1. <b>APICallTest</b> per testare la classe <i>APICall</i>, che gestisce le chiamate API e restituisce il JSONArray con i dati della città e del periodo introdotti
-2. <b>CityFileReaderTest</b> per testare la classe <i>CityFileReader</i>, che gestisce il file delle città e restituisce latitudine e longitudine della cottà inserita 
-3. <b>StatsTest</b> per testare la classe <i>StatsTest</i>, che definisce le statistiche mensili e stagionali predendo i dati dal JSONArray restituito dalla APICall
+Abbiamo implementato sei unità  di test: 
+1. <b>APICallTest</b> per testare la classe <i>APICall</i>, che gestisce le chiamate API e restituisce il JSONArray con i dati della città  e del periodo introdotti
+2. <b>CityFileReaderTest</b> per testare la classe <i>CityFileReader</i>, che gestisce il file delle città  e restituisce latitudine e longitudine della città  inserita 
+3. <b>StatsTest</b> per testare la classe <i>Stats</i>, che definisce le statistiche mensili e stagionali predendo i dati dal JSONArray restituito dalla APICall
 4. <b>ConfrontoTest</b> per testare la classe <i>Confronto</i>, che restituisce un JSONArray composto da due JSONObject le statistiche prese in due anni consecutivi di un medesimo periodo
+5.  <b>WrongPeriodExceptionTest</b> per testare la classe <i>WrongPeriodException</i>, che gestisce le eccezioni dovute ad un inserimento errato o non valido del periodo
+6.  <b>WrongCityExceptionTest</b> per testare la classe <i>WrongCityException</i>, che gestisce le eccezioni dovute ad un inserimento errato o non disponibile di una città e/o del suo stato
 
 # Autori
 Il programma è stato sviluppato in modo equo da:

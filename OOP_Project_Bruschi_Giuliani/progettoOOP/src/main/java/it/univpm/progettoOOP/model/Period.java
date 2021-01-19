@@ -124,7 +124,7 @@ public class Period {
 	 * @throws WrongPeriodException periodo inserito sbagliato
 	 */
 	public void setStart_year(int start_year) throws WrongPeriodException {
-		if(start_year<2017 || start_day<21 && start_month <= 6 && start_year ==2017) throw new WrongPeriodException();
+		if(start_year<2017 || start_month < 6 && start_year ==2017) throw new WrongPeriodException();
 		else this.start_year = start_year;
 	}
 	/**

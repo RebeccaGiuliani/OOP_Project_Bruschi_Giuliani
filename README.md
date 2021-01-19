@@ -10,11 +10,14 @@ Una volta ottenuti i dati tramite una chiamata API l'utente può richiedere il c
 <b>UseCase Diagram</b>
 ![Utente](https://user-images.githubusercontent.com/75033311/104932809-62afd380-59a8-11eb-8d9d-7126ff6a427f.jpg)
 
-<b>Class Diagram</b>
-![ClassDiagram](https://user-images.githubusercontent.com/75033190/103371837-be392080-4ad0-11eb-9d22-f75168f13fea.jpg)
-
 <b>Sequence Diagram</b>
 ![Sequence](https://user-images.githubusercontent.com/75033311/103019791-a9481480-4547-11eb-9bf6-42e6c377d318.jpg)
+
+Nei diagrammi riportati qui sopra (dei casi d'uso e delle sequenze) l'attore <i>Utente</i> rappresenta appunto un utente che si interfaccia al programma per ricercare i dati storici dei raggi UV in un periodo e una città di interesse, ha inoltre la possibilità di leggere le statistiche relative ai dati scegliendo la modalità di filtraggio (mesi o stagioni).
+L'attore <i>Amministratore</i> si occupa della gestione del programma ovvero date delle richieste (o azioni) effettuate dall'utente opererà di conseguenza. Richiesto lo storico dei dati UV, farà una chiamata all'API di OpenWeather con i parametri inseriti dall'utente. L'amministratore si occuperà inoltre anche del calcolo delle statistiche e della generazione di un confronto qualora fosse richiesta.
+
+<b>Class Diagram</b>
+![ClassDiagram](https://user-images.githubusercontent.com/75033190/103371837-be392080-4ad0-11eb-9d22-f75168f13fea.jpg)
 
 # Rotte
 Le richieste che l'utente può effettuare tramite Postman devono essere effettuate all'indirizzo

@@ -1,7 +1,7 @@
 # OOP_Project_Bruschi_Giuliani
 # Introduzione
-Il programma permette all'utente di visualizzare lo storico e le statistiche dei valori UV relativamente ad una determinata città e un determinato periodo. 
-Richiede in ingresso la città d'interesse e il relativo stato (es. Ancona, IT) e il periodo che può essere generico oppure una stagione o un anno specifico.
+Il programma permette all'utente di visualizzare lo storico e le statistiche dei valori UV relativamente ad una determinata città  e un determinato periodo. 
+Richiede in ingresso la città  d'interesse e il relativo stato (es. Ancona, IT) e il periodo che può essere generico oppure una stagione o un anno specifico.
 Una volta ottenuti i dati tramite una chiamata API l'utente può richiedere il calcolo delle statistiche del periodo inserito (media, varianza, max e min) decidendo di filtrarli mensilmente o in maniera stagionale. Inoltre l'utente può anche richiedere di confrontare le statistiche di uno specifico mese o di una specifica stagione prese in due anni consecutivi.
 
 
@@ -17,10 +17,10 @@ Una volta ottenuti i dati tramite una chiamata API l'utente può richiedere il c
 ![Sequence](https://user-images.githubusercontent.com/75033311/103019791-a9481480-4547-11eb-9bf6-42e6c377d318.jpg)
 
 # Rotte
-Le richieste che l'utente può effettuare tramite Postman devono essere effettuate all'indirizzo
+Le richieste che l'utente puÃ² effettuare tramite Postman devono essere effettuate all'indirizzo
 localhost:8080.
 
-Nel caso in cui l'utente voglia analizzare un periodo generico, diverso da quello di default, dovrà inserire come parametri il giorno, il mese e l'anno d'inizio e di fine dello stesso.
+Nel caso in cui l'utente voglia analizzare un periodo generico, diverso da quello di default, dovrÃ  inserire come parametri il giorno, il mese e l'anno d'inizio e di fine dello stesso.
 
 <i>Esempio</i>
 
@@ -69,37 +69,37 @@ Restituisce le statistiche in estate nel 2018 e nell'anno precedente
 # Gestione Eccezioni
 Abbiamo gestito le eccezioni creando due nuove classi: <b>WrongPeriodException</b> e <b>WrongCityException</b>.
 
-La prima eccezione viene generate quando l'utente inserisce dei parametri riguardanti il tempo in maniera errata (se il <i>giorno</i> è =0 o >31, se il mese è =0 o >12, o se l'anno è < 2017).
+La prima eccezione viene generate quando l'utente inserisce dei parametri riguardanti il tempo in maniera errata (se il <i>giorno</i> Ã¨ =0 o >31, se il mese Ã¨ =0 o >12, o se l'anno Ã¨ < 2017).
 
-<b><i>ATTENZIONE!</i></b> Non sono registrati dati per periodi precedenti al 22.6.2017, quindi qualsiasi periodo che terminer� prima di tale data sarà considerato non valido e quindi il programma genererà l'eccezione <b>WrongPeriodException</b> e stamperà a video <i>"ERR: Il periodo inserito non è valido!"</i>.
+<b><i>ATTENZIONE!</i></b> Non sono registrati dati per periodi precedenti al 22.6.2017, quindi qualsiasi periodo che terminerÃ prima di tale data sarÃ  considerato non valido e quindi il programma genererÃ  l'eccezione <b>WrongPeriodException</b> e stamperÃ  a video <i>"ERR: Il periodo inserito non Ã¨ valido!"</i>.
 
 </b> <i>Esempio:</i>
 
-In questo caso nella data di fine il giorno inserito è 32, chiaramente è un valore non accettabile
+In questo caso nella data di fine il giorno inserito Ã¨ 32, chiaramente Ã¨ un valore non accettabile
 
 ![err](https://user-images.githubusercontent.com/75033311/104929217-e3200580-59a3-11eb-9a48-5ce94f548934.png)
 
-La seconda eccezione viene generata quando l'utente inserisce una città non presente nell file di riferimento(tale file è presente nella repository) o scrive in maniera errata il nome della città o la sigla dello stato. 
+La seconda eccezione viene generata quando l'utente inserisce una cittÃ  non presente nell file di riferimento(tale file Ã¨ presente nella repository) o scrive in maniera errata il nome della cittÃ  o la sigla dello stato. 
 
-<b><i>ATTENZIONE!</i></b> I nomi delle città devono essere scritti in inglese. Ad esempio, se si inserisce "Roma" il programma genererà l'eccezione <b>WrongCityException</b> e stamperà a video <i>"ERR: La città o lo stato inseriti non sono validi!"</i>.
+<b><i>ATTENZIONE!</i></b> I nomi delle cittÃ  devono essere scritti in inglese. Ad esempio, se si inserisce "Roma" il programma genererÃ  l'eccezione <b>WrongCityException</b> e stamperÃ  a video <i>"ERR: La cittÃ  o lo stato inseriti non sono validi!"</i>.
 
 <i>Esempi:</i> 
-1. In questo caso Ancona è stata scritta in modo errato 
+1. In questo caso Ancona Ã¨ stata scritta in modo errato 
 
 ![eccezioni](https://user-images.githubusercontent.com/75033190/104930514-89203f80-59a5-11eb-8ce2-97f9618216b1.PNG)
 
-2. In questo caso la sigla dello stato italiano è stata scritta in modo errato 
+2. In questo caso la sigla dello stato italiano Ã¨ stata scritta in modo errato 
 
 ![eccezioni2](https://user-images.githubusercontent.com/75033190/104930553-94736b00-59a5-11eb-9dea-b5f98eeb791c.PNG)
 
 # Test
-Abbiamo implementato quattro unità di test: 
-1. <b>APICallTest</b> per testare la classe <i>APICall</i>, che gestisce le chiamate API e restituisce il JSONArray con i dati della città e del periodo introdotti
-2. <b>CityFileReaderTest</b> per testare la classe <i>CityFileReader</i>, che gestisce il file delle città e restituisce latitudine e longitudine della cottà inserita 
+Abbiamo implementato quattro unitÃ  di test: 
+1. <b>APICallTest</b> per testare la classe <i>APICall</i>, che gestisce le chiamate API e restituisce il JSONArray con i dati della cittÃ  e del periodo introdotti
+2. <b>CityFileReaderTest</b> per testare la classe <i>CityFileReader</i>, che gestisce il file delle cittÃ  e restituisce latitudine e longitudine della cottÃ  inserita 
 3. <b>StatsTest</b> per testare la classe <i>StatsTest</i>, che definisce le statistiche mensili e stagionali predendo i dati dal JSONArray restituito dalla APICall
 4. <b>ConfrontoTest</b> per testare la classe <i>Confronto</i>, che restituisce un JSONArray composto da due JSONObject le statistiche prese in due anni consecutivi di un medesimo periodo
 
 # Autori
-Il programma è stato sviluppato in modo equo da:
+Il programma Ã¨ stato sviluppato in modo equo da:
 
 @ RebeccaGiuliani & @ SimoneBruschi

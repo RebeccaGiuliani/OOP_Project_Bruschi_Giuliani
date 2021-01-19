@@ -126,7 +126,7 @@ public class Stats implements StatsService{
 			if(month != 0) {
 				if(d.getYear() == year) {
 					if (d.getMonth() == month) {
-						if(value>max_value) max_value = value;
+						max_value = Math.max(max_value, value);
 					}else {
 						max.add(max_value);
 						max_value = value;
@@ -159,7 +159,7 @@ public class Stats implements StatsService{
 			if(month != 0) {
 				if(d.getYear() == year) {
 					if (d.getMonth() == month) {
-						if(value<min_value) min_value = value;
+						min_value = Math.min(min_value, value);
 					}else {
 						min.add(min_value);
 						min_value = value;
@@ -307,7 +307,7 @@ public class Stats implements StatsService{
 					|| d.getMonth() == period.getEnd_month()-2 && d.getYear() == period.getEnd_year() 
 					|| d.getMonth() == period.getEnd_month()-1 && d.getYear() == period.getEnd_year() 
 					|| d.getMonth() == period.getEnd_month() && d.getDay() <= period.getEnd_day() && d.getYear() == period.getEnd_year()) {
-				if(value>max)   max = value; 
+				max = Math.max(max, value);
 			}	
 		}
 		return max;
@@ -331,7 +331,7 @@ public class Stats implements StatsService{
 					|| d.getMonth() == period.getEnd_month()-2 && d.getYear() == period.getEnd_year() 
 					|| d.getMonth() == period.getEnd_month()-1 && d.getYear() == period.getEnd_year() 
 					|| d.getMonth() == period.getEnd_month() && d.getDay() <= period.getEnd_day() && d.getYear() == period.getEnd_year()) {
-				if(value<min)  min = value; 
+				min = Math.min(min, value);
 			}
 		}
 		return min;

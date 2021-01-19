@@ -110,7 +110,7 @@ public class SeasonStats implements SeasonStatsService{
 		for(int i = 0; i<this.ja.size(); i++) {
 			JSONObject Object = (JSONObject) this.ja.get(i);
 			double value = getValue((String) Object.get("date_iso"));
-			if(value>max) max = value;
+			max = Math.max(max, value);
 		}
 		return max;
 	}
@@ -121,7 +121,7 @@ public class SeasonStats implements SeasonStatsService{
 		for(int i = 0; i<this.ja.size(); i++) {
 			JSONObject Object = (JSONObject) this.ja.get(i);
 			double value = getValue((String) Object.get("date_iso"));
-			if(value<min) min = value;
+			min = Math.min(min, value);
 		}
 		return min;
 	}

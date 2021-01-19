@@ -127,7 +127,7 @@ public class YearStats extends Stats{
 
 			if(month != 0) {
 					if (d.getMonth() == month) {
-						if(value>max_value) max_value = value;
+						max_value = Math.max(max_value, value);
 					}else {
 						max.add(max_value);
 						max_value = value;
@@ -159,7 +159,7 @@ public class YearStats extends Stats{
 
 			if(month != 0) {
 					if (d.getMonth() == month) {
-						if(value<min_value) min_value = value;
+						min_value = Math.min(min_value, value);
 					}else {
 						min.add(min_value);
 						min_value = value;
